@@ -1,0 +1,46 @@
+unique_id,name,service,E,label,llm_label,D,feature_coverage,C,completeness_band,confidence,caveats,prerequisites_missing,not_reported,direct_field,direct_quote
+e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",dialysis,30.0,Possible,Possible,58.5,0.3,90,rich,Low,,,number of doctors,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",emergency_csection,26.7,Possible,Possible,47.3,0.4,90,rich,Medium,,"blood_bank (not reported, list cut off)",number of doctors,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",cardiac_surgery,15.0,Possible,None,54.5,0.3,90,rich,Low,,"icu_ccu (not reported, list cut off); blood_bank (not reported, list cut off)",number of doctors,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",dialysis,30.0,Possible,Possible,44.2,1.0,85,rich,Medium,,,year established; page update date,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",emergency_csection,73.3,Moderate,Moderate,54.3,1.0,85,rich,Medium,emergency readiness not confirmed,blood_bank,year established; page update date,procedure,Performs Caesarean Section
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",cardiac_surgery,10.0,Possible,None,23.1,1.0,85,rich,Medium,,anaesthesia; blood_bank,year established; page update date,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,dialysis,0.0,None,None,37.2,1.0,100,rich,Medium,,nephrology,,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,emergency_csection,0.0,None,None,31.9,1.0,100,rich,Medium,,ot; anaesthesia; blood_bank,,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,cardiac_surgery,5.0,Possible,None,16.1,1.0,100,rich,Medium,,ot; anaesthesia; blood_bank,,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",dialysis,90.0,Strong,Strong,87.8,0.8,90,rich,High,,,number of doctors,procedure,Dialysis treatment is provided using 25 dialysis machines.
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",emergency_csection,36.7,Possible,Possible,50.8,0.5,90,rich,Medium,,"blood_bank (not reported, list cut off)",number of doctors,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",cardiac_surgery,87.5,Strong,Strong,63.8,0.6,90,rich,High,,"blood_bank (not reported, list cut off)",number of doctors,procedure,Performs cardiothoracic surgery
+509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,dialysis,32.0,Weak,Weak,59.6,0.9,70,rich,Medium,,nephrology,number of doctors; procedure; page update date,equipment,Dialysis facilities
+509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,emergency_csection,23.3,Possible,Possible,64.5,1.0,70,rich,Medium,,anaesthesia,number of doctors; procedure; page update date,,
+509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,cardiac_surgery,25.0,Possible,Possible,46.5,1.0,70,rich,Medium,,anaesthesia,number of doctors; procedure; page update date,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,dialysis,0.0,None,None,35.5,0.9,80,rich,Medium,,nephrology,beds; page update date,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,emergency_csection,73.3,Moderate,Moderate,23.0,0.9,80,rich,Medium,emergency readiness not confirmed,blood_bank,beds; page update date,procedure,Caesarean Delivery
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,cardiac_surgery,5.0,Possible,None,5.0,0.9,80,rich,Medium,,ot; anaesthesia; blood_bank,beds; page update date,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",dialysis,58.8,Moderate,Moderate,72.7,0.85,95,rich,Medium,,,year established,capability,Has the largest dialysis centre in Central India
+c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",emergency_csection,20.0,Possible,Possible,52.3,0.4,95,rich,Medium,,"ot (not reported, list cut off); anaesthesia (not reported, list cut off); blood_bank (not reported, list cut off)",year established,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",cardiac_surgery,77.5,Moderate,Moderate,52.8,0.35,95,rich,Low,no cath lab / CTICU / heart-lung machine,"blood_bank (not reported, list cut off)",year established,procedure,Heart bypass surgery is performed
+f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,dialysis,30.0,Possible,Possible,31.7,0.9,70,rich,Medium,,,number of doctors; equipment; year established,,
+f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,emergency_csection,10.0,Possible,Possible,6.7,1.0,70,rich,Medium,,ot; anaesthesia; blood_bank,number of doctors; equipment; year established,,
+f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,cardiac_surgery,10.0,Possible,Possible,6.7,1.0,70,rich,Medium,,ot; anaesthesia; icu_ccu; blood_bank,number of doctors; equipment; year established,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,dialysis,30.0,Possible,Possible,60.1,0.55,80,rich,Medium,,,number of doctors; page update date,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,emergency_csection,40.0,Possible,Possible,64.9,0.6,80,rich,Medium,,,number of doctors; page update date,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,cardiac_surgery,30.0,Possible,Possible,54.4,0.5,80,rich,Medium,,,number of doctors; page update date,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,dialysis,80.0,Moderate,Moderate,38.1,0.8,60,partial,Medium,no dialysis equipment and not a dialysis centre,,number of doctors; beds; equipment; page update date,procedure,Dialysis
+8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,emergency_csection,10.0,Possible,Possible,23.0,0.9,60,partial,Medium,,ot; anaesthesia; blood_bank,number of doctors; beds; equipment; page update date,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,cardiac_surgery,5.0,Possible,None,5.0,0.9,60,partial,Medium,,ot; anaesthesia; blood_bank,number of doctors; beds; equipment; page update date,,
+0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,dialysis,30.0,Possible,Possible,51.1,1.0,95,rich,Medium,,,,,
+0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,emergency_csection,73.3,Moderate,Moderate,33.3,1.0,95,rich,Medium,emergency readiness not confirmed,blood_bank,,procedure,Performs cesarean delivery
+0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,cardiac_surgery,75.0,Moderate,Moderate,25.3,1.0,95,rich,Medium,no cath lab / CTICU / heart-lung machine,blood_bank,,procedure,Performs cardiothoracic surgery
+3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,dialysis,80.0,Moderate,Moderate,73.5,0.55,75,rich,Medium,no dialysis equipment and not a dialysis centre,,number of doctors; year established; page update date,procedure,Provides hemodialysis
+3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,emergency_csection,36.7,Possible,Possible,72.9,0.6,75,rich,Medium,,"blood_bank (not reported, list cut off)",number of doctors; year established; page update date,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,cardiac_surgery,87.5,Strong,Strong,72.0,0.75,75,rich,High,,"blood_bank (not reported, list cut off)",number of doctors; year established; page update date,procedure,Performs cardiac bypass surgery in the Cardiac Cath Lab
+f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,dialysis,0.0,None,None,16.0,0.9,80,rich,Medium,,nephrology,beds; page update date,,
+f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,emergency_csection,63.3,Moderate,Moderate,5.0,0.9,80,rich,Medium,emergency readiness not confirmed,blood_bank,beds; page update date,procedure,Caesarean Section (C Section)
+f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,cardiac_surgery,0.0,None,None,5.0,0.9,80,rich,Medium,,ot; anaesthesia; icu_ccu; blood_bank,beds; page update date,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,dialysis,30.0,Possible,Possible,32.3,1.0,65,partial,Medium,,,procedure; equipment; year established; page update date,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,emergency_csection,10.0,Possible,Possible,11.7,1.0,65,partial,Medium,,ot; anaesthesia; blood_bank,procedure; equipment; year established; page update date,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,cardiac_surgery,5.0,Possible,None,5.7,1.0,65,partial,Medium,,ot; anaesthesia; blood_bank,procedure; equipment; year established; page update date,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,dialysis,78.8,Moderate,Moderate,51.8,1.0,85,rich,Medium,direct claim not in procedure/equipment,,equipment,description,offers 24-hour dialysis services with 10 units
+78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,emergency_csection,0.0,None,None,5.7,1.0,85,rich,Medium,,ot; anaesthesia; blood_bank,equipment,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,cardiac_surgery,5.0,Possible,None,5.7,1.0,85,rich,Medium,,ot; anaesthesia; blood_bank,equipment,,

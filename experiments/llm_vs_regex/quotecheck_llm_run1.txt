@@ -1,0 +1,3 @@
+quotes checked: 175
+quotes failed: 0
+
