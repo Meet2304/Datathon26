@@ -1,4 +1,9 @@
-"""Deterministic (regex) flow for the LLM-vs-regex experiment.
+"""Deterministic (regex) flow for the LLM-vs-regex experiment, reading the silver tables.
+
+Everything comes from Databricks: features and Depth from the docs/FEATURES.md SQL over
+silver_facilities; completeness from silver columns; facility locations with the M8 fallback
+(silver_pincode_directory); query points = PIN centres of 492001 / 492013 / 492004.
+facilities_15.json is only used for the list of ids.
 
 Features (G*, S*) and Depth D come from the SQL in docs/FEATURES.md §4.1–4.6, run on
 Databricks for the 15 experiment facilities only (features are per-facility, so
@@ -93,7 +98,7 @@ PROFILES = {  # SCORING §4.2
     "emergency_csection": dict(wE=.30, wD=.10, wA=.60, d_half=15,  gate="Moderate"),
     "cardiac_surgery":    dict(wE=.35, wD=.45, wA=.20, d_half=150, gate="Moderate"),
 }
-QUERIES = [("Q1", "dialysis", "km_q1"), ("Q2", "emergency_csection", "km_q2"), ("Q3", "cardiac_surgery", "km_q3")]
+QUERIES = [("Q1", "dialysis", 492001), ("Q2", "emergency_csection", 492013), ("Q3", "cardiac_surgery", 492004)]
 LABEL_ORDER = {"Strong": 0, "Moderate": 1, "Weak": 2, "Possible": 3, "No evidence": 4, "Not offered": 5}
 
 def specificity(text):
@@ -196,31 +201,38 @@ def evidence(uid, svc, claims, feat, clean):
                 prereq_missing=missing, n_claims=len(kept), n_negated=len(neg),
                 primary_field=primary["field"] if primary else "", primary_quote=primary["text"] if primary else "")
 
+def haversine_km(lat1, lon1, lat2, lon2):
+    r = math.radians
+    a = math.sin(r(lat2 - lat1) / 2) ** 2 + math.cos(r(lat1)) * math.cos(r(lat2)) * math.sin(r(lon2 - lon1) / 2) ** 2
+    return 2 * 6371 * math.asin(math.sqrt(a))
+
 def completeness(f, feat):
-    """SCORING §2."""
-    pts, missing = 25, []                               # all 15 have exact coordinates
-    if f.get("officialPhone") or f.get("phone_numbers"): pts += 10
+    """SCORING §2, from silver columns (f = one row of the silver info query)."""
+    pts, missing = 0, []
+    pts += {"exact": 25, "approximate": 15}.get(f["location_quality"], 0)
+    if f["location_quality"] != "exact": missing.append("exact location")
+    if f["official_phone"] or int(f["n_phones"] or 0) > 0: pts += 10
     else: missing.append("contact")
-    if f.get("numberDoctors"): pts += 10
+    if f["n_doctors"] is not None: pts += 10
     else: missing.append("doctors")
-    if f.get("capacity") or feat.get((f["unique_id"], "beds"), {}).get("status") == "found": pts += 10
+    if f["capacity"] or f["capacity_text"] or feat.get((f["unique_id"], "beds"), {}).get("status") == "found": pts += 10
     else: missing.append("beds")
-    for k in ("procedure", "equipment", "capability"):
-        if f.get(k): pts += 10
-        else: missing.append(k)
-    if f.get("yearEstablished"): pts += 5
+    for k, label in (("np", "procedure"), ("ne", "equipment"), ("nc", "capability")):
+        if int(f[k]) > 0: pts += 10
+        else: missing.append(label)
+    if f["year_established"] is not None: pts += 5
     else: missing.append("year established")
     try:
-        d = date.fromisoformat(str(f.get("recency_of_page_update"))[:10])
+        d = date.fromisoformat(str(f["last_updated"])[:10])
         pts += 10 if (TODAY - d).days <= 730 else 5
     except Exception:
         missing.append("page date")
     band = "rich" if pts >= 70 else "partial" if pts >= 40 else "sparse"
     return pts, band, missing
 
-def confidence(label, band, coverage):
-    """SCORING §4.7 (all 15 locations are exact)."""
-    if band == "sparse" or coverage < 0.4:
+def confidence(label, band, coverage, location_quality="exact"):
+    """SCORING §4.7."""
+    if band == "sparse" or coverage < 0.4 or (location_quality != "exact" and label != "Strong"):
         return "Low"
     if label == "Strong" and band == "rich" and coverage >= 0.6:
         return "High"
@@ -237,6 +249,19 @@ def main():
     print("3/3 claims …", flush=True)
     claims = sql(chain + "SELECT c.unique_id, c.field, c.text, c.lc, c.item_lc, c.norm_item, c.is_negated FROM silver_claims c")
     clean = sql(chain + "SELECT unique_id, to_json(specialties_arr) AS spec, name_type, capacity, truncated FROM silver_facility_clean")
+    info = sql(chain + """SELECT f.unique_id, f.name, f.official_phone, size(f.phone_numbers) AS n_phones, f.n_doctors,
+        f.capacity, f.capacity_text, coalesce(size(f.procedure_arr), 0) AS np, coalesce(size(f.equipment_arr), 0) AS ne,
+        coalesce(size(f.capability_arr), 0) AS nc, f.year_established, f.last_updated,
+        coalesce(f.lat_raw, p.latitude) AS lat, CASE WHEN f.lat_raw IS NOT NULL THEN f.lon_raw ELSE p.longitude END AS lon,
+        CASE WHEN f.lat_raw IS NOT NULL AND f.lon_raw IS NOT NULL THEN 'exact'
+             WHEN p.latitude IS NOT NULL THEN 'approximate' ELSE 'unknown' END AS location_quality
+      FROM silver_facility_clean f
+      LEFT JOIN workspace.hackathon.silver_pincode_directory p ON p.pincode = f.pincode AND p.is_primary_state""")
+    qpts = {int(r["pincode"]): (float(r["latitude"]), float(r["longitude"])) for r in sql(
+        "SELECT pincode, latitude, longitude FROM workspace.hackathon.silver_pincode_directory "
+        "WHERE is_primary_state AND pincode IN (492001, 492013, 492004)")}
+    INFO = {r["unique_id"]: r for r in info}
+    NAME = {u: (INFO[u]["name"] or BY_ID[u]["name"]) for u in IDS}
 
     feat = {(r["unique_id"], r["feature"]): r for r in feats}
     claims_by = {}
@@ -257,31 +282,32 @@ def main():
     with open(os.path.join(OUTDIR, "features_regex.csv"), "w", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["unique_id", "name", "feature", "value", "status", "qty", "quote", "field"])
-        for r in sorted(feats, key=lambda r: (BY_ID[r["unique_id"]]["name"], r["feature"])):
+        for r in sorted(feats, key=lambda r: (NAME[r["unique_id"]], r["feature"])):
             ev = json.loads(r["evidence"]) if r["evidence"] else []
-            w.writerow([r["unique_id"], BY_ID[r["unique_id"]]["name"], r["feature"],
+            w.writerow([r["unique_id"], NAME[r["unique_id"]], r["feature"],
                         "" if r["value"] is None else round(float(r["value"]), 3), r["status"], r["qty"] or "",
                         ev[0]["text"] if ev else "", ev[0]["field"] if ev else ""])
 
     # evidence + ranking
     ev_rows, rank_rows = [], []
-    for qid, svc, kmcol in QUERIES:
+    for qid, svc, qpin in QUERIES:
+        qlat, qlon = qpts[qpin]
         p = PROFILES[svc]
         scored = []
         for uid in IDS:
-            f = BY_ID[uid]
+            f = INFO[uid]
             e = evidence(uid, svc, claims_by.get(uid, []), feat, clean_by[uid])
             dd = depth_by[(uid, svc)]
             D, cov = float(dd["depth_D"]), float(dd["feature_coverage"])
-            road = 1.4 * float(f[kmcol])
+            road = 1.4 * haversine_km(qlat, qlon, float(f["lat"]), float(f["lon"]))
             A = 100 * 0.5 ** (road / p["d_half"])
             score = p["wE"] * e["E"] + p["wD"] * D + p["wA"] * A
             C, band, missing = completeness(f, feat)
-            conf = confidence(e["label"], band, cov)
-            ev_rows.append([qid, svc, uid, f["name"], e["E"], e["label"], e["pts"], "; ".join(e["caveats"]),
+            conf = confidence(e["label"], band, cov, f["location_quality"])
+            ev_rows.append([qid, svc, uid, NAME[uid], e["E"], e["label"], e["pts"], "; ".join(e["caveats"]),
                             ", ".join(e["prereq_missing"]), e["n_claims"], e["n_negated"],
                             e["primary_field"], e["primary_quote"]])
-            scored.append(dict(uid=uid, name=f["name"], score=score, e=e, D=D, A=A, cov=cov, road=road,
+            scored.append(dict(uid=uid, name=NAME[uid], score=score, e=e, D=D, A=A, cov=cov, road=road,
                                C=C, band=band, conf=conf))
         # Gate-passing facilities first, by score (SCORING §4.3). Below them, facilities failing the
         # gate are ordered by label first (Possible > No evidence > Not offered: matches what the UI

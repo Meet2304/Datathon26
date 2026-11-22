@@ -3,6 +3,8 @@
 **Status (2026-11-21):** regex and LLM arms compared. **Human grades not done yet**, so NDCG@5 and τ vs human and the README decision rule can't be applied.
 
 > **Note:** this pilot ran on the **bronze** table with the v3 rules. `run_regex.py` and `regex_extract.py` now read `silver_facilities` (docs v4: M8 flags, silver specialty codes), so re-running them reproduces the method, not these exact numbers.
+>
+> **Silver re-run** (`silver_rerun/`, 2026-11-22): `run_regex.py` on the same 15 facilities, now fully from silver (features, completeness, M8 locations, PIN-centre query points). **All 45 evidence labels and E scores match the bronze run.** Rankings shift slightly in Q1 (MMI Narayana #3 → #2) and Q2 (Kanwar NH #2 → #1) because silver's PIN centres for the query points differ by a few hundred metres. None of the 15 facilities has flagged coordinates.
 
 ## Method
 - **Same input:** `facilities_15.json` (identical to the file on Meet's branch).

@@ -1,0 +1,46 @@
+query_id,rank,unique_id,name,rank_score,label,passes_gate,E,D,A,road_km,completeness_C,completeness_band,feature_coverage,confidence,caveats
+Q1,1,723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",86.22,Strong,True,90.0,87.8,84.1,3.8,90,rich,0.8,High,
+Q1,2,c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",79.08,Moderate,True,76.0,72.7,81.7,4.4,95,rich,0.85,Medium,claim only in capability/description
+Q1,3,8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,78.72,Moderate,True,80.0,38.1,84.9,3.6,60,partial,0.8,Medium,no dialysis equipment or kidney-centre name
+Q1,4,3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,76.78,Moderate,True,80.0,73.5,75.7,6.0,75,rich,0.55,Medium,no dialysis equipment or kidney-centre name
+Q1,5,78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,73.67,Moderate,True,68.8,30.7,83.3,4.0,75,rich,0.9,Medium,
+Q1,6,509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,61.32,Weak,False,40.0,38.6,75.8,6.0,70,rich,0.9,Medium,
+Q1,7,269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,65.76,Possible,False,30.0,60.1,84.6,3.6,80,rich,0.55,Medium,
+Q1,8,6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",62.6,Possible,False,30.0,44.2,82.0,4.3,85,rich,1.0,Medium,
+Q1,9,702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,59.55,Possible,False,30.0,32.3,78.9,5.1,65,partial,1.0,Medium,
+Q1,10,0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,56.77,Possible,False,30.0,51.1,71.1,7.4,95,rich,1.0,Medium,
+Q1,11,f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,55.73,Possible,False,30.0,31.7,72.6,6.9,70,rich,0.9,Medium,
+Q1,12,e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",53.98,Possible,False,30.0,58.5,65.2,9.3,90,rich,0.3,Low,
+Q1,13,f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,58.17,No evidence,False,0.0,16.0,94.3,1.3,80,rich,0.9,Medium,
+Q1,14,3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,52.57,No evidence,False,0.0,43.5,80.4,4.7,80,rich,0.9,Medium,
+Q1,15,8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,51.06,No evidence,False,0.0,37.2,78.9,5.1,100,rich,1.0,Medium,
+Q2,1,3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,68.46,Moderate,True,73.3,31.0,72.3,7.0,80,rich,0.9,Medium,emergency readiness not confirmed
+Q2,2,0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,66.53,Moderate,True,73.3,33.3,68.7,8.1,95,rich,1.0,Medium,emergency readiness not confirmed
+Q2,3,f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,65.18,Moderate,True,63.3,23.0,73.1,6.8,80,rich,0.9,Medium,emergency readiness not confirmed
+Q2,4,6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",62.87,Moderate,True,73.3,54.3,59.1,11.4,85,rich,1.0,Medium,emergency readiness not confirmed
+Q2,5,269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,65.22,Possible,False,40.0,64.9,77.9,5.4,80,rich,0.6,Medium,
+Q2,6,723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",64.39,Possible,False,36.7,47.6,81.0,4.5,90,rich,0.6,Medium,
+Q2,7,c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",60.41,Possible,False,20.0,52.3,82.0,4.3,95,rich,0.4,Medium,
+Q2,8,8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,54.56,Possible,False,10.0,23.0,82.1,4.3,60,partial,0.9,Medium,
+Q2,9,509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,53.35,Possible,False,23.3,66.5,66.2,8.9,70,rich,1.0,Medium,
+Q2,10,3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,50.09,Possible,False,36.7,72.9,53.0,13.7,75,rich,0.6,Medium,
+Q2,11,f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,43.47,Possible,False,10.0,6.7,66.3,8.9,70,rich,1.0,Medium,
+Q2,12,e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",40.04,Possible,False,26.7,47.3,45.5,17.0,90,rich,0.4,Medium,
+Q2,13,702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,37.83,Possible,False,10.0,11.7,56.1,12.5,65,partial,1.0,Medium,
+Q2,14,78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,44.62,No evidence,False,0.0,5.7,73.4,6.7,75,rich,1.0,Medium,
+Q2,15,8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,34.65,No evidence,False,0.0,13.9,55.4,12.8,100,rich,1.0,Medium,
+Q3,1,723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",78.8,Strong,True,87.5,63.8,97.3,5.8,90,rich,0.6,High,
+Q3,2,c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",70.28,Moderate,True,77.5,52.8,97.1,6.5,95,rich,0.35,Low,no cath lab / CTICU / heart-lung machine
+Q3,3,0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,68.9,Moderate,True,85.0,43.3,98.4,3.5,95,rich,1.0,Medium,no cath lab / CTICU / heart-lung machine
+Q3,4,3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,69.33,Possible,False,37.5,82.0,96.6,7.4,75,rich,0.95,Medium,
+Q3,5,269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,54.42,Possible,False,30.0,54.4,97.1,6.4,80,rich,0.5,Medium,
+Q3,6,509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,49.51,Possible,False,25.0,46.5,99.1,2.0,70,rich,1.0,Medium,
+Q3,7,f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,26.24,Possible,False,10.0,6.7,98.7,2.9,70,rich,1.0,Medium,
+Q3,8,e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",48.75,No evidence,False,15.0,54.5,94.9,11.3,90,rich,0.3,Low,
+Q3,9,6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",33.17,No evidence,False,10.0,23.1,96.4,8.0,85,rich,1.0,Medium,
+Q3,10,3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,29.29,No evidence,False,5.0,17.0,99.5,1.2,80,rich,0.9,Medium,
+Q3,11,8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,28.26,No evidence,False,5.0,16.1,96.3,8.1,100,rich,1.0,Medium,
+Q3,12,8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,23.56,No evidence,False,5.0,5.0,97.8,4.8,60,partial,0.9,Medium,
+Q3,13,702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,23.54,No evidence,False,5.0,5.7,96.2,8.5,65,partial,1.0,Medium,
+Q3,14,78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,22.46,No evidence,False,0.0,5.7,99.5,1.1,75,rich,1.0,Medium,
+Q3,15,f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,21.96,No evidence,False,0.0,5.0,98.5,3.2,80,rich,0.9,Medium,

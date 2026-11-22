@@ -124,7 +124,7 @@ SELECT * FROM VALUES
 AS t(service, direct_rx, equip_rx, excl_rx);
 ```
 
-Checked on the live data (facilities with a positive direct claim after negation, exclusion and routing): dialysis 967 · C-section 440 · NICU 700 · cardiac surgery 477 · MRI 943 · trauma 963 (65 eye/dental excluded) · burn care 80 · oncology 1,606 · ENT 1,622.
+Checked on `silver_facilities` (facilities with a positive direct claim after negation, exclusion and routing): dialysis 966 · C-section 440 · NICU 696 · cardiac surgery 466 (6 gastric/bariatric excluded) · MRI 940 · trauma 948 (65 eye/dental excluded) · burn care 80 · oncology 1,579 · ENT 1,570.
 
 ### 3.2 Extraction steps
 

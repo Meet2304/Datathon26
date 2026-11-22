@@ -25,23 +25,24 @@ D(f, s) = 100 × Σ_i  wD[s][i] · feature_i(f)        (Σ_i wD[s][i] = 1;  unkn
 
 ## 1. Profiling facts that shaped the design
 
-From `bronze_facilities` (10,088 rows), profiled 2026-11-21. Keyword counts are regex-based and approximate.
+From **`silver_facilities` (10,077 facilities)**, re-profiled 2026-11-22. Rows marked *(bronze)* were measured on the raw table (10,088 rows) and not re-measured. Keyword counts are regex-based and approximate.
 
 | Fact | Implication |
 |---|---|
-| 56% hospital, 37% clinic, 5% dentist | Facility type is a strong base feature |
-| `numberDoctors` is filled for 36%; median **2**, p95 ≈ 94 | Log-scale it; missing means unknown, not 0 |
-| `capacity` is filled for 25%; median 100 beds | Fill gaps by parsing "N beds" from text. Combined, beds are known for 2,678 facilities (27%), because most text mentions overlap with `capacity` |
-| `area` is filled for 1% | Dropped |
-| Facilities average **28 specialties** each; `cardiology` is tagged on 3,003 but a cath lab appears on only 487 | A specialty tag alone is weak evidence (strength 0.3) |
-| Quantities in text: beds 1,856 · ICU beds 350 · MRI tesla 235 · CT slices 213 · OT count 175 · dialysis units 83 · NICU beds 58 | Quantity features exist, but they're sparse |
+| 55.8% hospital, 37.5% clinic, 4.9% dentist (`clean_facility_type`) | Facility type is a strong base feature |
+| `clean_number_doctors` usable for 34.9% (112 flagged implausible → unknown, M8); median **2**, p95 ≈ 98 | Log-scale it; missing means unknown, not 0 |
+| `clean_capacity` is filled for 24.8%; median 100 beds | Fill gaps with `clean_capacity_from_text`, then "N beds" parsed from text. Combined, beds are known for 2,690 facilities (26.7%) |
+| `clean_area` is filled for 1.2% | Dropped |
+| Facilities average **11 specialty codes** each in silver (bronze showed ~28, inflated by duplicates); `cardiology` is tagged on 3,024 but a cath lab appears in the text of only 476 | A specialty tag alone is weak evidence (strength 0.3) |
+| Quantities in text *(bronze)*: beds 1,856 · ICU beds 350 · MRI tesla 235 · CT slices 213 · OT count 175 · dialysis units 83 · NICU beds 58 | Quantity features exist, but they're sparse |
 | Numbers parsed from free text can be misread (ICU "13,177", dialysis "60,000" = sessions per year, not machines) | Every **text-parsed** quantity needs a plausible range; values outside it are discarded. Structured columns are taken as-is |
-| 2,320 facilities have empty list items; 312 have negation lines ("…not available") | Treat empty as missing; a negated claim is a real statement of absence, so it never counts as positive |
-| **Lists are cut off at 50 items**: 2,080 facilities (21%) hit the cap in `procedure`, `equipment` or `capability` | For these, "not mentioned" may just mean "cut off" → **unknown**, not 0 (M7) |
+| Silver removed placeholder lines ("No equipment details provided…": 491 → 37) but **kept real negations** ("not available" 43, "outsourced" 44, "referred to" 20, "under construction" 23) | Treat empty as missing; a negated claim is a real statement of absence, so it never counts as positive |
+| **Lists are cut off at 50 items**: 2,078 facilities (20.6%) have a `flag_*_truncated_50` on procedures, equipment or capabilities | For these, "not mentioned" may just mean "cut off" → **unknown**, not 0 (M7) |
+| 1,492 facilities (14.8%) have coordinates > 50 km from their own PIN (`flag_coordinates_far_from_pincode`) | Use the PIN centroid, location `approximate` (M8) |
 | Negation goes beyond "not available": "outsourced", "referred to", "under construction", "upcoming" (+342 clauses). "In collaboration with" is **not** a negation | Clause-level negation with an extended phrase list (§4.2) |
-| `ventilator`/`cpap` appears at 447 facilities, but only 179 in a neonatal context | NICU equipment needs a neonatal context word in the same item (§4.3) |
-| "Dialysis" often appears only as equipment ("dialysis machines", 82 facilities have nothing else) | Service terms (→ E) and equipment terms (→ D) are separate lists, so one phrase isn't counted twice |
-| 5,330 facility items appear word for word in more than one field (description repeats structured fields) | Deduplicate claims by normalised text before counting corroboration (SCORING §3.2) |
+| `ventilator`/`cpap` appears at 447 facilities, but only 179 in a neonatal context *(bronze)* | NICU equipment needs a neonatal context word in the same item (§4.3) |
+| "Dialysis" often appears only as equipment ("dialysis machines", 82 facilities have nothing else) *(bronze)* | Service terms (→ E) and equipment terms (→ D) are separate lists, so one phrase isn't counted twice |
+| 5,330 facility items appear word for word in more than one field (description repeats structured fields) *(bronze)* | Deduplicate claims by normalised text before counting corroboration (SCORING §3.2) |
 
 ---
 
@@ -57,7 +58,7 @@ From `bronze_facilities` (10,088 rows), profiled 2026-11-21. Keyword counts are 
 | **M4. Missing lowers confidence** | Feature coverage (§6) counts only known features, so missing data reduces confidence automatically. |
 | **M5. Location fallback** | If latitude/longitude are missing, use the PIN centroid and mark the location `approximate`. If both are missing, the location is `unknown` and the facility can't be ranked by distance. |
 | **M6. Negation is data, not error** | "Dialysis not available", "MRI (outsourced)", "cath lab under construction" are valid statements that the service isn't offered **here, now**. Detected per clause (§4.2). Excluded from positive features; E uses them for the "Not offered" label (SCORING §3.4). |
-| **M8. Silver flags that mean "don't trust this value"** | Two `silver_facilities` flags are treated as **missing**: `flag_coordinates_far_from_pincode` (coordinates > 50 km from the facility's own PIN; 1,492 facilities) → use the PIN centroid, location `approximate`; `flag_numberDoctors_implausible` (96) → doctors unknown. All other `flag_*` columns are ignored. (Team decision, 2026-11-21.) |
+| **M8. Silver flags that mean "don't trust this value"** | Two `silver_facilities` flags are treated as **missing**: `flag_coordinates_far_from_pincode` (coordinates > 50 km from the facility's own PIN; 1,492 facilities) → use the PIN centroid, location `approximate`; `flag_numberDoctors_implausible` (112 facilities) → doctors unknown. All other `flag_*` columns are ignored. (Team decision, 2026-11-21.) |
 | **M7. Truncated lists** | If any of a facility's `procedure` / `equipment` / `capability` lists has 50 items, it was cut off. A text feature that isn't found is then `truncated` (NULL → 0.5 in D), not `not_mentioned` (0). |
 
 Values are trusted as given, so structured columns get **no** sanity bounds. Bounds remain only on numbers parsed out of free text (§4.3 `qty_min`/`qty_max`), because a regex can grab the wrong number from a correct sentence.
@@ -608,7 +609,7 @@ Missing values (M2) lower `feature_coverage`. An approximate location (M5) lower
 
 ---
 
-## 7. Validation run (2026-11-21, v3 rules)
+## 7. Validation run (2026-11-21, v3 rules, bronze table)
 
 §4.1–4.6 were run end-to-end, read-only, against the live bronze table.
 
@@ -648,7 +649,7 @@ Coverage fell from v2 (0.70–0.99) because 21% of facilities have a truncated l
 §4.1–4.6 run end-to-end on `silver_facilities` (10,077 facilities, read-only test).
 
 - **Location (M5, M8):** exact 8,460 · approximate (PIN centroid) 1,527 · unknown 90.
-- **Doctors:** found 3,516 (96 flagged values now unknown, M8). **Beds:** found 2,690 (adds `clean_capacity_from_text`).
+- **Doctors:** found 3,516 (112 flagged facilities treated as unknown, M8). **Beds:** found 2,690 (adds `clean_capacity_from_text`).
 - **NICU** found 1,514 (was 712): silver's standardised `neonatology` tag (1,303 facilities) now maps to the weak (0.3) tag hit. Text-only NICU evidence is unchanged.
 - **Audiometry** found 304 (adds the `audiology` tag).
 - Depth D medians: burn 7.5 · cardiac 5.0 · dialysis 30.0 · C-section 17.0 · ENT 22.5 · MRI 16.0 · NICU 19.5 · oncology 5.0 · trauma 18.5. Coverage 0.61–0.85, as in v3.

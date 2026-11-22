@@ -1,4 +1,7 @@
 -- =====================================================================
+-- NOTE (2026-11-22): profiles the RAW bronze table, to measure data-quality
+-- problems. The pipeline itself reads workspace.hackathon.silver_facilities;
+-- see docs/FEATURES.md §1 for the silver profile.
 -- 01_profiling.sql — measure data-quality problems before building fixes
 -- Run in ONE Databricks notebook (SQL language), one cell per block,
 -- top to bottom. Temp views/functions live for the notebook session.

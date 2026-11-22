@@ -229,6 +229,8 @@ Confidence is shown as a word, never a percentage. URLs are listed as references
 
 The regex's misses and false hits (e.g. "cardiac bypass surgery", "Non-NABH", "24x7 nursing") have specific fixes, which are pending (§10). Human-graded NDCG is still to come.
 
+**Silver re-run:** the deterministic flow was re-run on the same 15 facilities from `silver_facilities` (`experiments/llm_vs_regex/silver_rerun/`). Every evidence label and E score matches the bronze run; only small ranking shifts appear, from silver's PIN-centre query points.
+
 **Planned evaluation** (SCORING.md §7): blind labelling of what the record supports; regex precision and recall per service; negation accuracy; label monotonicity (Strong > Moderate > Weak); ranking vs baselines (nearest keyword match, keyword count, largest nearby); ablations; ±20% weight sensitivity; automatic honesty checks. About 8 person-hours in total.
 
 ## 9. Limitations
@@ -245,7 +247,7 @@ The regex's misses and false hits (e.g. "cardiac bypass surgery", "Non-NABH", "2
 | Part | Status |
 |---|---|
 | Clean view, location, claims, features, Depth D (SQL) | ✅ built and tested on all 10,077 silver facilities |
-| Evidence E, labels, completeness C, ranking | 🟨 working in Python (`experiments/llm_vs_regex/run_regex.py`), tested on the pilot |
+| Evidence E, labels, completeness C, ranking | 🟨 working in Python on silver (`experiments/llm_vs_regex/run_regex.py`), tested on the 15-facility pilot |
 | `gold_facility_completeness`, `gold_service_evidence` (SQL) | ⬜ to build |
 | `gold_service_scores` + `find_care` query function | ⬜ specified; depends on the two tables above |
 | Five regex fixes from the pilot | ⬜ to apply |
