@@ -1,0 +1,890 @@
+{
+ "Q1": {
+  "query": {
+   "service": "dialysis",
+   "location_input": "21.23855,81.64300",
+   "resolved_location": {
+    "lat": 21.23855,
+    "lon": 81.643,
+    "method": "latlon",
+    "label": "21.2386, 81.6430"
+   },
+   "radius_km_used": 150
+  },
+  "how_ranked": "Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km.",
+  "results": [
+   {
+    "rank": 1,
+    "unique_id": "723a6e17-fdf9-4af8-ae80-b16ea3b98244",
+    "name": "Hospitales CARE, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 3.9,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 86.0,
+    "E": 90.0,
+    "D": 87.8,
+    "A": 83.7,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Dialysis treatment is provided using 25 dialysis machines."
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "number of doctors"
+    ],
+    "contact": {
+     "official_phone": "+917713003300",
+     "references": [
+      "https://carehospitals.com"
+     ]
+    }
+   },
+   {
+    "rank": 2,
+    "unique_id": "78bed667-b16e-43c1-8d82-c82891f23aa8",
+    "name": "Vidya Hospital and Kidney Centre",
+    "facility_type": "hospital",
+    "distance_km": 3.2,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 80.1,
+    "E": 78.8,
+    "D": 46.4,
+    "A": 86.3,
+    "why": [
+     {
+      "field": "description",
+      "quote": "Established in 1988, it specializes in nephrology and offers 24-hour dialysis services with 10 units and intensive renal care facilities."
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [],
+    "not_reported": [
+     "list of equipment"
+    ],
+    "contact": {
+     "official_phone": "+919329102218",
+     "references": [
+      "https://vidyahospitalkidneycentre.com"
+     ]
+    }
+   },
+   {
+    "rank": 3,
+    "unique_id": "8e0dbec3-fd46-42e1-b213-9204bf799f69",
+    "name": "Shri Krishna Hospital",
+    "facility_type": "hospital",
+    "distance_km": 3.4,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 79.1,
+    "E": 80.0,
+    "D": 38.1,
+    "A": 85.4,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Dialysis"
+     },
+     {
+      "field": "capability",
+      "quote": "Nephrology, Dialysis & Urology services are available"
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "No dialysis equipment and not a kidney/dialysis centre by name"
+    ],
+    "not_reported": [
+     "number of doctors",
+     "number of beds",
+     "list of equipment",
+     "date the record was last updated"
+    ],
+    "contact": {
+     "official_phone": "+917714022233",
+     "references": [
+      "https://shrikrishnahospital.com"
+     ]
+    }
+   },
+   {
+    "rank": 4,
+    "unique_id": "3d4c1b68-7402-427c-922c-adbf52bd7dab",
+    "name": "Suyash Hospital",
+    "facility_type": "hospital",
+    "distance_km": 6.2,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 76.4,
+    "E": 80.0,
+    "D": 73.5,
+    "A": 75.1,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Dialysis"
+     },
+     {
+      "field": "procedure",
+      "quote": "Provides hemodialysis"
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "No dialysis equipment and not a kidney/dialysis centre by name",
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "number of doctors",
+     "year established",
+     "date the record was last updated"
+    ],
+    "contact": {
+     "official_phone": "+917712575275",
+     "references": [
+      "https://suyashhealth.co.in"
+     ]
+    }
+   },
+   {
+    "rank": 5,
+    "unique_id": "c35dabaa-544a-4d93-9405-b5444ed0bab3",
+    "name": "MMI Narayana Multispeciality Hospital, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 4.5,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 75.8,
+    "E": 66.0,
+    "D": 72.7,
+    "A": 81.2,
+    "why": [
+     {
+      "field": "capability",
+      "quote": "Has the largest dialysis centre in Central India"
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "year established"
+    ],
+    "contact": {
+     "official_phone": "+9118602080208",
+     "references": [
+      "https://narayanahealth.org"
+     ]
+    }
+   }
+  ],
+  "extra_rows": {
+   "unconfirmed_options": {
+    "message": "Unconfirmed options: these records only hint at this service (a specialty or equipment), with no direct claim. Call first.",
+    "results": [
+     {
+      "rank": null,
+      "unique_id": "269e3a30-c0d8-447c-8d74-fe6a2977a315",
+      "name": "Sanjeevani Cancer Hospital",
+      "facility_type": "hospital",
+      "distance_km": 3.9,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 65.1,
+      "E": 30.0,
+      "D": 60.1,
+      "A": 83.4,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "nephrology"
+       }
+      ],
+      "caveats": [
+       "Some lists in this record were cut off at 50 items, so evidence may be missing"
+      ],
+      "not_reported": [
+       "number of doctors",
+       "date the record was last updated"
+      ],
+      "contact": {
+       "official_phone": "+918319505058",
+       "references": [
+        "https://scch.co.in"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "6c08e1f3-1d59-42c0-bb0c-4617f95a8986",
+      "name": "Devi Woman and Child Hospital, Raipur",
+      "facility_type": "hospital",
+      "distance_km": 5.0,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 61.0,
+      "E": 30.0,
+      "D": 44.2,
+      "A": 79.3,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "nephrology"
+       }
+      ],
+      "caveats": [],
+      "not_reported": [
+       "year established",
+       "date the record was last updated"
+      ],
+      "contact": {
+       "official_phone": "+919303786212",
+       "references": [
+        "http://devihospital.in/"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "0b02d119-a409-4554-9979-39817ed38e3e",
+      "name": "Smc Heart Institute And Ivf Research Center",
+      "facility_type": "hospital",
+      "distance_km": 6.6,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 58.4,
+      "E": 30.0,
+      "D": 51.1,
+      "A": 73.8,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "nephrology"
+       }
+      ],
+      "caveats": [],
+      "not_reported": [],
+      "contact": {
+       "official_phone": "+918839800123",
+       "references": [
+        "https://smchospital.in"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "702a22a9-0c4c-49b4-afbe-e54b42750283",
+      "name": "Vasudev Multispeciality Hospital and Apollo Dialysis Clinic",
+      "facility_type": "hospital",
+      "distance_km": 5.8,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 58.2,
+      "E": 30.0,
+      "D": 32.3,
+      "A": 76.6,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "nephrology"
+       }
+      ],
+      "caveats": [],
+      "not_reported": [
+       "list of procedures",
+       "list of equipment",
+       "year established",
+       "date the record was last updated"
+      ],
+      "contact": {
+       "official_phone": "+917987025114",
+       "references": [
+        "https://vasudevhospital.in"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "f71b47e9-1504-40f9-9256-706f6173280b",
+      "name": "Mamta Super Speciality Hospital",
+      "facility_type": "hospital",
+      "distance_km": 6.1,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 57.4,
+      "E": 30.0,
+      "D": 31.7,
+      "A": 75.3,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "nephrology"
+       }
+      ],
+      "caveats": [],
+      "not_reported": [
+       "number of doctors",
+       "list of equipment",
+       "year established"
+      ],
+      "contact": {
+       "official_phone": "+917383371427",
+       "references": [
+        "https://mamtahospitalraipur.com"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "e43a21d0-8c78-436d-9656-39418b1fbf16",
+      "name": "All India Institute of Medical Sciences, Raipur",
+      "facility_type": "hospital",
+      "distance_km": 9.6,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Low",
+      "rank_score": 53.3,
+      "E": 30.0,
+      "D": 58.5,
+      "A": 64.1,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "nephrology"
+       }
+      ],
+      "caveats": [
+       "Some lists in this record were cut off at 50 items, so evidence may be missing"
+      ],
+      "not_reported": [
+       "number of doctors"
+      ],
+      "contact": {
+       "official_phone": "+917712572240",
+       "references": [
+        "https://aiimsraipur.edu.in"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "fallback": null
+ },
+ "Q2": {
+  "query": {
+   "service": "emergency_csection",
+   "location_input": "21.23784,81.70542",
+   "resolved_location": {
+    "lat": 21.23784,
+    "lon": 81.70542,
+    "method": "latlon",
+    "label": "21.2378, 81.7054"
+   },
+   "radius_km_used": 100
+  },
+  "how_ranked": "For emergency delivery we show the closest facilities whose records say they perform caesareans, ranked 45% closeness, 35% how clearly the record documents it, 20% equipment and capability, searching up to 100 km.",
+  "results": [
+   {
+    "rank": 1,
+    "unique_id": "0b02d119-a409-4554-9979-39817ed38e3e",
+    "name": "Smc Heart Institute And Ivf Research Center",
+    "facility_type": "hospital",
+    "distance_km": 5.8,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 69.9,
+    "E": 73.3,
+    "D": 36.8,
+    "A": 81.9,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Performs cesarean delivery"
+     },
+     {
+      "field": "equipment",
+      "quote": "Modern operation theatres"
+     },
+     {
+      "field": "specialties",
+      "quote": "gynecologyAndObstetrics"
+     }
+    ],
+    "caveats": [
+     "Emergency readiness not confirmed"
+    ],
+    "not_reported": [
+     "blood bank"
+    ],
+    "contact": {
+     "official_phone": "+918839800123",
+     "references": [
+      "https://smchospital.in"
+     ]
+    }
+   },
+   {
+    "rank": 2,
+    "unique_id": "3933c2cf-fae4-439e-a72d-39d2c28ddf4e",
+    "name": "Kanwar Nursing Home",
+    "facility_type": "hospital",
+    "distance_km": 6.3,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 67.9,
+    "E": 73.3,
+    "D": 30.5,
+    "A": 80.3,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Caesarean Delivery"
+     },
+     {
+      "field": "capability",
+      "quote": "Provides emergency services"
+     },
+     {
+      "field": "procedure",
+      "quote": "Caesarean hysterectomy"
+     },
+     {
+      "field": "specialties",
+      "quote": "gynecologyAndObstetrics"
+     }
+    ],
+    "caveats": [],
+    "not_reported": [
+     "number of beds",
+     "date the record was last updated",
+     "blood bank"
+    ],
+    "contact": {
+     "official_phone": "+917773013084",
+     "references": [
+      "https://kanwarnursinghome.com"
+     ]
+    }
+   },
+   {
+    "rank": 3,
+    "unique_id": "6c08e1f3-1d59-42c0-bb0c-4617f95a8986",
+    "name": "Devi Woman and Child Hospital, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 13.9,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 64.5,
+    "E": 73.3,
+    "D": 55.1,
+    "A": 61.8,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Performs Caesarean Section"
+     },
+     {
+      "field": "capability",
+      "quote": "Offers 24/7 emergency care"
+     },
+     {
+      "field": "equipment",
+      "quote": "Delivery rooms designed to international safety standards"
+     },
+     {
+      "field": "specialties",
+      "quote": "gynecologyAndObstetrics"
+     }
+    ],
+    "caveats": [],
+    "not_reported": [
+     "year established",
+     "date the record was last updated",
+     "blood bank"
+    ],
+    "contact": {
+     "official_phone": "+919303786212",
+     "references": [
+      "http://devihospital.in/"
+     ]
+    }
+   },
+   {
+    "rank": 4,
+    "unique_id": "f73efb65-a436-45a4-b6b3-8409e412525d",
+    "name": "Tiwari Nursing Home",
+    "facility_type": "clinic",
+    "distance_km": 8.4,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 59.2,
+    "E": 63.3,
+    "D": 17.0,
+    "A": 74.8,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Caesarean Section (C Section)"
+     },
+     {
+      "field": "specialties",
+      "quote": "gynecologyAndObstetrics"
+     }
+    ],
+    "caveats": [
+     "Emergency readiness not confirmed"
+    ],
+    "not_reported": [
+     "number of beds",
+     "date the record was last updated",
+     "blood bank"
+    ],
+    "contact": {
+     "official_phone": "+917041861729",
+     "references": [
+      "https://tiwarinursinghome.business.site"
+     ]
+    }
+   }
+  ],
+  "extra_rows": null,
+  "fallback": null
+ },
+ "Q3": {
+  "query": {
+   "service": "cardiac_surgery",
+   "location_input": "21.25457,81.65708",
+   "resolved_location": {
+    "lat": 21.25457,
+    "lon": 81.65708,
+    "method": "latlon",
+    "label": "21.2546, 81.6571"
+   },
+   "radius_km_used": 500
+  },
+  "how_ranked": "For heart surgery we prioritise equipment and experience over distance, because it's often worth travelling, ranked 45% equipment and capability, 35% how clearly the record documents it, 20% closeness, searching up to 500 km.",
+  "results": [
+   {
+    "rank": 1,
+    "unique_id": "3d4c1b68-7402-427c-922c-adbf52bd7dab",
+    "name": "Suyash Hospital",
+    "facility_type": "hospital",
+    "distance_km": 7.4,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 85.9,
+    "E": 87.5,
+    "D": 80.0,
+    "A": 96.6,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Cardiac catheterization with Cathlab and bypass surgery"
+     },
+     {
+      "field": "procedure",
+      "quote": "Performs cardiac bypass surgery in the Cardiac Cath Lab"
+     },
+     {
+      "field": "equipment",
+      "quote": "7 operating theatres"
+     }
+    ],
+    "caveats": [
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "number of doctors",
+     "year established",
+     "date the record was last updated",
+     "blood bank (not reported, list cut off)"
+    ],
+    "contact": {
+     "official_phone": "+917712575275",
+     "references": [
+      "https://suyashhealth.co.in"
+     ]
+    }
+   },
+   {
+    "rank": 2,
+    "unique_id": "723a6e17-fdf9-4af8-ae80-b16ea3b98244",
+    "name": "Hospitales CARE, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 5.8,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 78.8,
+    "E": 87.5,
+    "D": 63.8,
+    "A": 97.3,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Performs cardiothoracic surgery"
+     },
+     {
+      "field": "equipment",
+      "quote": "Has a catheterization laboratory (Cath Lab)"
+     },
+     {
+      "field": "procedure",
+      "quote": "Cardiothoracic surgery procedures are offered"
+     },
+     {
+      "field": "equipment",
+      "quote": "Integrated operating theatre designed by Carl Storz (Germany)"
+     }
+    ],
+    "caveats": [
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "number of doctors",
+     "blood bank (not reported, list cut off)"
+    ],
+    "contact": {
+     "official_phone": "+917713003300",
+     "references": [
+      "https://carehospitals.com"
+     ]
+    }
+   },
+   {
+    "rank": 3,
+    "unique_id": "c35dabaa-544a-4d93-9405-b5444ed0bab3",
+    "name": "MMI Narayana Multispeciality Hospital, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 6.5,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Low",
+    "rank_score": 70.3,
+    "E": 77.5,
+    "D": 52.8,
+    "A": 97.1,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Heart bypass surgery is performed"
+     },
+     {
+      "field": "procedure",
+      "quote": "Heart valve replacement is performed"
+     }
+    ],
+    "caveats": [
+     "No cath lab, CTICU or heart-lung machine",
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "year established",
+     "blood bank (not reported, list cut off)"
+    ],
+    "contact": {
+     "official_phone": "+9118602080208",
+     "references": [
+      "https://narayanahealth.org"
+     ]
+    }
+   },
+   {
+    "rank": 4,
+    "unique_id": "0b02d119-a409-4554-9979-39817ed38e3e",
+    "name": "Smc Heart Institute And Ivf Research Center",
+    "facility_type": "hospital",
+    "distance_km": 3.5,
+    "distance_uncertainty_km": 0.0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 57.3,
+    "E": 75.0,
+    "D": 25.3,
+    "A": 98.4,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Bypass Surgery"
+     },
+     {
+      "field": "procedure",
+      "quote": "Performs cardiothoracic surgery"
+     },
+     {
+      "field": "equipment",
+      "quote": "Modern operation theatres"
+     }
+    ],
+    "caveats": [
+     "No cath lab, CTICU or heart-lung machine"
+    ],
+    "not_reported": [
+     "blood bank"
+    ],
+    "contact": {
+     "official_phone": "+918839800123",
+     "references": [
+      "https://smchospital.in"
+     ]
+    }
+   }
+  ],
+  "extra_rows": {
+   "unconfirmed_options": {
+    "message": "Unconfirmed options: these records only hint at this service (a specialty or equipment), with no direct claim. Call first.",
+    "results": [
+     {
+      "rank": null,
+      "unique_id": "269e3a30-c0d8-447c-8d74-fe6a2977a315",
+      "name": "Sanjeevani Cancer Hospital",
+      "facility_type": "hospital",
+      "distance_km": 6.4,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 54.4,
+      "E": 30.0,
+      "D": 54.4,
+      "A": 97.1,
+      "why": [
+       {
+        "field": "specialties",
+        "quote": "cardiothoracicSurgery"
+       },
+       {
+        "field": "capability",
+        "quote": "Haematology and haemato-oncology department with blood bank facility"
+       },
+       {
+        "field": "procedure",
+        "quote": "Laparoscopic cancer surgeries are performed in modular operating theatres"
+       }
+      ],
+      "caveats": [
+       "Some lists in this record were cut off at 50 items, so evidence may be missing"
+      ],
+      "not_reported": [
+       "number of doctors",
+       "date the record was last updated"
+      ],
+      "contact": {
+       "official_phone": "+918319505058",
+       "references": [
+        "https://scch.co.in"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "509c6668-953b-4d13-b198-5659718b54e6",
+      "name": "Kanha Children Hospital",
+      "facility_type": "hospital",
+      "distance_km": 2.0,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 49.5,
+      "E": 25.0,
+      "D": 46.5,
+      "A": 99.1,
+      "why": [
+       {
+        "field": "equipment",
+        "quote": "Philips Azurion 5 M12 Cathlab"
+       },
+       {
+        "field": "equipment",
+        "quote": "Blood Storage Center"
+       },
+       {
+        "field": "equipment",
+        "quote": "Modular Operation Theatre Complex"
+       }
+      ],
+      "caveats": [],
+      "not_reported": [
+       "number of doctors",
+       "list of procedures",
+       "date the record was last updated"
+      ],
+      "contact": {
+       "official_phone": "+919753834500",
+       "references": [
+        "https://kanhahospital.com"
+       ]
+      }
+     },
+     {
+      "rank": null,
+      "unique_id": "f71b47e9-1504-40f9-9256-706f6173280b",
+      "name": "Mamta Super Speciality Hospital",
+      "facility_type": "hospital",
+      "distance_km": 2.9,
+      "distance_uncertainty_km": 0.0,
+      "evidence_label": "Possible",
+      "confidence": "Medium",
+      "rank_score": 26.2,
+      "E": 10.0,
+      "D": 6.7,
+      "A": 98.7,
+      "why": [],
+      "caveats": [],
+      "not_reported": [
+       "number of doctors",
+       "list of equipment",
+       "year established",
+       "blood bank"
+      ],
+      "contact": {
+       "official_phone": "+917383371427",
+       "references": [
+        "https://mamtahospitalraipur.com"
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "fallback": null
+ }
+}

@@ -1,0 +1,452 @@
+{
+ "tables": {
+  "silver_facility_clean": "workspace.hackathon.silver_facility_clean",
+  "silver_facility_location": "workspace.hackathon.silver_facility_location",
+  "silver_claims": "workspace.hackathon.silver_claims",
+  "ref_feature_terms": "workspace.hackathon.ref_feature_terms",
+  "ref_feature_context": "workspace.hackathon.ref_feature_context",
+  "ref_feature_specialty": "workspace.hackathon.ref_feature_specialty",
+  "ref_service_direct": "workspace.hackathon.ref_service_direct",
+  "ref_regression_fixtures": "workspace.hackathon.ref_regression_fixtures",
+  "silver_feature_hits": "workspace.hackathon.silver_feature_hits",
+  "gold_facility_features": "workspace.hackathon.gold_facility_features",
+  "gold_facility_completeness": "workspace.hackathon.gold_facility_completeness",
+  "gold_service_evidence": "workspace.hackathon.gold_service_evidence",
+  "ref_service_weights": "workspace.hackathon.ref_service_weights",
+  "gold_service_depth": "workspace.hackathon.gold_service_depth",
+  "gold_service_scores": "workspace.hackathon.gold_service_scores",
+  "ref_service_profile": "workspace.hackathon.ref_service_profile",
+  "gold_query_log": "workspace.hackathon.gold_query_log"
+ },
+ "steps_s": {},
+ "total_s": 68.7,
+ "adaptations": [
+  "input contract: no column for 'city' (tried ['address_city', 'clean_city']); treated as missing",
+  "input contract: 'official_website' read from column `clean_website` (plan assumes `clean_officialWebsite`)",
+  "input contract: no column for 'websites' (tried ['clean_websites', 'websites']); treated as missing",
+  "input contract: 'raw description' read from column `clean_description` (plan assumes `description`)",
+  "input contract: 'raw procedure' read from column `clean_procedures` (plan assumes `procedure`)",
+  "input contract: 'raw equipment' read from column `clean_equipment` (plan assumes `equipment`)",
+  "input contract: 'raw capability' read from column `clean_capabilities` (plan assumes `capability`)",
+  "input contract: 'raw specialties' read from column `clean_specialties` (plan assumes `specialties`)",
+  "input contract: city read from bronze_facilities.address_city (joined on unique_id); silver has no city column",
+  "PIN directory: 206 of 19586 PIN points are > 300 km from their 3-digit-prefix median; treated as unknown for facility locations and district centres (input not modified)",
+  "26 clean procedure items are not byte-identical substrings of the raw JSON field (usually JSON escaping); quotes are re-checked against the decoded raw list at build time"
+ ],
+ "fixtures": [
+  [
+   "F1",
+   "Performs cardiac bypass surgery in the Cardiac Cath Lab",
+   "cardiac_surgery.direct",
+   "found",
+   "PASS"
+  ],
+  [
+   "F2",
+   "Laparoscopic gastric bypass surgery",
+   "cardiac_surgery.direct",
+   "not found",
+   "PASS"
+  ],
+  [
+   "F3",
+   "24-hour dialysis services with 10 units",
+   "S1.dialysis_unit",
+   "found, qty 10",
+   "PASS"
+  ],
+  [
+   "F4",
+   "Non-NABH accreditation",
+   "G10.accreditation",
+   "not found",
+   "PASS"
+  ],
+  [
+   "F5",
+   "24x7 nursing",
+   "G5.emergency_24x7",
+   "not found",
+   "PASS"
+  ],
+  [
+   "F6",
+   "24x7 Pharmacy",
+   "G5.emergency_24x7",
+   "not found",
+   "PASS"
+  ],
+  [
+   "F7",
+   "Offers 24/7 emergency care",
+   "G5.emergency_24x7",
+   "found",
+   "PASS"
+  ],
+  [
+   "F8",
+   "Offers emergency and elective services",
+   "G5.emergency_24x7",
+   "found",
+   "PASS"
+  ],
+  [
+   "F9",
+   "Heart Institute for cardiac care",
+   "S6.ccu",
+   "not found",
+   "PASS"
+  ],
+  [
+   "F10",
+   "Intensive Critical Care Unit (ICCU)",
+   "S6.ccu / G4.icu",
+   "S6 not found, G4 found",
+   "PASS"
+  ],
+  [
+   "F11",
+   "Dialysis not available",
+   "dialysis.direct",
+   "negated",
+   "PASS"
+  ],
+  [
+   "F12",
+   "Largest dialysis centre in the region",
+   "dialysis.second_claim",
+   "no (deduplicated)",
+   "PASS"
+  ]
+ ],
+ "pilot_checks": {
+  "Q1 top 3 = {CARE, Vidya, Shri Krishna}": true,
+  "Q3 top 2 ⊇ {Suyash, CARE}": true,
+  "Q2 top 3 ⊇ {Devi, Kanwar}": true,
+  "Q2 has ≥ 1 Strong C-section": true
+ },
+ "labels": [
+  {
+   "service": "burn_care",
+   "strong": 3,
+   "moderate": 66,
+   "weak": 11,
+   "possible": 116,
+   "not_offered": 0,
+   "no_evidence": 9881,
+   "passes_gate": 69,
+   "gate_high": 3,
+   "gate_medium": 48,
+   "gate_low": 18,
+   "median_D": 7.5,
+   "avg_coverage": 0.79
+  },
+  {
+   "service": "cardiac_surgery",
+   "strong": 153,
+   "moderate": 331,
+   "weak": 17,
+   "possible": 640,
+   "not_offered": 0,
+   "no_evidence": 8936,
+   "passes_gate": 484,
+   "gate_high": 121,
+   "gate_medium": 208,
+   "gate_low": 155,
+   "median_D": 5.0,
+   "avg_coverage": 0.78
+  },
+  {
+   "service": "dialysis",
+   "strong": 280,
+   "moderate": 677,
+   "weak": 74,
+   "possible": 1390,
+   "not_offered": 2,
+   "no_evidence": 7654,
+   "passes_gate": 957,
+   "gate_high": 239,
+   "gate_medium": 549,
+   "gate_low": 169,
+   "median_D": 30.0,
+   "avg_coverage": 0.75
+  },
+  {
+   "service": "emergency_csection",
+   "strong": 179,
+   "moderate": 257,
+   "weak": 4,
+   "possible": 4846,
+   "not_offered": 2,
+   "no_evidence": 4789,
+   "passes_gate": 436,
+   "gate_high": 137,
+   "gate_medium": 239,
+   "gate_low": 60,
+   "median_D": 17.0,
+   "avg_coverage": 0.82
+  },
+  {
+   "service": "ent",
+   "strong": 93,
+   "moderate": 1382,
+   "weak": 95,
+   "possible": 1412,
+   "not_offered": 0,
+   "no_evidence": 7095,
+   "passes_gate": 1570,
+   "gate_high": 54,
+   "gate_medium": 1068,
+   "gate_low": 448,
+   "median_D": 22.5,
+   "avg_coverage": 0.61
+  },
+  {
+   "service": "mri",
+   "strong": 612,
+   "moderate": 262,
+   "weak": 66,
+   "possible": 2426,
+   "not_offered": 7,
+   "no_evidence": 6704,
+   "passes_gate": 940,
+   "gate_high": 505,
+   "gate_medium": 378,
+   "gate_low": 57,
+   "median_D": 0.0,
+   "avg_coverage": 0.85
+  },
+  {
+   "service": "nicu",
+   "strong": 81,
+   "moderate": 585,
+   "weak": 30,
+   "possible": 880,
+   "not_offered": 1,
+   "no_evidence": 8500,
+   "passes_gate": 666,
+   "gate_high": 71,
+   "gate_medium": 474,
+   "gate_low": 121,
+   "median_D": 12.0,
+   "avg_coverage": 0.77
+  },
+  {
+   "service": "oncology",
+   "strong": 204,
+   "moderate": 1193,
+   "weak": 182,
+   "possible": 920,
+   "not_offered": 2,
+   "no_evidence": 7576,
+   "passes_gate": 1397,
+   "gate_high": 170,
+   "gate_medium": 822,
+   "gate_low": 405,
+   "median_D": 5.0,
+   "avg_coverage": 0.79
+  },
+  {
+   "service": "trauma",
+   "strong": 200,
+   "moderate": 717,
+   "weak": 31,
+   "possible": 2528,
+   "not_offered": 3,
+   "no_evidence": 6598,
+   "passes_gate": 917,
+   "gate_high": 175,
+   "gate_medium": 559,
+   "gate_low": 183,
+   "median_D": 12.9,
+   "avg_coverage": 0.8
+  }
+ ],
+ "env": {
+  "volumes": [
+   {
+    "database": "hackathon",
+    "volume_name": "eval_files"
+   },
+   {
+    "database": "hackathon",
+    "volume_name": "reference_files"
+   }
+  ],
+  "tables": [
+   "bronze_facilities",
+   "bronze_facilities_flagged",
+   "bronze_nfhs5_indicators",
+   "bronze_pincode_directory",
+   "dq_facilities_identity_contact",
+   "eval_audit_packets",
+   "eval_audit_packets_new",
+   "eval_dispute_packets",
+   "eval_judge_audit",
+   "eval_judge_audit_new",
+   "eval_judge_packets",
+   "eval_judge_packets_new",
+   "eval_judge_primary",
+   "eval_judge_primary_new",
+   "eval_judge_resolve",
+   "gold_facility_completeness",
+   "gold_facility_features",
+   "gold_query_log",
+   "gold_service_depth",
+   "gold_service_evidence",
+   "gold_service_scores",
+   "ref_feature_context",
+   "ref_feature_specialty",
+   "ref_feature_terms",
+   "ref_regression_fixtures",
+   "ref_service_direct",
+   "ref_service_profile",
+   "ref_service_weights",
+   "ref_specialty_mapping",
+   "silver_claims",
+   "silver_facilities",
+   "silver_facility_clean",
+   "silver_facility_location",
+   "silver_feature_hits",
+   "silver_pincode_directory",
+   "fx_claims",
+   "fx_clean",
+   "fx_features",
+   "fx_hits"
+  ],
+  "volume_files": [
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/agreement.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/audit.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/facilities.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/judge_packets.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/method_log.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/method_log_v1.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/pins.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/primary.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/queries.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/references.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/resolutions.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/REPORT.md",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/failures.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/label_monotonicity.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/missing_method.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/per_query.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/responses.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/stability.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/summary.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/eval_files/silver_v5/report/tuning.jsonl",
+   "dbfs:/Volumes/workspace/hackathon/reference_files/specialty_mapping.json"
+  ],
+  "workspace_brief_candidates": [],
+  "ai_query_function": "registered",
+  "ai_query_call": "OK"
+ },
+ "smoke": [
+  [
+   "dialysis",
+   "492001",
+   "urban PIN, recurring",
+   "Dialysis near 492001\n  resolved: PIN 492001 (Raipur, Chhattisgarh) (pin), radius 25 km\n  how ranked: Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km.\n  1. Hospitales CARE, Raipur  ~3.8 km · STRONG · Confidence: High · score 86.2 (E 90 · D 88 · A 84)\n       ✓ procedure: \"Dialysis treatment is provided using 25 dialysis machines.\"\n       ✓ specialties: \"nephrology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors\n  2. Shri Krishna Hospital  ~3.6 km · MODERATE · Confidence: Medium · score 78.7 (E 80 · D 38 · A 85)\n       ✓ procedure: \"Dialysis\"\n       ✓ capability: \"Nephrology, Dialysis & Urology services are available\"\n       ✓ specialties: \"nephrology\"\n       ⚠ No dialysis equipment and not a kidney/dialysis centre by name\n       ? number of doctors · number of beds · list of equipment · date the record was last updated\n  3. Vidya Hospital and Kidney Centre  ~4.0 km · STRONG · Confidence: High · score 78.6 (E 79 · D 50 · A 83)\n       ✓ description: \"Established in 1988, it specializes in nephrology and offers 24-hour dialysis services with 10 units and intensive renal care facilities.\"\n       ✓ specialties: \"nephrology\"\n       ? number of doctors · list of equipment\n  4. Suyash Hospital  ~6.0 km · MODERATE · Confidence: Medium · score 76.8 (E 80 · D 74 · A 76)\n       ✓ procedure: \"Dialysis\"\n       ✓ procedure: \"Provides hemodialysis\"\n       ✓ specialties: \"nephrology\"\n       ⚠ No dialysis equipment and not a kidney/dialysis centre by name\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · year established · date the record was last updated\n  5. MMI Narayana Multispeciality Hospital, Raipur  ~4.4 km · MODERATE · Confidence: Medium · score 76.1 (E 66 · D 73 · A 82)\n       ✓ capability: \"Has the largest dialysis centre in Central India\"\n       ✓ specialties: \"nephrology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established",
+   1.31
+  ],
+  [
+   "emergency_csection",
+   "Patna",
+   "city, time-critical",
+   "Emergency C-section near Patna\n  resolved: Patna city, Bihar (centre of 129 listed facilities) (city), radius 25 km\n  how ranked: For emergency delivery we show the closest facilities whose records say they perform caesareans, ranked 45% closeness, 35% how clearly the record documents it, 20% equipment and capability, searching up to 100 km.\n  1. Shrinivas Hospital  ~0.8 km · STRONG · Confidence: High · score 87.7 (E 87 · D 68 · A 97)\n       ✓ procedure: \"Caesarean Section\"\n       ✓ procedure: \"Emergency Room provides first aid and emergency treatment attended by trained doctors and nursing staff\"\n       ✓ procedure: \"Labor and delivery services include a four-bed labour room and a delivery operating theatre with a motorised delivery table and a neonatal w\"\n       ✓ procedure: \"Offers caesarean section\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established · blood bank (not reported, list cut off)\n  2. Medizone Hospitals  ~0.7 km · STRONG · Confidence: High · score 80.6 (E 83 · D 38 · A 98)\n       ✓ procedure: \"Performs cesarean deliveries\"\n       ✓ capability: \"Has 24/7 emergency and trauma centre\"\n       ✓ capability: \"ICU / NICU / CCU\"\n       ✓ procedure: \"Cesarean delivery\"\n       ? number of doctors · list of equipment · blood bank\n  3. Ruban Memorial Hospital  ~6.0 km · STRONG · Confidence: High · score 77.2 (E 77 · D 69 · A 81)\n       ✓ procedure: \"Normal delivery (vaginal delivery) and cesarean delivery\"\n       ✓ capability: \"Offers 24/7 emergency services\"\n       ✓ equipment: \"Maternity wing with modern labor rooms\"\n       ✓ specialties: \"obstetrics\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established · blood bank (not reported, list cut off)\n  4. Sun Hospita  ~1.8 km · MODERATE · Confidence: Low · score 76.1 (E 67 · D 52 · A 94)\n       ✓ procedure: \"Caesarean Section (C Section) is performed at Sun Hospita\"\n       ✓ specialties: \"obstetrics\"\n       ⚠ Emergency readiness not confirmed\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · number of beds · list of equipment · blood bank (not reported, list cut off)\n  5. Patna Medical College & Hospital  ~7.3 km · MODERATE · Confidence: Medium · score 73.5 (E 77 · D 58 · A 78)\n       ✓ procedure: \"Caesarean Section performed at Nalanda Medical College and Hospital, Sadikpur\"\n       ✓ equipment: \"Two operating theatres existed in 1930\"\n       ✓ specialties: \"obstetrics\"\n       ✓ equipment: \"ENT block contained an operation theatre\"\n       ⚠ Emergency readiness not confirmed\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? blood bank (not reported, list cut off)",
+   1.18
+  ],
+  [
+   "nicu",
+   "110001",
+   "metro PIN, time-critical",
+   "NICU (newborn intensive care) near 110001\n  resolved: PIN 110001 (New Delhi, Delhi) (pin), radius 25 km\n  how ranked: For a newborn needing intensive care we show the closest facilities whose records describe a NICU, ranked 50% closeness, 35% how clearly the record documents it, 15% equipment and capability, searching up to 200 km.\n  1. Aravind Eye Hospital  ~5.2 km · MODERATE · Confidence: Low · score 85.3 (E 90 · D 85 · A 82)\n       ✓ capability: \"10-bed Neonatal Intensive Care Unit (NICU)\"\n       ✓ capability: \"50-bed Paediatric Intensive Care Unit (PICU) with 10 ventilator beds\"\n       ✓ specialties: \"neonatology\"\n       ⚠ The claim appears only in the description or capability text\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ⚠ This record may include text from another facility (capabilities mention another facility and the description names a different state). Call to confirm.\n       ⚠ Location is approximate (centre of the PIN area), so the distance may be off by about 2 km\n       ? exact location (only the PIN area is known) · number of doctors · date the record was last updated\n  2. Triton Hospital  ~10.3 km · MODERATE · Confidence: Medium · score 80.7 (E 100 · D 54 · A 75)\n       ✓ capability: \"12-bed Level III NICU\"\n       ✓ capability: \"Has Neonatal Intensive Care Unit (NICU)\"\n       ✓ specialties: \"neonatology\"\n       ⚠ No neonatal equipment (ventilator, CPAP, warmer, incubator or phototherapy)\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · year established · date the record was last updated\n  3. Orchid Hospital  ~18.2 km · STRONG · Confidence: High · score 70.7 (E 86 · D 69 · A 60)\n       ✓ capability: \"Five-bed Neonatal Intensive Care Unit\"\n       ✓ equipment: \"NICU equipment including infant warmers, double surface phototherapy, infusion pumps, cardiac monitors, centralized oxygen suction and venti\"\n       ✓ capability: \"NICU (Neonatal Intensive Care Unit)\"\n       ✓ specialties: \"neonatology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · year established · date the record was last updated\n  4. Alshifa Multispeciality Hospital  ~12.5 km · MODERATE · Confidence: Medium · score 69.8 (E 76 · D 52 · A 71)\n       ✓ capability: \"Level II NICU on site\"\n       ✓ capability: \"Level II NICU\"\n       ✓ specialties: \"neonatology\"\n       ⚠ No neonatal equipment (ventilator, CPAP, warmer, incubator or phototherapy)\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · year established\n  5. Bhardwaj Hospital  ~16.9 km · MODERATE · Confidence: Medium · score 66.3 (E 76 · D 56 · A 62)\n       ✓ capability: \"Neonatal Intensive Care Unit on site\"\n       ✓ capability: \"Neonatal Intensive Care Unit (NICU)\"\n       ✓ specialties: \"neonatology\"\n       ⚠ No neonatal equipment (ventilator, CPAP, warmer, incubator or phototherapy)\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of beds",
+   1.66
+  ],
+  [
+   "trauma",
+   "Barmer",
+   "rural district, time-critical",
+   "Trauma care near Barmer\n  resolved: Barmer district, Rajasthan (centre of 28 PIN areas) (district), radius 100 km\n  how ranked: For injuries every minute counts, so we show the closest facilities whose records describe trauma or accident care, ranked 55% closeness, 30% how clearly the record documents it, 15% equipment and capability, searching up to 100 km.\n  1. Jeevan Jeewana Hospital  ~98.8 km · STRONG · Confidence: High · score 38.1 (E 90 · D 70 · A 1)\n       ✓ procedure: \"Emergency trauma care\"\n       ✓ procedure: \"CT scan\"\n       ✓ capability: \"24/7 emergency department and trauma care\"\n       ✓ specialties: \"emergencyMedicine\"\n       ? number of beds · date the record was last updated",
+   1.85
+  ],
+  [
+   "cardiac_surgery",
+   "Chennai",
+   "city, travel-worthy",
+   "Cardiac surgery near Chennai\n  resolved: Chennai city, Tamil Nadu (centre of 272 listed facilities) (city), radius 25 km\n  how ranked: For heart surgery we prioritise equipment and experience over distance, because it's often worth travelling, ranked 45% equipment and capability, 35% how clearly the record documents it, 20% closeness, searching up to 500 km.\n  1. MGM Healthcare  ~3.0 km · STRONG · Confidence: High · score 84.5 (E 80 · D 82 · A 99)\n       ✓ procedure: \"MGM Healthcare performs mitral/heart valve replacement\"\n       ✓ equipment: \"Monoplane catheterization laboratory\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ✓ equipment: \"On-site Laboratory Services and Blood Bank\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n  2. Medway Heart Institute  ~0.1 km · STRONG · Confidence: High · score 75.7 (E 85 · D 58 · A 100)\n       ✓ procedure: \"Valve Replacement Surgery\"\n       ✓ equipment: \"Cardiac catheterization lab (Cath lab)\"\n       ✓ procedure: \"Coronary Artery Bypass Grafting\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ? date the record was last updated · blood bank\n  3. Gleneagles Clinic, Adyar, Chennai  ~7.6 km · STRONG · Confidence: Medium · score 73.9 (E 78 · D 61 · A 97)\n       ✓ procedure: \"Heart Bypass Surgery\"\n       ✓ equipment: \"24/7 Cath Lab\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ✓ equipment: \"Modern operating theatres\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of beds · year established · blood bank (not reported, list cut off)\n  4. Prime Indian Hospital  ~5.0 km · MODERATE · Confidence: Medium · score 72.7 (E 78 · D 58 · A 98)\n       ✓ procedure: \"Valve replacement during open-heart surgery\"\n       ✓ capability: \"Cardiothoracic surgeons and cardiac anesthesiologists on staff\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ✓ equipment: \"Operation Theatres\"\n       ⚠ No cath lab, CTICU or heart-lung machine\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established · blood bank (not reported, list cut off)\n  5. Santosham Chest Hospital  ~5.1 km · MODERATE · Confidence: Low · score 65.8 (E 74 · D 46 · A 98)\n       ✓ capability: \"Listed among Top Cardiothoracic Surgery Hospitals In Chennai\"\n       ✓ capability: \"Listed among Top Cardiothoracic Surgery Clinics in Greams Road, Chennai\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ⚠ No cath lab, CTICU or heart-lung machine\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · date the record was last updated · blood bank (not reported, list cut off)",
+   1.21
+  ],
+  [
+   "mri",
+   "Jalandhar",
+   "city, non-critical",
+   "MRI scan near Jalandhar\n  resolved: Jalandhar city, Punjab (centre of 69 listed facilities) (city), radius 50 km\n  how ranked: For an MRI scan we show nearby facilities whose records list an MRI, ranked 50% closeness, 40% how clearly the record documents it, 10% equipment and capability, searching up to 300 km.\n  1. NHS Hospital  ~3.6 km · STRONG · Confidence: High · score 86.0 (E 80 · D 64 · A 95)\n       ✓ equipment: \"On-site MRI facility (MRI Center)\"\n       ✓ equipment: \"On-site MRI center\"\n       ✓ specialties: \"radiology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? date the record was last updated\n  2. SGL Super Speciality Charitable Hospital  ~3.9 km · STRONG · Confidence: High · score 85.8 (E 80 · D 64 · A 95)\n       ✓ procedure: \"Provides MRI imaging\"\n       ✓ equipment: \"MRI scanner\"\n       ✓ specialties: \"radiology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · date the record was last updated\n  3. Shrimann Superspeciality Hospital  ~8.0 km · STRONG · Confidence: High · score 80.5 (E 70 · D 78 · A 90)\n       ✓ equipment: \"1.5 Tesla MRI scanner\"\n       ✓ equipment: \"Fetal MRI capability\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established · radiology specialty (not reported, list cut off)\n  4. Aujla Hospital  ~26.6 km · STRONG · Confidence: High · score 67.1 (E 70 · D 45 · A 69)\n       ✓ equipment: \"MRI machine\"\n       ✓ specialties: \"radiology\"\n       ? number of beds\n  5. Healing Touch Gastrosurgery & Gynaecology Hospital 1 B Golden Avenue Phase 2 Jalandhar City, Jalandhar  ~3.9 km · WEAK · Confidence: Medium · score 66.0 (E 36 · D 42 · A 95)\n       ✓ capability: \"Has tie-ups for CT-MRI imaging and blood bank support\"\n       ? number of doctors · number of beds · year established · date the record was last updated · radiology specialty",
+   1.89
+  ],
+  [
+   "oncology",
+   "Guwahati",
+   "north-east city",
+   "Cancer care (oncology) near Guwahati\n  resolved: Guwahati city, Assam (centre of 45 listed facilities) (city), radius 25 km\n  how ranked: For cancer treatment we prioritise treatment capability (radiotherapy, chemotherapy) over distance, ranked 45% equipment and capability, 35% how clearly the record documents it, 20% closeness, searching up to 500 km.\n  1. Govt. Homoeo Medical College Hospital (Guwahati, Nowgong, Jorhat)  ~0.9 km · STRONG · Confidence: High · score 92.5 (E 90 · D 91 · A 100)\n       ✓ procedure: \"Provides surgical oncology services\"\n       ✓ procedure: \"Performs high-dose-rate brachytherapy using cobalt-60\"\n       ✓ procedure: \"Provides medical oncology services\"\n       ✓ specialties: \"medicalOncology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n  2. Hayat Hospital  ~5.1 km · STRONG · Confidence: High · score 87.3 (E 90 · D 81 · A 98)\n       ✓ procedure: \"Performs surgical oncology procedures\"\n       ✓ procedure: \"Provides radiation oncology with IMRT, IGRT, and brachytherapy\"\n       ✓ procedure: \"Offers surgical oncology for cancer treatment\"\n       ✓ specialties: \"medicalOncology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n  3. Dr. Bhubaneswar Borooah Cancer Institute (BBCI), Guwahati, Assam  ~3.9 km · STRONG · Confidence: High · score 86.6 (E 90 · D 79 · A 98)\n       ✓ procedure: \"Delivers telecobalt radiotherapy\"\n       ✓ procedure: \"Performs HDR brachytherapy\"\n       ✓ procedure: \"Delivers radiotherapy using LINAC and CyberKnife\"\n       ✓ specialties: \"medicalOncology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors\n  4. The North-East Cancer Hospital and Research Institute  ~16.2 km · STRONG · Confidence: High · score 85.9 (E 90 · D 80 · A 93)\n       ✓ procedure: \"Provides LINAC-based radiotherapy\"\n       ✓ procedure: \"Provides radiotherapy services\"\n       ✓ specialties: \"medicalOncology\"\n  5. Pratiksha Hospitals  ~5.2 km · STRONG · Confidence: High · score 82.5 (E 90 · D 70 · A 98)\n       ✓ procedure: \"Performs chemotherapy sessions\"\n       ✓ procedure: \"Uses PET-CT scans for cancer staging\"\n       ✓ capability: \"Multidisciplinary team of medical, radiation and surgical oncologists\"\n       ✓ specialties: \"medicalOncology\"\n       ? number of doctors · number of beds",
+   1.81
+  ],
+  [
+   "ent",
+   "26.85,80.95",
+   "lat,lon (Lucknow)",
+   "ENT (ear, nose, throat) near 26.85,80.95\n  resolved: 26.8500, 80.9500 (latlon), radius 25 km\n  how ranked: For ear, nose and throat care, which is widely available, we balance distance, evidence and the number of doctors, ranked 40% how clearly the record documents it, 30% equipment and capability, 30% closeness, searching up to 150 km.\n  1. Charak Hospital  ~11.5 km · MODERATE · Confidence: Medium · score 80.3 (E 86 · D 71 · A 82)\n       ✓ capability: \"Charak Hospital has ENT specialists on staff\"\n       ✓ equipment: \"Audiometry\"\n       ✓ capability: \"Specializes in ENT (Ear-Nose-Throat) care\"\n       ✓ specialties: \"otolaryngology\"\n       ⚠ The claim appears only in the description or capability text\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n  2. Charak Hospital And Research Centre  ~11.5 km · MODERATE · Confidence: Medium · score 78.7 (E 76 · D 79 · A 82)\n       ✓ capability: \"Department of Ear, Nose & Throat (ENT)\"\n       ✓ equipment: \"Audiometry equipment\"\n       ✓ specialties: \"otolaryngology\"\n       ⚠ The claim appears only in the description or capability text\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n  3. Tender Palm Super Specialty Hospital  ~10.9 km · MODERATE · Confidence: Medium · score 76.0 (E 80 · D 64 · A 83)\n       ✓ procedure: \"Head and neck surgery procedures offered by the ENT department\"\n       ✓ equipment: \"ENT diagnostic imaging tools\"\n       ✓ specialties: \"otolaryngology\"\n       ⚠ No audiometry, BERA or ENT endoscope\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of beds · year established\n  4. Jagrani Hospital  ~8.9 km · MODERATE · Confidence: Medium · score 75.1 (E 80 · D 58 · A 86)\n       ✓ procedure: \"Functional Endoscopic Sinus Surgery (FESS) is performed at Jagrani Hospital\"\n       ✓ capability: \"Multispecialty department including Urology, Cardiology, Obs.& Gynae, Opthalmology, Surgical Gastroenterology, Nephrology, Endocrinology & D\"\n       ✓ specialties: \"otolaryngology\"\n       ⚠ No audiometry, BERA or ENT endoscope\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of beds\n  5. Chandan Hospital  ~9.0 km · MODERATE · Confidence: Low · score 74.3 (E 76 · D 62 · A 84)\n       ✓ capability: \"ENT services available at Chandan Hospital, Lucknow\"\n       ✓ capability: \"ENT care provided at Chandan Hospital in Gomtinagar, Lucknow\"\n       ✓ specialties: \"otolaryngology\"\n       ⚠ No audiometry, BERA or ENT endoscope\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ⚠ Location is approximate (centre of the PIN area), so the distance may be off by about 1 km\n       ? exact location (only the PIN area is known)\n  [stronger_evidence] Stronger documented evidence, 8 km away\n  -. Pravigya ENT Clinic  ~8.2 km · STRONG · Confidence: High · score 73.5 (E 90 · D 38 · A 87)\n       ✓ procedure: \"General ENT Checkup\"\n       ✓ procedure: \"Audiometry testing\"\n       ✓ equipment: \"Audiometry testing equipment available at Pravigya ENT Clinic\"\n       ✓ specialties: \"otolaryngology\"\n       ? number of beds · year established · date the record was last updated",
+   1.84
+  ],
+  [
+   "burn_care",
+   "Bhopal",
+   "beta service",
+   "Burn care (beta) near Bhopal\n  resolved: Bhopal city, Madhya Pradesh (centre of 74 listed facilities) (city), radius 400 km\n  how ranked: For burns we look for a documented burn unit, which is worth some extra travel, ranked 40% closeness, 35% how clearly the record documents it, 25% equipment and capability, searching up to 400 km.\n  1. Tender Care Hospital  ~2.5 km · MODERATE · Confidence: Medium · score 71.2 (E 70 · D 34 · A 96)\n       ✓ procedure: \"Pediatric burn care\"\n       ✓ capability: \"Pediatric surgery including newborn surgery, pediatric laparoscopic surgery, pediatric urology, pediatric thoracic surgery, pediatric neuros\"\n       ✓ equipment: \"Two modern operation theatres\"\n       ✓ capability: \"Newborn Intensive Care Unit (NICU) and pediatric services\"\n       ⚠ No burn-specific equipment (burn ICU, dressing room)\n       ? number of doctors · year established · date the record was last updated\n  2. Narmada Apna Hospital, Hoshangabad  ~90.1 km · MODERATE · Confidence: Medium · score 49.6 (E 80 · D 53 · A 21)\n       ✓ equipment: \"Burn Unit with 6 beds equipped with advanced life support systems and ventilators\"\n       ✓ description: \"Narmada Apna Hospital is a 111 bedded multi-specialty hospital with Daycare, ICU, NICU, Burn Ward, OPD Dialysis Facilities, Casualty, Privat\"\n       ✓ equipment: \"HEPA filtration and laminar flow in operating theatres\"\n       ✓ equipment: \"ICU with 30 beds equipped with advanced life support systems and ventilators\"\n       ⚠ No burn-specific equipment (burn ICU, dressing room)\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? date the record was last updated\n  3. C. R. Gardi Hospital  ~236.1 km · MODERATE · Confidence: Medium · score 33.5 (E 47 · D 66 · A 2)\n       ✓ capability: \"Has SICU, NICU, PICU, burns units and surgical superspeciality units\"\n       ✓ specialties: \"burnCare\"\n       ✓ capability: \"Medical intensive care unit with 25 beds\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? phone number · operating theatre (not reported, list cut off)\n  4. Pandey Hospital  ~360.3 km · MODERATE · Confidence: Medium · score 31.7 (E 66 · D 34 · A 0)\n       ✓ capability: \"Burns unit\"\n       ✓ specialties: \"burnCare\"\n       ✓ equipment: \"State-of-the-art operation theatre\"\n       ✓ capability: \"Fully equipped ICU\"\n       ? number of doctors · date the record was last updated\n  [unconfirmed_options] Unconfirmed options: these records only hint at this service (a specialty or equipment), with no direct claim. Call first.\n  -. Hamidia Hospital  ~7.1 km · POSSIBLE · Confidence: Medium · score 65.5 (E 30 · D 78 · A 88)\n       ✓ specialties: \"burnCare\"\n       ✓ equipment: \"Operates two modern operation theatres\"\n       ✓ capability: \"Intensive Care Units with dedicated beds\"\n       ? number of doctors · year established",
+   1.68
+  ],
+  [
+   "dialysis",
+   "Dantewada",
+   "rural district (tribal Chhattisgarh)",
+   "Dialysis near Dantewada\n  resolved: Dantewada district, Chhattisgarh (centre of 5 PIN areas) (district), radius 150 km\n  how ranked: Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km.\n  FALLBACK: No facility with good evidence for dialysis within 150 km of Dantewada district, Chhattisgarh (centre of 5 PIN areas). Call before travelling. The nearest facility whose record documents it is Apollo Hospitals - Kakinada, about 308 km away (road estimate).",
+   1.21
+  ],
+  [
+   "trauma",
+   "744301",
+   "care-desert candidate (Car Nicobar PIN)",
+   "Trauma care near 744301\n  resolved: PIN 744301 (Nicobars, Andaman And Nicobar Islands) (pin), radius 100 km\n  how ranked: For injuries every minute counts, so we show the closest facilities whose records describe trauma or accident care, ranked 55% closeness, 30% how clearly the record documents it, 15% equipment and capability, searching up to 100 km.\n  FALLBACK: No facility with good evidence for trauma care within 100 km of PIN 744301 (Nicobars, Andaman And Nicobar Islands). Call before travelling. The nearest facility whose record documents it is Supreme Speciality Hospitals, about 1958 km away (road estimate).",
+   1.19
+  ],
+  [
+   "emergency_csection",
+   "Aurangabad",
+   "ambiguous city (Maharashtra / Bihar)",
+   "Emergency C-section near Aurangabad\n  'Aurangabad' exists in more than one state. Which one do you mean?\n   - Aurangabad, Bihar\n   - Aurangabad, Maharashtra",
+   1.22
+  ],
+  [
+   "nicu",
+   "Bilaspur",
+   "ambiguous city (Chhattisgarh / Himachal)",
+   "NICU (newborn intensive care) near Bilaspur\n  'Bilaspur' exists in more than one state. Which one do you mean?\n   - Bilaspur, Chhattisgarh\n   - Bilaspur, Himachal Pradesh",
+   1.18
+  ],
+  [
+   "emergency_csection",
+   "Aurangabad, Bihar",
+   "disambiguated",
+   "Emergency C-section near Aurangabad, Bihar\n  resolved: Aurangabad district, Bihar (centre of 6 PIN areas) (district), radius 100 km\n  how ranked: For emergency delivery we show the closest facilities whose records say they perform caesareans, ranked 45% closeness, 35% how clearly the record documents it, 20% equipment and capability, searching up to 100 km.\n  FALLBACK: No facility with good evidence for emergency C-section within 100 km of Aurangabad district, Bihar (centre of 6 PIN areas). Call before travelling. The nearest facility whose record documents it is Sanjeevan Sparsh Hospital, about 136 km away (road estimate).",
+   1.25
+  ]
+ ],
+ "pilot": {
+  "Q1": "Dialysis near 21.23855,81.64300\n  resolved: 21.2386, 81.6430 (latlon), radius 150 km\n  how ranked: Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km.\n  1. Hospitales CARE, Raipur  ~3.9 km · STRONG · Confidence: High · score 86.0 (E 90 · D 88 · A 84)\n       ✓ procedure: \"Dialysis treatment is provided using 25 dialysis machines.\"\n       ✓ specialties: \"nephrology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors\n  2. Vidya Hospital and Kidney Centre  ~3.2 km · STRONG · Confidence: High · score 80.4 (E 79 · D 50 · A 86)\n       ✓ description: \"Established in 1988, it specializes in nephrology and offers 24-hour dialysis services with 10 units and intensive renal care facilities.\"\n       ✓ specialties: \"nephrology\"\n       ? number of doctors · list of equipment\n  3. Shri Krishna Hospital  ~3.4 km · MODERATE · Confidence: Medium · score 79.1 (E 80 · D 38 · A 85)\n       ✓ procedure: \"Dialysis\"\n       ✓ capability: \"Nephrology, Dialysis & Urology services are available\"\n       ✓ specialties: \"nephrology\"\n       ⚠ No dialysis equipment and not a kidney/dialysis centre by name\n       ? number of doctors · number of beds · list of equipment · date the record was last updated\n  4. Suyash Hospital  ~6.2 km · MODERATE · Confidence: Medium · score 76.4 (E 80 · D 74 · A 75)\n       ✓ procedure: \"Dialysis\"\n       ✓ procedure: \"Provides hemodialysis\"\n       ✓ specialties: \"nephrology\"\n       ⚠ No dialysis equipment and not a kidney/dialysis centre by name\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · year established · date the record was last updated\n  5. MMI Narayana Multispeciality Hospital, Raipur  ~4.5 km · MODERATE · Confidence: Medium · score 75.8 (E 66 · D 73 · A 81)\n       ✓ capability: \"Has the largest dialysis centre in Central India\"\n       ✓ specialties: \"nephrology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established\n  [unconfirmed_options] Unconfirmed options: these records only hint at this service (a specialty or equipment), with no direct claim. Call first.\n  -. Sanjeevani Cancer Hospital  ~3.9 km · POSSIBLE · Confidence: Medium · score 65.1 (E 30 · D 60 · A 83)\n       ✓ specialties: \"nephrology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · date the record was last updated\n  -. Devi Woman and Child Hospital, Raipur  ~5.0 km · POSSIBLE · Confidence: Medium · score 61.0 (E 30 · D 44 · A 79)\n       ✓ specialties: \"nephrology\"\n       ? year established · date the record was last updated\n  -. Smc Heart Institute And Ivf Research Center  ~6.6 km · POSSIBLE · Confidence: Medium · score 58.4 (E 30 · D 51 · A 74)\n       ✓ specialties: \"nephrology\"\n  -. Vasudev Multispeciality Hospital and Apollo Dialysis Clinic  ~5.8 km · POSSIBLE · Confidence: Medium · score 58.2 (E 30 · D 32 · A 77)\n       ✓ specialties: \"nephrology\"\n       ? list of procedures · list of equipment · year established · date the record was last updated\n  -. Mamta Super Speciality Hospital  ~6.1 km · POSSIBLE · Confidence: Medium · score 57.4 (E 30 · D 32 · A 75)\n       ✓ specialties: \"nephrology\"\n       ? number of doctors · list of equipment · year established\n  -. All India Institute of Medical Sciences, Raipur  ~9.6 km · POSSIBLE · Confidence: Low · score 53.3 (E 30 · D 58 · A 64)\n       ✓ specialties: \"nephrology\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors",
+  "Q2": "Emergency C-section near 21.23784,81.70542\n  resolved: 21.2378, 81.7054 (latlon), radius 100 km\n  how ranked: For emergency delivery we show the closest facilities whose records say they perform caesareans, ranked 45% closeness, 35% how clearly the record documents it, 20% equipment and capability, searching up to 100 km.\n  1. Smc Heart Institute And Ivf Research Center  ~5.8 km · MODERATE · Confidence: Medium · score 69.9 (E 73 · D 37 · A 82)\n       ✓ procedure: \"Performs cesarean delivery\"\n       ✓ equipment: \"Modern operation theatres\"\n       ✓ specialties: \"obstetrics\"\n       ⚠ Emergency readiness not confirmed\n       ? blood bank\n  2. Kanwar Nursing Home  ~6.3 km · STRONG · Confidence: High · score 67.9 (E 73 · D 30 · A 80)\n       ✓ procedure: \"Caesarean Delivery\"\n       ✓ capability: \"Provides emergency services\"\n       ✓ procedure: \"Caesarean hysterectomy\"\n       ✓ specialties: \"obstetrics\"\n       ? number of beds · date the record was last updated · blood bank\n  3. Devi Woman and Child Hospital, Raipur  ~13.9 km · STRONG · Confidence: High · score 64.5 (E 73 · D 55 · A 62)\n       ✓ procedure: \"Performs Caesarean Section\"\n       ✓ capability: \"Offers 24/7 emergency care\"\n       ✓ equipment: \"Delivery rooms designed to international safety standards\"\n       ✓ specialties: \"obstetrics\"\n       ? year established · date the record was last updated · blood bank\n  4. Tiwari Nursing Home  ~8.4 km · MODERATE · Confidence: Medium · score 59.2 (E 63 · D 17 · A 75)\n       ✓ procedure: \"Caesarean Section (C Section)\"\n       ✓ specialties: \"obstetrics\"\n       ⚠ Emergency readiness not confirmed\n       ? number of beds · date the record was last updated · blood bank",
+  "Q3": "Cardiac surgery near 21.25457,81.65708\n  resolved: 21.2546, 81.6571 (latlon), radius 500 km\n  how ranked: For heart surgery we prioritise equipment and experience over distance, because it's often worth travelling, ranked 45% equipment and capability, 35% how clearly the record documents it, 20% closeness, searching up to 500 km.\n  1. Suyash Hospital  ~7.4 km · STRONG · Confidence: High · score 85.9 (E 88 · D 80 · A 97)\n       ✓ procedure: \"Cardiac catheterization with Cathlab and bypass surgery\"\n       ✓ procedure: \"Performs cardiac bypass surgery in the Cardiac Cath Lab\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ✓ equipment: \"Operates 7 ultra-modern operation theatres\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · year established · date the record was last updated · blood bank (not reported, list cut off)\n  2. Hospitales CARE, Raipur  ~5.8 km · STRONG · Confidence: Medium · score 78.8 (E 88 · D 64 · A 97)\n       ✓ procedure: \"Performs cardiothoracic surgery\"\n       ✓ equipment: \"Cath lab on site.\"\n       ✓ procedure: \"Cardiothoracic surgery procedures are offered\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · blood bank (not reported, list cut off)\n  3. MMI Narayana Multispeciality Hospital, Raipur  ~6.5 km · MODERATE · Confidence: Low · score 70.3 (E 78 · D 53 · A 97)\n       ✓ procedure: \"Heart bypass surgery is performed\"\n       ✓ procedure: \"Heart valve replacement is performed\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ⚠ No cath lab, CTICU or heart-lung machine\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? year established · blood bank (not reported, list cut off)\n  4. Smc Heart Institute And Ivf Research Center  ~3.5 km · MODERATE · Confidence: Medium · score 57.3 (E 75 · D 25 · A 98)\n       ✓ procedure: \"Bypass Surgery\"\n       ✓ procedure: \"Performs cardiothoracic surgery\"\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ✓ equipment: \"Modern operation theatres\"\n       ⚠ No cath lab, CTICU or heart-lung machine\n       ? blood bank\n  [unconfirmed_options] Unconfirmed options: these records only hint at this service (a specialty or equipment), with no direct claim. Call first.\n  -. Sanjeevani Cancer Hospital  ~6.4 km · POSSIBLE · Confidence: Medium · score 54.4 (E 30 · D 54 · A 97)\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ✓ capability: \"Haematology and Haemato-oncology department with a blood bank\"\n       ✓ procedure: \"Laparoscopic cancer surgeries are performed in modular operating theatres\"\n       ⚠ Some lists in this record were cut off at 50 items, so evidence may be missing\n       ? number of doctors · date the record was last updated\n  -. Kanha Children Hospital  ~2.0 km · POSSIBLE · Confidence: Medium · score 49.5 (E 25 · D 46 · A 99)\n       ✓ equipment: \"Philips Azurion 5 M12 Cathlab\"\n       ✓ equipment: \"Blood Storage Center\"\n       ✓ equipment: \"Modular Operation Theatre Complex\"\n       ? number of doctors · list of procedures · date the record was last updated\n  -. Mamta Super Speciality Hospital  ~2.9 km · POSSIBLE · Confidence: Medium · score 26.2 (E 10 · D 7 · A 99)\n       ✓ specialties: \"cardiothoracicSurgery\"\n       ? number of doctors · list of equipment · year established · blood bank"
+ },
+ "_wall_s": 102,
+ "_run_page_url": "https://dbc-4b4617c5-f718.cloud.databricks.com/?o=7474644416958437#job/1099954737676286/run/363959387094134",
+ "_notebook_path": "/Users/<your-user>/find_the_right_care/find_care_v5"
+}

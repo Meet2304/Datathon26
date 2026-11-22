@@ -1,0 +1,936 @@
+{
+ "meta": {
+  "services": [
+   {
+    "id": "dialysis",
+    "name": "Dialysis",
+    "hint": "Kidney failure, regular sessions",
+    "time_critical": false,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.3,
+     "capability": 0.1,
+     "closeness": 0.6
+    },
+    "half_distance_km": 15,
+    "max_radius_km": 150,
+    "how_ranked": "Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km."
+   },
+   {
+    "id": "emergency_csection",
+    "name": "Emergency C-section",
+    "hint": "High-risk or emergency delivery",
+    "time_critical": true,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.35,
+     "capability": 0.2,
+     "closeness": 0.45
+    },
+    "half_distance_km": 20,
+    "max_radius_km": 100,
+    "how_ranked": "For emergency delivery we show the closest facilities whose records say they perform caesareans, ranked 45% closeness, 35% how clearly the record documents it, 20% equipment and capability, searching up to 100 km."
+   },
+   {
+    "id": "nicu",
+    "name": "NICU (newborn intensive care)",
+    "hint": "Newborn needing intensive care",
+    "time_critical": true,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.35,
+     "capability": 0.15,
+     "closeness": 0.5
+    },
+    "half_distance_km": 25,
+    "max_radius_km": 200,
+    "how_ranked": "For a newborn needing intensive care we show the closest facilities whose records describe a NICU, ranked 50% closeness, 35% how clearly the record documents it, 15% equipment and capability, searching up to 200 km."
+   },
+   {
+    "id": "cardiac_surgery",
+    "name": "Cardiac surgery",
+    "hint": "Bypass, valve or heart surgery",
+    "time_critical": false,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.35,
+     "capability": 0.45,
+     "closeness": 0.2
+    },
+    "half_distance_km": 150,
+    "max_radius_km": 500,
+    "how_ranked": "For heart surgery we prioritise equipment and experience over distance, because it's often worth travelling, ranked 45% equipment and capability, 35% how clearly the record documents it, 20% closeness, searching up to 500 km."
+   },
+   {
+    "id": "mri",
+    "name": "MRI scan",
+    "hint": "MRI imaging",
+    "time_critical": false,
+    "gate_min_label": "Weak",
+    "weights": {
+     "evidence": 0.4,
+     "capability": 0.1,
+     "closeness": 0.5
+    },
+    "half_distance_km": 50,
+    "max_radius_km": 300,
+    "how_ranked": "For an MRI scan we show nearby facilities whose records list an MRI, ranked 50% closeness, 40% how clearly the record documents it, 10% equipment and capability, searching up to 300 km."
+   },
+   {
+    "id": "trauma",
+    "name": "Trauma care",
+    "hint": "Accidents and serious injuries",
+    "time_critical": true,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.3,
+     "capability": 0.15,
+     "closeness": 0.55
+    },
+    "half_distance_km": 15,
+    "max_radius_km": 100,
+    "how_ranked": "For injuries every minute counts, so we show the closest facilities whose records describe trauma or accident care, ranked 55% closeness, 30% how clearly the record documents it, 15% equipment and capability, searching up to 100 km."
+   },
+   {
+    "id": "burn_care",
+    "name": "Burn care",
+    "hint": "Serious burns (beta)",
+    "time_critical": false,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.35,
+     "capability": 0.25,
+     "closeness": 0.4
+    },
+    "half_distance_km": 40,
+    "max_radius_km": 400,
+    "how_ranked": "For burns we look for a documented burn unit, which is worth some extra travel, ranked 40% closeness, 35% how clearly the record documents it, 25% equipment and capability, searching up to 400 km."
+   },
+   {
+    "id": "oncology",
+    "name": "Cancer care",
+    "hint": "Chemotherapy, radiotherapy",
+    "time_critical": false,
+    "gate_min_label": "Moderate",
+    "weights": {
+     "evidence": 0.35,
+     "capability": 0.45,
+     "closeness": 0.2
+    },
+    "half_distance_km": 150,
+    "max_radius_km": 500,
+    "how_ranked": "For cancer treatment we prioritise treatment capability (radiotherapy, chemotherapy) over distance, ranked 45% equipment and capability, 35% how clearly the record documents it, 20% closeness, searching up to 500 km."
+   },
+   {
+    "id": "ent",
+    "name": "Ear, nose & throat",
+    "hint": "Ear, nose and throat problems",
+    "time_critical": false,
+    "gate_min_label": "Weak",
+    "weights": {
+     "evidence": 0.4,
+     "capability": 0.3,
+     "closeness": 0.3
+    },
+    "half_distance_km": 40,
+    "max_radius_km": 150,
+    "how_ranked": "For ear, nose and throat care, which is widely available, we balance distance, evidence and the number of doctors, ranked 40% how clearly the record documents it, 30% equipment and capability, 30% closeness, searching up to 150 km."
+   }
+  ],
+  "specialties": [
+   {
+    "code": "allergyAndImmunology",
+    "name": "Allergy and immunology",
+    "facilities": 412
+   },
+   {
+    "code": "anesthesiology",
+    "name": "Anesthesiology",
+    "facilities": 1650
+   },
+   {
+    "code": "audiology",
+    "name": "Audiology",
+    "facilities": 36
+   },
+   {
+    "code": "cardiology",
+    "name": "Cardiology",
+    "facilities": 3063
+   },
+   {
+    "code": "clinicalPharmacology",
+    "name": "Clinical pharmacology",
+    "facilities": 12
+   },
+   {
+    "code": "criticalCareMedicine",
+    "name": "Critical care medicine",
+    "facilities": 1857
+   },
+   {
+    "code": "dentistry",
+    "name": "Dentistry",
+    "facilities": 4266
+   },
+   {
+    "code": "dermatology",
+    "name": "Dermatology",
+    "facilities": 2430
+   },
+   {
+    "code": "endocrinology",
+    "name": "Endocrinology",
+    "facilities": 1989
+   },
+   {
+    "code": "familyMedicine",
+    "name": "Family medicine",
+    "facilities": 5156
+   },
+   {
+    "code": "forensicMedicine",
+    "name": "Forensic medicine",
+    "facilities": 16
+   },
+   {
+    "code": "gastroenterology",
+    "name": "Gastroenterology",
+    "facilities": 2469
+   },
+   {
+    "code": "generalSurgery",
+    "name": "General surgery",
+    "facilities": 3680
+   },
+   {
+    "code": "geriatrics",
+    "name": "Geriatrics",
+    "facilities": 317
+   },
+   {
+    "code": "gynecology",
+    "name": "Gynecology",
+    "facilities": 4641
+   },
+   {
+    "code": "hematology",
+    "name": "Hematology",
+    "facilities": 660
+   },
+   {
+    "code": "infectiousDiseases",
+    "name": "Infectious diseases",
+    "facilities": 1002
+   },
+   {
+    "code": "integrativeMedicine",
+    "name": "Integrative medicine",
+    "facilities": 71
+   },
+   {
+    "code": "internalMedicine",
+    "name": "Internal medicine",
+    "facilities": 6811
+   },
+   {
+    "code": "laboratoryMedicine",
+    "name": "Laboratory medicine",
+    "facilities": 146
+   },
+   {
+    "code": "medicalGenetics",
+    "name": "Medical genetics",
+    "facilities": 52
+   },
+   {
+    "code": "neurology",
+    "name": "Neurology",
+    "facilities": 2370
+   },
+   {
+    "code": "neurosurgery",
+    "name": "Neurosurgery",
+    "facilities": 2180
+   },
+   {
+    "code": "nuclearMedicine",
+    "name": "Nuclear medicine",
+    "facilities": 167
+   },
+   {
+    "code": "nutritionAndDietetics",
+    "name": "Nutrition and dietetics",
+    "facilities": 141
+   },
+   {
+    "code": "occupationalTherapy",
+    "name": "Occupational therapy",
+    "facilities": 30
+   },
+   {
+    "code": "ophthalmology",
+    "name": "Ophthalmology",
+    "facilities": 2875
+   },
+   {
+    "code": "optometry",
+    "name": "Optometry",
+    "facilities": 34
+   },
+   {
+    "code": "oralAndMaxillofacialSurgery",
+    "name": "Oral and maxillofacial surgery",
+    "facilities": 1875
+   },
+   {
+    "code": "orthopedics",
+    "name": "Orthopedics",
+    "facilities": 3778
+   },
+   {
+    "code": "palliativeMedicine",
+    "name": "Palliative medicine",
+    "facilities": 201
+   },
+   {
+    "code": "pathology",
+    "name": "Pathology",
+    "facilities": 2444
+   },
+   {
+    "code": "pediatrics",
+    "name": "Pediatrics",
+    "facilities": 5267
+   },
+   {
+    "code": "physicalMedicineAndRehabilitation",
+    "name": "Physical medicine and rehabilitation",
+    "facilities": 1653
+   },
+   {
+    "code": "physiotherapy",
+    "name": "Physiotherapy",
+    "facilities": 82
+   },
+   {
+    "code": "plasticAndReconstructiveSurgery",
+    "name": "Plastic and reconstructive surgery",
+    "facilities": 2135
+   },
+   {
+    "code": "podiatry",
+    "name": "Podiatry",
+    "facilities": 171
+   },
+   {
+    "code": "preventiveMedicine",
+    "name": "Preventive medicine",
+    "facilities": 793
+   },
+   {
+    "code": "psychiatry",
+    "name": "Psychiatry",
+    "facilities": 1297
+   },
+   {
+    "code": "psychology",
+    "name": "Psychology",
+    "facilities": 234
+   },
+   {
+    "code": "pulmonology",
+    "name": "Pulmonology",
+    "facilities": 1819
+   },
+   {
+    "code": "reproductiveMedicine",
+    "name": "Reproductive medicine",
+    "facilities": 1971
+   },
+   {
+    "code": "rheumatology",
+    "name": "Rheumatology",
+    "facilities": 542
+   },
+   {
+    "code": "sexology",
+    "name": "Sexology",
+    "facilities": 24
+   },
+   {
+    "code": "speechLanguagePathology",
+    "name": "Speech language pathology",
+    "facilities": 25
+   },
+   {
+    "code": "transplantSurgery",
+    "name": "Transplant surgery",
+    "facilities": 557
+   },
+   {
+    "code": "urology",
+    "name": "Urology",
+    "facilities": 2991
+   },
+   {
+    "code": "vascularSurgery",
+    "name": "Vascular surgery",
+    "facilities": 499
+   }
+  ],
+  "n_facilities": 9939,
+  "loaded_at": "2026-11-22T16:35:07+00:00"
+ },
+ "search?service=dialysis&location=492001&k=5": {
+  "query": {
+   "service": "dialysis",
+   "location_input": "492001",
+   "resolved_location": {
+    "lat": 21.235058,
+    "lon": 81.639022,
+    "method": "pin",
+    "label": "PIN 492001 (Raipur, Chhattisgarh)"
+   },
+   "radius_km_used": 25
+  },
+  "how_ranked": "Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km.",
+  "results": [
+   {
+    "rank": 1,
+    "unique_id": "723a6e17-fdf9-4af8-ae80-b16ea3b98244",
+    "name": "Hospitales CARE, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 3.8,
+    "distance_uncertainty_km": 0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 86.2,
+    "E": 90,
+    "D": 87.8,
+    "A": 84.1,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Dialysis treatment is provided using 25 dialysis machines."
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "number of doctors"
+    ],
+    "contact": {
+     "official_phone": "7713003300",
+     "references": [
+      "https://carehospitals.com"
+     ]
+    },
+    "lat": 21.217220306396484,
+    "lon": 81.65644836425781,
+    "record_checks": [],
+    "place": "Raipur, Chhattisgarh"
+   },
+   {
+    "rank": 2,
+    "unique_id": "8e0dbec3-fd46-42e1-b213-9204bf799f69",
+    "name": "Shri Krishna Hospital",
+    "facility_type": "hospital",
+    "distance_km": 3.6,
+    "distance_uncertainty_km": 0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 78.7,
+    "E": 80,
+    "D": 38.1,
+    "A": 84.9,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Dialysis"
+     },
+     {
+      "field": "capability",
+      "quote": "Nephrology, Dialysis & Urology services are available"
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "No dialysis equipment and not a kidney/dialysis centre by name"
+    ],
+    "not_reported": [
+     "number of doctors",
+     "number of beds",
+     "list of equipment",
+     "date the record was last updated"
+    ],
+    "contact": {
+     "official_phone": "7714022233",
+     "references": [
+      "https://shrikrishnahospital.com"
+     ]
+    },
+    "lat": 21.22364044189453,
+    "lon": 81.66022491455078,
+    "record_checks": [],
+    "place": "Raipur, Chhattisgarh"
+   },
+   {
+    "rank": 3,
+    "unique_id": "78bed667-b16e-43c1-8d82-c82891f23aa8",
+    "name": "Vidya Hospital and Kidney Centre",
+    "facility_type": "hospital",
+    "distance_km": 4,
+    "distance_uncertainty_km": 0,
+    "evidence_label": "Strong",
+    "confidence": "High",
+    "rank_score": 78.6,
+    "E": 78.8,
+    "D": 49.9,
+    "A": 83.3,
+    "why": [
+     {
+      "field": "description",
+      "quote": "Established in 1988, it specializes in nephrology and offers 24-hour dialysis services with 10 units and intensive renal care facilities."
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [],
+    "not_reported": [
+     "number of doctors",
+     "list of equipment"
+    ],
+    "contact": {
+     "official_phone": "9329102218",
+     "references": [
+      "https://vidyahospitalkidneycentre.com"
+     ]
+    },
+    "lat": 21.249095916748047,
+    "lon": 81.66180419921875,
+    "record_checks": [],
+    "place": "Raipur, Chhattisgarh"
+   },
+   {
+    "rank": 4,
+    "unique_id": "3d4c1b68-7402-427c-922c-adbf52bd7dab",
+    "name": "Suyash Hospital",
+    "facility_type": "hospital",
+    "distance_km": 6,
+    "distance_uncertainty_km": 0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 76.8,
+    "E": 80,
+    "D": 73.5,
+    "A": 75.7,
+    "why": [
+     {
+      "field": "procedure",
+      "quote": "Dialysis"
+     },
+     {
+      "field": "procedure",
+      "quote": "Provides hemodialysis"
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "No dialysis equipment and not a kidney/dialysis centre by name",
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "number of doctors",
+     "year established",
+     "date the record was last updated"
+    ],
+    "contact": {
+     "official_phone": "7712575275",
+     "references": [
+      "https://suyashhealth.co.in"
+     ]
+    },
+    "lat": 21.258403778076172,
+    "lon": 81.60595703125,
+    "record_checks": [],
+    "place": "Raipur, Chhattisgarh"
+   },
+   {
+    "rank": 5,
+    "unique_id": "c35dabaa-544a-4d93-9405-b5444ed0bab3",
+    "name": "MMI Narayana Multispeciality Hospital, Raipur",
+    "facility_type": "hospital",
+    "distance_km": 4.4,
+    "distance_uncertainty_km": 0,
+    "evidence_label": "Moderate",
+    "confidence": "Medium",
+    "rank_score": 76.1,
+    "E": 66,
+    "D": 72.7,
+    "A": 81.7,
+    "why": [
+     {
+      "field": "capability",
+      "quote": "Has the largest dialysis centre in Central India"
+     },
+     {
+      "field": "specialties",
+      "quote": "nephrology"
+     }
+    ],
+    "caveats": [
+     "Some lists in this record were cut off at 50 items, so evidence may be missing"
+    ],
+    "not_reported": [
+     "year established"
+    ],
+    "contact": {
+     "official_phone": "8035240555",
+     "references": [
+      "https://narayanahealth.org"
+     ]
+    },
+    "lat": 21.213134765625,
+    "lon": 81.65791320800781,
+    "record_checks": [],
+    "place": "Raipur, Chhattisgarh"
+   }
+  ],
+  "extra_rows": null,
+  "fallback": null,
+  "not_recommended": {
+   "radius_km": 25,
+   "groups": [
+    {
+     "kind": "ranked_lower",
+     "title": "Good evidence, but ranked below the top options",
+     "count": 2,
+     "items": [
+      {
+       "unique_id": "c0f16c35-d692-4dc2-b474-452f03b8dbf6",
+       "name": "Global Star Hospital, Raipur",
+       "distance_km": 5.6,
+       "evidence_label": "Moderate",
+       "reason": "Match 71 out of 100, below the last place on your list (76). Proof 70, support 41, closeness 77.",
+       "kind": "ranked_lower",
+       "rank_score": 71.4,
+       "quote": {
+        "field": "procedure",
+        "quote": "Nephrology and Dialysis"
+       },
+       "lat": 21.269603729248047,
+       "lon": 81.62789154052734
+      },
+      {
+       "unique_id": "58887b03-b8f9-44c8-bf81-89f7e85b7c3d",
+       "name": "Lalmati Multispeciality Hospital",
+       "distance_km": 9.2,
+       "evidence_label": "Moderate",
+       "reason": "Match 66 out of 100, below the last place on your list (76). Proof 70, support 62, closeness 65.",
+       "kind": "ranked_lower",
+       "rank_score": 66.4,
+       "quote": {
+        "field": "procedure",
+        "quote": "Advanced Kidney Dialysis"
+       },
+       "lat": 21.27063751220703,
+       "lon": 81.58869934082031
+      }
+     ]
+    },
+    {
+     "kind": "facility_type",
+     "title": "Facility type doesn't fit this service",
+     "count": 2,
+     "items": [
+      {
+       "unique_id": "fdf3c452-1922-4f88-9b70-e626d4ced56f",
+       "name": "Oxford Diagnostics",
+       "distance_km": 1.7,
+       "evidence_label": "Possible",
+       "reason": "Its name suggests a diagnostic centre, which is unlikely to provide dialysis. Records like this often mix up two facilities.",
+       "kind": "facility_type",
+       "rank_score": 69.3,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.245529174804688,
+       "lon": 81.64212036132812
+      },
+      {
+       "unique_id": "8e15393d-8fd5-498d-bad7-9df5f1aeb1f8",
+       "name": "ASG Eye Hospital",
+       "distance_km": 4.7,
+       "evidence_label": "Possible",
+       "reason": "Its name suggests an eye hospital, which is unlikely to provide dialysis. Records like this often mix up two facilities.",
+       "kind": "facility_type",
+       "rank_score": 60.3,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.256155014038086,
+       "lon": 81.66206359863281
+      }
+     ]
+    },
+    {
+     "kind": "thin_evidence",
+     "title": "Evidence too thin",
+     "count": 1,
+     "items": [
+      {
+       "unique_id": "509c6668-953b-4d13-b198-5659718b54e6",
+       "name": "Kanha Children Hospital",
+       "distance_km": 6,
+       "evidence_label": "Weak",
+       "reason": "Its record mentions dialysis only in passing, which isn't enough proof to recommend it.",
+       "kind": "thin_evidence",
+       "rank_score": 61.3,
+       "quote": {
+        "field": "equipment",
+        "quote": "Dialysis facilities"
+       },
+       "lat": 21.26626205444336,
+       "lon": 81.66339874267578
+      }
+     ]
+    },
+    {
+     "kind": "hint_only",
+     "title": "Only a hint (specialty or equipment), no direct claim",
+     "count": 12,
+     "items": [
+      {
+       "unique_id": "1a5e766a-feda-4ac7-8043-87d5e5092001",
+       "name": "Shri Narayana Hospital",
+       "distance_km": 0,
+       "evidence_label": "Possible",
+       "reason": "It lists a related specialty or equipment, but never says it provides dialysis.",
+       "kind": "hint_only",
+       "rank_score": 67.7,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.235058,
+       "lon": 81.639022
+      },
+      {
+       "unique_id": "cb399219-2889-4a40-8a48-0f1b9f16701d",
+       "name": "Agrasen Hospital",
+       "distance_km": 2.6,
+       "evidence_label": "Possible",
+       "reason": "It lists a related specialty or equipment, but never says it provides dialysis.",
+       "kind": "hint_only",
+       "rank_score": 66.3,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.24542999267578,
+       "lon": 81.62460327148438
+      },
+      {
+       "unique_id": "f9ae5850-e495-4669-88da-df85bff7dfcb",
+       "name": "Devi Laxmi Hospital",
+       "distance_km": 2.7,
+       "evidence_label": "Possible",
+       "reason": "It lists a related specialty or equipment, but never says it provides dialysis.",
+       "kind": "hint_only",
+       "rank_score": 65.5,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.22315216064453,
+       "lon": 81.65210723876953
+      },
+      {
+       "unique_id": "269e3a30-c0d8-447c-8d74-fe6a2977a315",
+       "name": "Sanjeevani Cancer Hospital",
+       "distance_km": 3.6,
+       "evidence_label": "Possible",
+       "reason": "It lists a related specialty or equipment, but never says it provides dialysis.",
+       "kind": "hint_only",
+       "rank_score": 65.8,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.214256286621094,
+       "lon": 81.6502685546875
+      },
+      {
+       "unique_id": "6c08e1f3-1d59-42c0-bb0c-4617f95a8986",
+       "name": "Devi Woman and Child Hospital, Raipur",
+       "distance_km": 4.3,
+       "evidence_label": "Possible",
+       "reason": "It lists a related specialty or equipment, but never says it provides dialysis.",
+       "kind": "hint_only",
+       "rank_score": 62.6,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.227460861206055,
+       "lon": 81.61051940917969
+      },
+      {
+       "unique_id": "80c1a326-7a2b-4b0f-a737-75c3b947c365",
+       "name": "Shri Medishine Hospital Amlidih,Raipur",
+       "distance_km": 4.5,
+       "evidence_label": "Possible",
+       "reason": "It lists a related specialty or equipment, but never says it provides dialysis.",
+       "kind": "hint_only",
+       "rank_score": 63.4,
+       "quote": {
+        "field": "specialties",
+        "quote": "nephrology"
+       },
+       "lat": 21.219982147216797,
+       "lon": 81.66552734375
+      }
+     ]
+    }
+   ],
+   "no_mention_count": 54,
+   "considered_count": 76
+  },
+  "elapsed_ms": 24
+ },
+ "coverage": {
+  "services": [
+   {
+    "service": "dialysis",
+    "name": "Dialysis",
+    "strong": 280,
+    "moderate": 677,
+    "weak": 74,
+    "possible": 1390,
+    "not_offered": 2,
+    "recommendable": 957
+   },
+   {
+    "service": "emergency_csection",
+    "name": "Emergency C-section",
+    "strong": 179,
+    "moderate": 257,
+    "weak": 4,
+    "possible": 4846,
+    "not_offered": 2,
+    "recommendable": 436
+   },
+   {
+    "service": "nicu",
+    "name": "NICU (newborn intensive care)",
+    "strong": 81,
+    "moderate": 585,
+    "weak": 30,
+    "possible": 880,
+    "not_offered": 1,
+    "recommendable": 666
+   },
+   {
+    "service": "cardiac_surgery",
+    "name": "Cardiac surgery",
+    "strong": 153,
+    "moderate": 331,
+    "weak": 17,
+    "possible": 640,
+    "not_offered": 0,
+    "recommendable": 484
+   },
+   {
+    "service": "mri",
+    "name": "MRI scan",
+    "strong": 612,
+    "moderate": 262,
+    "weak": 66,
+    "possible": 2426,
+    "not_offered": 7,
+    "recommendable": 940
+   },
+   {
+    "service": "trauma",
+    "name": "Trauma care",
+    "strong": 200,
+    "moderate": 717,
+    "weak": 31,
+    "possible": 2528,
+    "not_offered": 3,
+    "recommendable": 917
+   },
+   {
+    "service": "burn_care",
+    "name": "Burn care",
+    "strong": 3,
+    "moderate": 66,
+    "weak": 11,
+    "possible": 116,
+    "not_offered": 0,
+    "recommendable": 69
+   },
+   {
+    "service": "oncology",
+    "name": "Cancer care",
+    "strong": 204,
+    "moderate": 1193,
+    "weak": 182,
+    "possible": 920,
+    "not_offered": 2,
+    "recommendable": 1397
+   },
+   {
+    "service": "ent",
+    "name": "Ear, nose & throat",
+    "strong": 93,
+    "moderate": 1382,
+    "weak": 95,
+    "possible": 1412,
+    "not_offered": 0,
+    "recommendable": 1570
+   }
+  ],
+  "n_facilities": 9939
+ },
+ "search?service=dialysis&location=Dantewada&k=5": {
+  "query": {
+   "service": "dialysis",
+   "location_input": "Dantewada",
+   "resolved_location": {
+    "lat": 18.7531,
+    "lon": 81.350029,
+    "method": "district",
+    "label": "Dantewada district, Chhattisgarh (centre of 5 PIN areas)"
+   },
+   "radius_km_used": 150
+  },
+  "how_ranked": "Dialysis is needed several times a week, so we show the closest facilities whose own records say they provide dialysis, ranked 60% closeness, 30% how clearly the record documents it, 10% equipment and capability, searching up to 150 km.",
+  "results": [],
+  "extra_rows": null,
+  "fallback": "No facility with good evidence for dialysis within 150 km of Dantewada district, Chhattisgarh (centre of 5 PIN areas). Call before travelling. The nearest facility whose record documents it is Apollo Hospitals - Kakinada, about 308 km away (road estimate).",
+  "not_recommended": {
+   "radius_km": 150,
+   "groups": [],
+   "no_mention_count": 2,
+   "considered_count": 2
+  },
+  "elapsed_ms": 22
+ }
+}

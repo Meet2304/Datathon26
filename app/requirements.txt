@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn>=0.29
+databricks-sdk>=0.30
+databricks-sql-connector>=3.4,<5
+pandas>=2.0
+numpy>=1.26
+pyarrow>=14

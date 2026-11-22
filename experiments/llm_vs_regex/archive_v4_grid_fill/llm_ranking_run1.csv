@@ -1,0 +1,46 @@
+query_id,rank,unique_id,name,grade,km,reason
+Q1,1,723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",3,2.8,Explicit dialysis with 25 machines; large hospital; 2.8 km
+Q1,2,78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,3,2.3,"Dedicated kidney centre, 24-hour dialysis with 10 units; closest dialysis option (2.3 km) but page dated 2011"
+Q1,3,3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,3,4.4,Haemodialysis and dialysis/transplant programme in a 250-bed hospital; 4.4 km
+Q1,4,c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",3,3.2,Claims largest dialysis centre in Central India with nephrology; claim only in description/capability; 3.2 km
+Q1,5,8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,2,2.4,"Dialysis listed as a service with nephrology and ICU, no unit details; 2.4 km"
+Q1,6,702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,1,4.1,'Dialysis Clinic' in name only; no supporting text; 4.1 km
+Q1,7,509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,1,3.7,Mentions dialysis facilities but is a children's hospital; 3.7 km
+Q1,8,e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",1,6.9,Nephrology department only; record describes a 10-bed unit; 6.9 km
+Q1,9,6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",1,3.6,Nephrology only in a templated department list; 3.6 km
+Q1,10,f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,1,4.4,Nephrology specialty tag only; 4.4 km
+Q1,11,0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,1,4.7,Nephrology specialty tag only; cardiac/IVF centre; 4.7 km
+Q1,12,269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,0,2.8,Cancer hospital with a lone nephrology tag; 2.8 km
+Q1,13,f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,0,0.6,No dialysis evidence; closest facility (0.6 km) but a maternity/surgery nursing home
+Q1,14,3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,0,2.8,No dialysis evidence; obstetrics nursing home; 2.8 km
+Q1,15,8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,0,4.0,No dialysis evidence; orthopaedic/trauma hospital; 4.0 km
+Q2,1,3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,3,4.5,"Obstetrics nursing home listing C-section and high-risk delivery, emergency services and ICU; 4.5 km"
+Q2,2,6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",3,9.9,"Performs C-sections, 24/7 emergency, OT, ICU, high-risk pregnancy team; strongest readiness but 9.9 km"
+Q2,3,0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,2,4.1,Performs cesarean delivery with OTs and ICU but no 24/7 obstetric readiness stated; closest (4.1 km)
+Q2,4,f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,2,6.0,"Lists C-section and high-risk pregnancy; small clinic, 24-hour cover conflicts with posted hours; 6.0 km"
+Q2,5,723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",2,5.6,Large 24-hour hospital with obstetrics and neonatology but C-section not stated; 5.6 km
+Q2,6,3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,2,10.6,"24/7 emergency and obstetric surgeries, C-section not named; far (10.6 km)"
+Q2,7,8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,1,4.9,"Obstetrics department and 24/7 emergency, no C-section claim; 4.9 km"
+Q2,8,f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,1,4.9,Obstetrics named as a specialty only; 4.9 km
+Q2,9,c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",1,5.6,Gynaecology department only; 5.6 km
+Q2,10,702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,1,10.6,Obstetrics specialty tag only; 10.6 km
+Q2,11,e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",1,13.2,Obstetrics only within robotic surgery programme; 10-bed record; farthest (13.2 km)
+Q2,12,78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,0,4.7,Kidney centre; no obstetrics; 4.7 km
+Q2,13,509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,0,5.4,Children's hospital; no obstetrics; 5.4 km
+Q2,14,269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,0,6.3,Cancer hospital; 6.3 km
+Q2,15,8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,0,10.5,Orthopaedic/trauma hospital; 10.5 km
+Q3,1,c35dabaa-544a-4d93-9405-b5444ed0bab3,"MMI Narayana Multispeciality Hospital, Raipur",3,4.6,"Explicit heart bypass and valve replacement, largest cardiac surgery programme, 298 beds; 4.6 km"
+Q3,2,723a6e17-fdf9-4af8-ae80-b16ea3b98244,"Hospitales CARE, Raipur",3,4.2,"Cardiothoracic surgery, heart transplant, cath lab, cardiac centre of excellence; 4.2 km"
+Q3,3,0b02d119-a409-4554-9979-39817ed38e3e,Smc Heart Institute And Ivf Research Center,3,2.5,"Heart institute listing bypass surgery and 2,000+ cardiac surgeries; smaller; closest strong option (2.5 km)"
+Q3,4,3d4c1b68-7402-427c-922c-adbf52bd7dab,Suyash Hospital,3,5.3,"Bypass surgery with cardiac cath lab, 60-bed ICU; 5.3 km"
+Q3,5,f71b47e9-1504-40f9-9256-706f6173280b,Mamta Super Speciality Hospital,1,2.1,"cardiacSurgery tag only, not in its own specialty description; 2.1 km"
+Q3,6,269e3a30-c0d8-447c-8d74-fe6a2977a315,Sanjeevani Cancer Hospital,1,4.5,Cancer hospital with cardiothoracicSurgery tag (oncologic thoracic surgery); 4.5 km
+Q3,7,702a22a9-0c4c-49b4-afbe-e54b42750283,Vasudev Multispeciality Hospital and Apollo Dialysis Clinic,1,6.1,Cardiology tag only; boilerplate record; 6.1 km
+Q3,8,e43a21d0-8c78-436d-9656-39418b1fbf16,"All India Institute of Medical Sciences, Raipur",1,8.0,Cardiology tag only; 10-bed record; 8.0 km
+Q3,9,509c6668-953b-4d13-b198-5659718b54e6,Kanha Children Hospital,0,1.5,Children's hospital with a cath lab; not for adult bypass; 1.5 km
+Q3,10,f73efb65-a436-45a4-b6b3-8409e412525d,Tiwari Nursing Home,0,2.3,Cardiology tag in an obstetrics/surgery nursing home; 2.3 km
+Q3,11,6c08e1f3-1d59-42c0-bb0c-4617f95a8986,"Devi Woman and Child Hospital, Raipur",0,5.7,Cardiology in a templated list of a women's hospital; 5.7 km
+Q3,12,78bed667-b16e-43c1-8d82-c82891f23aa8,Vidya Hospital and Kidney Centre,0,0.8,Kidney centre; no cardiac evidence; 0.8 km
+Q3,13,3933c2cf-fae4-439e-a72d-39d2c28ddf4e,Kanwar Nursing Home,0,0.8,Obstetrics nursing home; no cardiac evidence; 0.8 km
+Q3,14,8e0dbec3-fd46-42e1-b213-9204bf799f69,Shri Krishna Hospital,0,3.5,No cardiac evidence; 3.5 km
+Q3,15,8f5bea35-e441-441f-ae15-cca315bbee5b,Gayatri Hospital,0,5.8,Orthopaedic hospital; no cardiac evidence; 5.8 km

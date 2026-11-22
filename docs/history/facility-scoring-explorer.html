@@ -1,0 +1,502 @@
+<div id="facility-scoring-explorer">
+  <h2>Facility scoring explorer</h2>
+  <div class="viz-row fs-top">
+    <span class="text-small text-muted">Synthetic facility records</span>
+    <label class="viz-row">Service <select class="form-select" data-in="service">
+      <option value="dialysis">Dialysis</option><option value="csection">Emergency C-section</option>
+      <option value="trauma">Trauma</option><option value="nicu">NICU</option>
+      <option value="imaging">MRI</option><option value="burn">Burn care</option>
+      <option value="cardiac">Cardiac surgery</option>
+    </select></label>
+  </div>
+  <div class="viz-grid fs-scores" aria-live="polite">
+    <div class="card viz-stat"><div>Location accuracy</div><div class="viz-stat-value tabular-nums" data-out="locationScore"></div><div data-out="locationTier"></div></div>
+    <div class="card viz-stat"><div>Service confidence</div><div class="viz-stat-value tabular-nums" data-out="serviceScore"></div><div data-out="serviceTier"></div></div>
+    <div class="card viz-stat"><div>Proximity</div><div class="viz-stat-value tabular-nums" data-out="proximityScore"></div><div data-out="proximityTier"></div></div>
+  </div>
+  <nav class="nav nav-pills fs-tabs" role="tablist" aria-label="Scoring stages">
+    <button id="fs-tab-location" type="button" class="nav-link active" role="tab" aria-selected="true" aria-controls="fs-location">Location</button>
+    <button id="fs-tab-evidence" type="button" class="nav-link" role="tab" aria-selected="false" aria-controls="fs-evidence">Evidence</button>
+    <button id="fs-tab-proximity" type="button" class="nav-link" role="tab" aria-selected="false" aria-controls="fs-proximity">Proximity</button>
+    <button id="fs-tab-ranking" type="button" class="nav-link" role="tab" aria-selected="false" aria-controls="fs-ranking">Ranking</button>
+  </nav>
+
+  <section id="fs-location" role="tabpanel" aria-labelledby="fs-tab-location">
+    <div class="viz-controls">
+      <label class="form-label">Address signals
+        <select class="form-select" data-in="address">
+          <option value="aligned">PIN, city and state agree</option>
+          <option value="wrongPin">Coordinates and state agree · PIN conflicts</option>
+          <option value="conflict">Coordinates, PIN and state conflict</option>
+          <option value="pinOnly">Coordinates invalid · PIN agrees</option>
+          <option value="gazetteer">Coordinates invalid · PIN missing</option>
+        </select>
+      </label>
+      <label class="form-label">Geocode precision
+        <select class="form-select" data-in="precision">
+          <option value="precise">5 decimals · unique point</option>
+          <option value="coarse">2 decimals · 40 records share the point</option>
+        </select>
+      </label>
+    </div>
+    <div class="viz-controls">
+      <label class="form-label">Coordinate-to-PIN gap <strong data-out="gapLabel"></strong>
+        <input class="form-range" type="range" min="0" max="60" value="15" data-in="gap">
+      </label>
+      <label class="form-label">PIN radius <strong data-out="radiusLabel"></strong>
+        <input class="form-range" type="range" min="1" max="45" value="3" data-in="radius">
+      </label>
+    </div>
+    <div class="fs-track" role="img" data-chart="location">
+      <span class="fs-window"></span><span class="fs-marker"></span><span class="fs-threshold"></span>
+    </div>
+    <div class="fs-axis text-small"><span>Gap ratio 0</span><span>1.5 · agreement threshold</span><span>6+</span></div>
+    <dl class="fs-readout">
+      <div><dt>Gap ÷ max(PIN radius, 3 km)</dt><dd data-out="ratio"></dd></div>
+      <div><dt>Resolved point</dt><dd data-out="source"></dd></div>
+      <div><dt>Uncertainty radius</dt><dd data-out="locationRadius"></dd></div>
+    </dl>
+    <h3>Location reasons</h3><ul data-reasons="location"></ul>
+  </section>
+
+  <section id="fs-evidence" role="tabpanel" aria-labelledby="fs-tab-evidence" hidden>
+    <div class="viz-row fs-top">
+      <label class="form-label">Example matches
+        <select class="form-select" data-in="matchPreset">
+          <option value="strong">Procedure and equipment examples</option>
+          <option value="structured">Source capability list + description</option>
+          <option value="capabilityOnly">Source capability list only</option>
+          <option value="weak">Exact description copy</option>
+          <option value="support">Supporting specialty only</option>
+          <option value="negated">Referral mention only</option>
+          <option value="none">No matches</option>
+        </select>
+      </label>
+      <label class="form-label">Record-level sources
+        <select class="form-select" data-in="sources">
+          <option value=".1">None listed</option><option value=".15">JustDial</option>
+          <option value=".85" selected>Facility website + Practo</option>
+          <option value="1">Government + facility website</option>
+        </select>
+      </label>
+    </div>
+    <details open><summary class="cursor-interaction">Documented infrastructure for capability</summary><div class="viz-row" data-support></div></details>
+    <details><summary class="cursor-interaction">Record plausibility flags</summary>
+      <div class="viz-row">
+        <label class="form-check"><input class="form-check-input" type="checkbox" data-in="incompatible"><span class="form-check-label">Incompatible facility type</span></label>
+        <label class="form-check"><input class="form-check-input" type="checkbox" data-in="kitchenSink"><span class="form-check-label">Unusually many specialties</span></label>
+        <label class="form-check"><input class="form-check-input" type="checkbox" data-in="merged"><span class="form-check-label">Possible merged record</span></label>
+      </div>
+    </details>
+    <table class="table table-sm">
+      <thead><tr><th scope="col">Field</th><th scope="col">Example text</th><th scope="col">Match</th></tr></thead>
+      <tbody data-matches></tbody>
+    </table>
+    <dl class="fs-readout">
+      <div><dt>Raw service confidence</dt><dd data-out="e"></dd></div>
+      <div><dt>Infrastructure coverage</dt><dd data-out="s"></dd></div>
+      <div><dt>Documented capability</dt><dd data-out="p"></dd></div>
+      <div><dt>Record reliability</dt><dd data-out="q"></dd></div>
+    </dl>
+    <div class="tabular-nums" data-out="serviceMath"></div>
+    <h3>Evidence reasons</h3><ul data-reasons="service"></ul>
+  </section>
+
+  <section id="fs-proximity" role="tabpanel" aria-labelledby="fs-tab-proximity" hidden>
+    <div class="viz-controls">
+      <label class="form-label">User input
+        <select class="form-select" data-in="inputType">
+          <option value="0">Coordinates · ±0 km</option><option value="8">PIN centre · ±8 km</option>
+          <option value="25">City / district centre · ±25 km</option><option value="state">State only</option>
+        </select>
+      </label>
+      <label class="form-label">User point to facility PIN centre <strong data-out="userGapLabel"></strong>
+        <input class="form-range" type="range" min="0" max="250" value="12" data-in="userGap">
+      </label>
+    </div>
+    <div class="fs-track" role="img" data-chart="proximity">
+      <span class="fs-window"></span><span class="fs-marker"></span><span class="fs-threshold"></span>
+    </div>
+    <div class="fs-axis text-small"><span>0 km</span><span data-out="cutoffLabel"></span><span data-out="distanceMax"></span></div>
+    <dl class="fs-readout">
+      <div><dt>Straight-line distance</dt><dd data-out="straight"></dd></div>
+      <div><dt>Approximate road distance</dt><dd data-out="road"></dd></div>
+      <div><dt>Distance scale (d₀)</dt><dd data-out="d0"></dd></div>
+    </dl>
+    <div class="tabular-nums" data-out="distanceMath"></div>
+    <h3>Proximity reasons</h3><ul data-reasons="proximity"></ul>
+  </section>
+
+  <section id="fs-ranking" role="tabpanel" aria-labelledby="fs-tab-ranking" hidden>
+    <div class="viz-controls">
+      <label class="form-label">Target Moderate-or-better results
+        <select class="form-select" data-in="target"><option>1</option><option selected>2</option><option>3</option></select>
+      </label>
+    </div>
+    <div class="tabular-nums" data-out="rankMath"></div>
+    <ol class="fs-search" aria-label="Search expansion" data-search></ol>
+    <table class="table table-sm">
+      <thead><tr><th scope="col">Facility</th><th scope="col">Road estimate</th><th scope="col">Evidence</th><th scope="col">Rank score</th></tr></thead>
+      <tbody data-ranking></tbody>
+    </table>
+    <h3>Ranking reasons</h3><ul data-reasons="ranking"></ul>
+  </section>
+</div>
+<style>
+#facility-scoring-explorer { display:grid; gap:12px; color:var(--foreground); }
+#facility-scoring-explorer h2, #facility-scoring-explorer h3 { margin:0; }
+#facility-scoring-explorer h3 { margin-top:14px; }
+#facility-scoring-explorer .fs-top { justify-content:space-between; gap:8px; }
+#facility-scoring-explorer .fs-scores { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+#facility-scoring-explorer .fs-readout { display:flex; flex-wrap:wrap; gap:12px 24px; margin:12px 0; }
+#facility-scoring-explorer .fs-readout dt { color:var(--muted-foreground); font-weight:400; }
+#facility-scoring-explorer .fs-readout dd { margin:3px 0 0; font-variant-numeric:tabular-nums; }
+#facility-scoring-explorer .fs-axis { display:flex; justify-content:space-between; gap:8px; margin-top:5px; }
+#facility-scoring-explorer .fs-axis span:nth-child(2) { text-align:center; }
+#facility-scoring-explorer .fs-track { position:relative; margin:14px 4px 0; height:12px; border-radius:8px; background:var(--muted); }
+#facility-scoring-explorer .fs-track span { display:block; position:absolute; }
+#facility-scoring-explorer .fs-track span[hidden] { display:none; }
+#facility-scoring-explorer .fs-window { top:0; bottom:0; border-radius:8px; background:var(--viz-series-1); opacity:.26; }
+#facility-scoring-explorer .fs-marker { top:0; width:12px; height:12px; border-radius:50%; background:var(--viz-series-1); transform:translateX(-50%); }
+#facility-scoring-explorer .fs-threshold { top:-3px; bottom:-3px; width:2px; background:var(--foreground); opacity:.65; }
+#facility-scoring-explorer .fs-search { display:flex; flex-wrap:wrap; list-style:none; padding:0; gap:6px 16px; }
+#facility-scoring-explorer .fs-search li { color:var(--muted-foreground); }
+#facility-scoring-explorer .fs-search li[aria-current] { color:var(--foreground); font-weight:500; }
+#facility-scoring-explorer ul { margin:6px 0 0; padding-left:20px; }
+#facility-scoring-explorer li + li { margin-top:3px; }
+#facility-scoring-explorer .fs-search li + li { margin-top:0; }
+#facility-scoring-explorer th, #facility-scoring-explorer td { overflow-wrap:anywhere; }
+#facility-scoring-explorer details { margin:8px 0; }
+#facility-scoring-explorer details > .viz-row { margin:6px 0; }
+@media (max-width:500px) {
+  #facility-scoring-explorer .fs-scores { grid-template-columns:1fr; }
+  #facility-scoring-explorer .fs-scores > div { display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:8px; }
+  #facility-scoring-explorer .fs-scores > div > :last-child { grid-column:1; }
+  #facility-scoring-explorer .fs-scores .viz-stat-value { grid-row:1 / span 2; grid-column:2; }
+}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('facility-scoring-explorer');
+  const input = key => root.querySelector('[data-in="' + key + '"]');
+  const node = (attribute, key) => root.querySelector('[data-' + attribute + '="' + key + '"]');
+  const write = (key, value) => { node('out', key).textContent = value; };
+  const num = key => Number(input(key).value);
+  const fmt = value => value.toFixed(2);
+  const km = value => String(Math.round(value)) + ' km';
+  const supportBox = root.querySelector('[data-support]');
+  const domainInfo = {
+    '.1': 'No source domains listed',
+    '.15': 'justdial.example',
+    '.85': 'hospital.example and practo.example',
+    '1': 'registry.gov.example and hospital.example'
+  };
+
+  // Illustrative specs and ranking knobs. All matching text is synthetic.
+  const services = {
+    dialysis: { term:'haemodialysis', equipment:'dialysis machine', equipmentIndex:1, specialty:'nephrology', needs:['RO water plant','Dialysis machines or stations','Nephrologist','ICU'], infrastructureWeights:[1,1,1,.5], hitRate:.106, d0:25, cutoff:100, alpha:1, beta:1.25 },
+    csection: { term:'emergency C-section', equipment:null, specialty:'obstetrics', needs:['Operating theatre','Anaesthesia','Blood bank','24/7 cover'], d0:25, cutoff:100, alpha:1, beta:1.5 },
+    trauma: { term:'trauma resuscitation', equipment:null, specialty:'emergency medicine', needs:['Emergency department','Operating theatre','24/7 cover','Imaging'], d0:25, cutoff:100, alpha:1, beta:1.5 },
+    nicu: { term:'NICU', equipment:'neonatal incubator', equipmentIndex:1, specialty:'neonatology', needs:['Neonatology','Incubator or ventilator','Paediatrics'], d0:50, cutoff:150, alpha:1.2, beta:1 },
+    imaging: { term:'MRI', equipment:'MRI scanner', specialty:'radiology', needs:[], d0:75, cutoff:200, alpha:1.1, beta:1 },
+    burn: { term:'burn unit', equipment:null, specialty:'plastic surgery', needs:['Burn ward','Critical care','Surgical support'], d0:100, cutoff:250, alpha:1.4, beta:.8 },
+    cardiac: { term:'cardiac surgery', equipment:null, specialty:'cardiothoracic surgery', needs:['Cardiac theatre','Cardiac anaesthesia','Postoperative intensive care','Perfusion support'], d0:150, cutoff:250, alpha:1.6, beta:.6 }
+  };
+  const locationValue = { High:.95, Medium:.65, Low:.30 };
+  const factor = { High:1, Medium:.85, Low:.6 };
+  const tierPriority = { Strong:3, Moderate:2, Weak:1 };
+  const weights = { procedure:.85, equipment:.85, description:.30 };
+
+  function fillList(key, values) {
+    node('reasons', key).replaceChildren(...values.map(value => {
+      const item = document.createElement('li');
+      item.textContent = value;
+      return item;
+    }));
+  }
+
+  function fillTable(selector, rows) {
+    root.querySelector(selector).replaceChildren(...rows.map(values => {
+      const row = document.createElement('tr');
+      for (const value of values) row.insertCell().textContent = value;
+      return row;
+    }));
+  }
+
+  function location(gap, radius, address, coarse, merged) {
+    const pinExists = address !== 'gazetteer';
+    const coordsValid = !['pinOnly','gazetteer'].includes(address);
+    const ratio = pinExists && coordsValid ? gap / Math.max(radius, 3) : null;
+    const reasons = [];
+    if (ratio !== null) reasons.push('Recorded coordinates are ' + km(gap) + ' from the PIN centre. The PIN radius is ' + km(radius) + ', giving a gap ratio of ' + fmt(ratio) + '.');
+    if (!coordsValid) reasons.push('Recorded coordinates fail the validity check.');
+    if (pinExists) reasons.push('The PIN exists in the directory.');
+    const result = (tier, source, uncertainty, position, reason) => {
+      reasons.push(reason);
+      if (merged) reasons.push('Possible merged record flagged for review.');
+      return { tier, source, uncertainty, position, ratio, reasons, score:locationValue[tier] };
+    };
+    if (!pinExists) return result('Low','District centre',25,-9,'The PIN is missing, so the district gazetteer supplies a fallback.');
+    if (address === 'conflict') return result('Low','PIN centre · flagged',35,0,'Coordinates conflict with the stated state, and the PIN’s state and district also conflict with the address.');
+    if (address === 'wrongPin') return result('Medium','Recorded coordinates',5,gap,'The coordinate-derived state agrees with the address. The PIN state and district disagree.');
+    if (address === 'pinOnly') return result('Medium','PIN centre',radius,0,'The matching PIN, state and district supply a fallback.');
+    if (ratio > 1.5) return result('Medium','PIN centre',radius,0,'The gap exceeds the agreement threshold. The PIN, state and city agree.');
+    return result('High','Recorded coordinates',coarse ? radius : 1,gap,coarse
+      ? 'State and city agree with the PIN. The rounded, shared point uses the PIN radius for uncertainty.'
+      : 'State and city agree with the PIN. The precise, unique geocode is inside the agreement threshold.');
+  }
+
+  function buildSupport(spec, selected) {
+    supportBox.closest('details').hidden = spec.needs.length === 0;
+    supportBox.replaceChildren(...spec.needs.map((label, index) => {
+      const wrapper = document.createElement('label');
+      wrapper.className = 'form-check';
+      const box = document.createElement('input');
+      box.className = 'form-check-input';
+      box.type = 'checkbox';
+      box.checked = selected ? Boolean(selected[index]) : (spec.infrastructureWeights ? index === 1 || index === 3 : index < 2);
+      const text = document.createElement('span');
+      text.className = 'form-check-label';
+      text.textContent = label;
+      wrapper.append(box, text);
+      return wrapper;
+    }));
+  }
+
+  function serviceEvidence(spec, preset, infrastructure, sourceQuality, flags) {
+    const equipment = spec.equipment && (spec.equipmentIndex === undefined || infrastructure[spec.equipmentIndex]) && [
+      'equipment', spec.equipment, spec.needs.length ? 'Infrastructure' : 'Direct'
+    ];
+    const rows = {
+      strong: [['procedure',spec.term,'Direct'], ...(equipment ? [equipment] : [])],
+      structured: [['capability',spec.term,'Supporting only'],['description',spec.term + ' available','Direct']],
+      capabilityOnly: [['capability',spec.term,'Supporting only']],
+      weak: Array.from({length:2}, () => ['description',spec.term + ' available','Direct']),
+      support: [['specialties',spec.specialty,'Supporting only']],
+      negated: [['description','Patients referred to an external ' + spec.term + ' provider','Excluded · referral']],
+      none: []
+    }[preset];
+    const direct = rows.filter(([, , role]) => role === 'Direct');
+    const claims = new Map();
+    for (const [field, quote] of direct) {
+      const key = quote.toLowerCase().trim();
+      const previous = claims.get(key);
+      if (!previous || weights[field] > weights[previous]) claims.set(key, field);
+    }
+    const fields = [...claims.values()];
+    const raw = 1 - fields.reduce((gap, field) => gap * (1 - weights[field]), 1);
+    const missing = spec.needs.filter((name, index) => !infrastructure[index]);
+    const infrastructureWeights = spec.infrastructureWeights ?? spec.needs.map(() => 1);
+    const total = infrastructureWeights.reduce((sum, weight) => sum + weight, 0);
+    const documented = infrastructureWeights.reduce((sum, weight, index) => sum + (infrastructure[index] ? weight : 0), 0);
+    const coverage = total ? documented / total : null;
+    const size = .6; // Fixed synthetic facility of 120 beds.
+    const capability = coverage === null ? size : .4 * size + .6 * coverage;
+    const capFactor = .5 + .5 * capability;
+
+    const incompatible = flags['Incompatible facility type'];
+    const merged = flags['Possible merged record'];
+    const kitchenSink = flags['Unusually many specialties'];
+    const consistency = merged ? .5 : kitchenSink ? .75 : 1;
+    const reliability = Math.max(.3, .4 * sourceQuality + .4 * consistency + .15 * .5 + .05 * .5);
+    const rate = spec.hitRate ?? .1; // Illustrative direct-hit rate.
+    const plausible = incompatible ? .2 * raw : raw;
+    const confidence = Math.min(plausible, rate + reliability * (plausible - rate));
+    const hard = fields.some(field => field === 'procedure' || field === 'equipment');
+    let tier = 'Weak';
+    if (!direct.length) tier = preset === 'negated' ? 'Excluded' : rows.some(([, , role]) => role === 'Supporting only') ? 'Possible' : 'No evidence';
+    else if (hard && !incompatible && !merged && reliability >= .5) {
+      const qualifyingInfrastructure = spec.infrastructureWeights
+        ? infrastructureWeights.some((weight, index) => weight === 1 && infrastructure[index])
+        : coverage >= .5;
+      tier = fields.includes('equipment') || qualifyingInfrastructure ? 'Strong' : 'Moderate';
+    }
+
+    const reasons = [fields.length
+      ? 'The eligible claim' + (fields.length === 1 ? ' is' : 's are') + ' in ' + fields.join(' and ') + '.'
+      : 'No eligible positive direct claim was found.'];
+    if (preset === 'structured') reasons.push('The source capability list supplies a supporting hint. The explicit description supplies the direct claim at weight 0.30.');
+    if (preset === 'capabilityOnly') reasons.push('The source capability list supplies a supporting hint and adds zero direct confidence.');
+    if (preset === 'weak') reasons.push('Both rows repeat the same claim. The copy adds zero.');
+    if (preset === 'support') reasons.push('“' + spec.specialty + '” is a supporting specialty and adds zero direct confidence.');
+    if (preset === 'negated') reasons.push('The phrase “referred to” describes an external provider.');
+    if (incompatible && direct.length) reasons.push('The incompatible facility type applies a ×0.20 service plausibility penalty.');
+    if (coverage !== null) reasons.push(documented + ' of ' + total + ' infrastructure points are documented.' +
+      (missing.length ? ' Items without documentation include ' + missing.join(', ') + '.' : ''));
+    reasons.push(domainInfo[input('sources').value] + '. Record consistency is ' + fmt(consistency) +
+      '. The demo fixes metadata completeness and recency at 0.50 each.');
+    return { rows, fields, tier, raw, plausible, rate, reliability, confidence, coverage, documented, total, capability, capFactor,
+      score:confidence * capFactor, reasons };
+  }
+
+  function proximity(road, uncertainty, spec) {
+    const excluded = road > spec.cutoff;
+    const nominal = excluded ? 0 : Math.exp(-road / spec.d0);
+    const conservative = excluded ? 0 : Math.exp(-(road + uncertainty) / spec.d0);
+    return { nominal, conservative, excluded, tier: nominal >= .6 ? 'High' : nominal >= .25 ? 'Medium' : 'Low' };
+  }
+
+  function mark(chart, max, point, low, high, threshold, label) {
+    const element = node('chart', chart);
+    const pct = val => Math.min(100, Math.max(0, val / max * 100)) + '%';
+    element.querySelector('.fs-marker').style.left = pct(point || 0);
+    element.querySelector('.fs-marker').hidden = point === null;
+    element.querySelector('.fs-window').style.left = pct(low);
+    element.querySelector('.fs-window').style.right = 'calc(100% - ' + pct(high) + ')';
+    element.querySelector('.fs-threshold').style.left = pct(threshold);
+    element.setAttribute('aria-label', label);
+  }
+
+  function renderRanking(service, loc, road, uncertainty, inputRadius, spec) {
+    const sample = [
+      { name:'Explored facility', road, uncertainty, location:loc.tier, tier:service.tier, evidence:service.score },
+      { name:'Nearby clinic', road:9, uncertainty:1 + inputRadius, location:'High', tier:'Weak', evidence:.28 },
+      { name:'Community hospital', road:32, uncertainty:1 + inputRadius, location:'High', tier:'Moderate', evidence:.63 },
+      { name:'Regional hospital', road:64, uncertainty:3 + inputRadius, location:'Medium', tier:'Strong', evidence:.92 }
+    ];
+    for (const facility of sample) {
+      const distance = proximity(facility.road, facility.uncertainty, spec);
+      facility.excluded = distance.excluded;
+      facility.score = facility.evidence ** spec.alpha * distance.conservative ** spec.beta * factor[facility.location];
+    }
+    const target = num('target');
+    const stages = [25,50,100,250];
+    let eligible = [];
+    let used = 0;
+    let fallback = false;
+    const counts = [];
+    if (inputRadius !== null) {
+      for (const radius of stages) {
+        const inRange = sample.filter(row => row.road <= radius && !row.excluded && tierPriority[row.tier]);
+        eligible = inRange.filter(row => row.location !== 'Low');
+        fallback = radius === stages.at(-1) && !eligible.length && inRange.length > 0;
+        if (fallback) eligible = inRange;
+        const count = eligible.filter(row => tierPriority[row.tier] >= 2).length;
+        counts.push(count);
+        used = radius;
+        if (count >= target) break;
+      }
+    }
+    root.querySelector('[data-search]').replaceChildren(...stages.map((radius, index) => {
+      const item = document.createElement('li');
+      item.textContent = km(radius) + (counts[index] === undefined ? '' : ' · ' + counts[index] + ' qualify');
+      if (radius === used) item.setAttribute('aria-current','step');
+      return item;
+    }));
+    eligible.sort((a,b) => tierPriority[b.tier] - tierPriority[a.tier] || b.score - a.score);
+    fillTable('[data-ranking]',eligible.map(row => [
+      row.name, '~' + km(row.road) + ' ± ' + km(row.uncertainty), row.tier, fmt(row.score)
+    ]));
+    write('rankMath','(Service confidence × capability factor)^' + spec.alpha + ' × uncertainty-adjusted proximity^' + spec.beta + ' × location factor');
+    const reasons = inputRadius === null ? ['A district or PIN is needed to start the search.'] : [
+      'The search reached ' + km(used) + ' and found ' + counts.at(-1) + ' Moderate-or-better results (target ' + target + ').',
+      fallback ? 'Low-confidence locations are shown as a fallback.' : 'Low-confidence locations are held back unless nothing else qualifies.',
+      'Service tier sorts first. Within a tier, the rank score uses the upper distance estimate and a High/Medium/Low location factor of 1.00 / 0.85 / 0.60.'
+    ];
+    const weak = eligible.filter(row => row.tier === 'Weak').sort((a,b) => a.road - b.road)[0];
+    const strong = eligible.find(row => row.tier === 'Strong' && weak && row.road > weak.road);
+    if (weak && strong) reasons.push(weak.name + ' is closer (' + km(weak.road) + '). ' + strong.name + ' ranks higher with Strong evidence, at ' + km(strong.road) + '.');
+    if (inputRadius !== null && !eligible.includes(sample[0])) {
+      const explored = sample[0];
+      const why = !tierPriority[explored.tier] ? 'has tier ' + explored.tier
+        : explored.excluded ? 'falls outside the service cutoff'
+        : explored.location === 'Low' ? 'has Low location confidence'
+        : 'falls outside the search window';
+      reasons.push('The explored facility is excluded because it ' + why + '.');
+    }
+    fillList('ranking',reasons);
+  }
+
+  function render() {
+    const spec = services[input('service').value];
+    const gap = num('gap');
+    const radius = num('radius');
+    const address = input('address').value;
+    const merged = input('merged').checked;
+    const loc = location(gap, radius, address, input('precision').value === 'coarse', merged);
+    input('gap').disabled = loc.ratio === null;
+    input('radius').disabled = address === 'gazetteer';
+    input('precision').disabled = loc.source !== 'Recorded coordinates';
+    const evidence = serviceEvidence(spec,input('matchPreset').value,
+      [...supportBox.querySelectorAll('input')].map(box => box.checked),num('sources'), {
+        'Incompatible facility type':input('incompatible').checked,
+        'Unusually many specialties':input('kitchenSink').checked,
+        'Possible merged record':merged
+      });
+    const userGap = num('userGap');
+    const inputRadius = input('inputType').value === 'state' ? null : num('inputType');
+    input('userGap').disabled = inputRadius === null;
+    // Points lie on one synthetic meridian, so great-circle distance is their offset difference.
+    const straight = Math.abs(-userGap - loc.position);
+    const road = straight * 1.4;
+    const uncertainty = loc.uncertainty + (inputRadius ?? 0);
+    const distance = proximity(road,uncertainty,spec);
+    const hasInput = inputRadius !== null;
+    const out = {
+      locationScore:fmt(loc.score), locationTier:loc.tier, serviceScore:fmt(evidence.confidence), serviceTier:evidence.tier,
+      proximityScore:hasInput ? fmt(distance.nominal) : '—', proximityTier:hasInput ? distance.tier : 'District or PIN needed',
+      gapLabel:km(gap),radiusLabel:km(radius),ratio:loc.ratio === null ? 'Unavailable' : fmt(loc.ratio),
+      source:loc.source, locationRadius:'±' + km(loc.uncertainty),
+      e:fmt(evidence.raw),s:evidence.coverage === null ? '—' : fmt(evidence.coverage),
+      p:fmt(evidence.capability),q:fmt(evidence.reliability),
+      serviceMath:'Service confidence ' + fmt(evidence.confidence) + ' × capability factor ' + fmt(evidence.capFactor) +
+        ' ≈ ' + fmt(evidence.score) + ' before distance and location adjustments.',
+      userGapLabel:km(userGap), straight:hasInput ? km(straight) : '—',
+      road:hasInput ? '~' + km(road) + ' ± ' + km(uncertainty) : '—',
+      d0:km(spec.d0), cutoffLabel:km(spec.cutoff) + ' cutoff',
+      distanceMath:!hasInput ? '' : distance.excluded ? 'Beyond the cutoff → 0.00'
+        : 'exp(−' + road.toFixed(1) + ' ÷ ' + spec.d0 + ') = ' + fmt(distance.nominal) + ' · ranking uses ' + fmt(distance.conservative)
+    };
+    const max = Math.max(spec.cutoff * 1.3, hasInput ? road + uncertainty + 5 : 0);
+    out.distanceMax = km(max);
+    for (const [key,value] of Object.entries(out)) write(key,value);
+    mark('location',6,loc.ratio,0,1.5,1.5, loc.ratio === null ? 'Gap ratio unavailable' : 'Gap ratio ' + fmt(loc.ratio) + '. Agreement threshold 1.5.');
+    mark('proximity',max,hasInput ? road : null,hasInput ? road - uncertainty : 0,hasInput ? road + uncertainty : 0,spec.cutoff,
+      hasInput ? 'Estimated road distance ' + out.road + '. Cutoff ' + km(spec.cutoff) + '.' : 'Awaiting district or PIN');
+    fillList('location',loc.reasons);
+    fillList('service',evidence.reasons);
+    fillTable('[data-matches]',evidence.rows.length ? evidence.rows : [['—','No example mentions','—']]);
+    fillList('proximity',hasInput ? [
+      'Distance starts at the ' + loc.source.toLowerCase() + '. The straight-line distance is multiplied by 1.4 to estimate road distance.',
+      'The uncertainty adds ' + km(loc.uncertainty) + ' from the facility and ' + km(inputRadius) + ' from the user input.',
+      (distance.excluded ? 'The central estimate exceeds the ' + km(spec.cutoff) + ' service cutoff.' :
+        'Ranking uses the upper distance estimate of ' + km(road + uncertainty) + ' so a wide uncertainty band lowers the rank score.')
+    ] : ['State-level input is too broad. Choose a district or PIN before computing a distance.']);
+    renderRanking(evidence,loc,road,uncertainty,inputRadius,spec);
+  }
+
+  function snapshot() {
+    const controls = {};
+    for (const field of root.querySelectorAll('[data-in]')) {
+      controls[field.dataset.in] = field.type === 'checkbox' ? field.checked : field.value;
+    }
+    return { controls, support:[...supportBox.querySelectorAll('input')].map(box => box.checked) };
+  }
+  function restore(saved) {
+    const state = saved?.modelContent ?? saved;
+    if (state?.controls && services[state.controls.service]) {
+      for (const [key,value] of Object.entries(state.controls)) {
+        const field = input(key);
+        if (field?.type === 'checkbox') field.checked = Boolean(value);
+        else if (field && typeof value === 'string') field.value = value;
+      }
+    }
+    buildSupport(services[input('service').value],state?.support);
+    render();
+  }
+  root.addEventListener('input',event => {
+    if (!(event.target instanceof HTMLInputElement) && !(event.target instanceof HTMLSelectElement)) return;
+    if (event.target === input('service')) buildSupport(services[input('service').value]);
+    render();
+    if (event.target.type !== 'range') window.openai?.setWidgetState?.({modelContent:snapshot()})?.catch(() => {});
+  });
+  root.addEventListener('change',event => {
+    if (event.target.type === 'range') window.openai?.setWidgetState?.({modelContent:snapshot()})?.catch(() => {});
+  });
+  window.addEventListener('openai:set_globals',event => {
+    const saved = event.detail?.globals?.widgetState;
+    if (saved) restore(saved);
+  });
+  restore(window.openai?.widgetState);
+})();
+</script>

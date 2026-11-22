@@ -1,0 +1,12 @@
+{"split": "pilot", "system": "B0", "service": "all", "rates": {"Moderate": 0.9166666666666666}, "totals": {"Strong": 0, "Moderate": 12, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B0", "service": "cardiac_surgery", "rates": {"Moderate": 1.0}, "totals": {"Strong": 0, "Moderate": 3, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B0", "service": "dialysis", "rates": {"Moderate": 0.8}, "totals": {"Strong": 0, "Moderate": 5, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B0", "service": "emergency_csection", "rates": {"Moderate": 1.0}, "totals": {"Strong": 0, "Moderate": 4, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B1", "service": "all", "rates": {"Moderate": 0.9166666666666666}, "totals": {"Strong": 0, "Moderate": 12, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B1", "service": "cardiac_surgery", "rates": {"Moderate": 1.0}, "totals": {"Strong": 0, "Moderate": 3, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B1", "service": "dialysis", "rates": {"Moderate": 0.8}, "totals": {"Strong": 0, "Moderate": 5, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B1", "service": "emergency_csection", "rates": {"Moderate": 1.0}, "totals": {"Strong": 0, "Moderate": 4, "Weak": 0, "Possible": 0}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B2", "service": "all", "rates": {"Moderate": 1.0, "Possible": 0.375}, "totals": {"Strong": 0, "Moderate": 7, "Weak": 0, "Possible": 8}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B2", "service": "cardiac_surgery", "rates": {"Moderate": 1.0, "Possible": 0.5}, "totals": {"Strong": 0, "Moderate": 3, "Weak": 0, "Possible": 2}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B2", "service": "dialysis", "rates": {"Moderate": 1.0, "Possible": 0.0}, "totals": {"Strong": 0, "Moderate": 3, "Weak": 0, "Possible": 2}, "inversions": [], "all_labels_observed": false}
+{"split": "pilot", "system": "B2", "service": "emergency_csection", "rates": {"Moderate": 1.0, "Possible": 0.5}, "totals": {"Strong": 0, "Moderate": 1, "Weak": 0, "Possible": 4}, "inversions": [], "all_labels_observed": false}

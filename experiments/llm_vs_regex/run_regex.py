@@ -11,7 +11,7 @@ filtering the input doesn't change them). Evidence E, labels, completeness C,
 confidence and ranking implement docs/SCORING.md §2–§4 in Python, because those
 tables aren't built in SQL yet.
 
-Usage:  DATABRICKS_TOKEN=... python3 run_regex.py [out_dir]
+Usage:  DATABRICKS_HOST=... DATABRICKS_TOKEN=... DATABRICKS_WAREHOUSE_ID=... python3 run_regex.py [out_dir]
 Writes: features_regex.csv, evidence_regex.csv, ranking_regex.csv into out_dir (default: this folder)
 """
 import csv, json, math, os, re, sys, time, urllib.request
@@ -19,9 +19,9 @@ from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
-HOST = os.environ.get("DATABRICKS_HOST", "https://dbc-4b4617c5-f718.cloud.databricks.com")
+HOST = os.environ["DATABRICKS_HOST"].rstrip("/")
 TOKEN = os.environ["DATABRICKS_TOKEN"]
-WAREHOUSE = os.environ.get("DATABRICKS_WAREHOUSE", "809c9110ea0b7af6")
+WAREHOUSE = os.environ.get("DATABRICKS_WAREHOUSE_ID") or os.environ["DATABRICKS_WAREHOUSE"]
 TODAY = date(2026, 11, 21)
 OUTDIR = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else HERE
 

@@ -1,0 +1,1 @@
+{"stage": "grade", "run_dir": "/Volumes/workspace/hackathon/eval_files/silver_v5", "primary": {"n": 1417, "missing": 0, "fallback_judge": 0, "grades": {"0": 337, "3": 516, "1": 222, "2": 342}, "s": 242.3}, "audit": {"n": 354, "grades": {"3": 213, "1": 26, "0": 79, "2": 36}, "s": 49.4}, "disputes": {"n": 23, "resolved": 23}, "total_s": 309.7}

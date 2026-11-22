@@ -1,0 +1,76 @@
+# Evaluation results
+
+| Split | System | Service | Metric | Mean | 95% bootstrap interval | n |
+|---|---|---|---|---:|---:|---:|
+| pilot | B0 | all | judged_coverage | 1.000 | [1.000, 1.000] | 3 |
+| pilot | B0 | all | kendall_tau_b | 0.605 | [0.593, 0.623] | 3 |
+| pilot | B0 | all | ndcg@5 | 0.806 | [0.776, 0.827] | 3 |
+| pilot | B0 | all | no_possible | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | all | precision_moderate@k | 0.933 | [0.800, 1.000] | 3 |
+| pilot | B0 | all | quote_validity | 1.000 | [1.000, 1.000] | 3 |
+| pilot | B0 | cardiac_surgery | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | cardiac_surgery | kendall_tau_b | 0.623 | [0.623, 0.623] | 1 |
+| pilot | B0 | cardiac_surgery | ndcg@5 | 0.814 | [0.814, 0.814] | 1 |
+| pilot | B0 | cardiac_surgery | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | cardiac_surgery | quote_validity | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | dialysis | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | dialysis | kendall_tau_b | 0.599 | [0.599, 0.599] | 1 |
+| pilot | B0 | dialysis | ndcg@5 | 0.827 | [0.827, 0.827] | 1 |
+| pilot | B0 | dialysis | precision_moderate@k | 0.800 | [0.800, 0.800] | 1 |
+| pilot | B0 | dialysis | quote_validity | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | emergency_csection | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | emergency_csection | kendall_tau_b | 0.593 | [0.593, 0.593] | 1 |
+| pilot | B0 | emergency_csection | ndcg@5 | 0.776 | [0.776, 0.776] | 1 |
+| pilot | B0 | emergency_csection | no_possible | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | emergency_csection | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B0 | emergency_csection | quote_validity | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | all | judged_coverage | 1.000 | [1.000, 1.000] | 3 |
+| pilot | B1 | all | kendall_tau_b | 0.616 | [0.599, 0.625] | 3 |
+| pilot | B1 | all | ndcg@5 | 0.838 | [0.814, 0.872] | 3 |
+| pilot | B1 | all | no_possible | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | all | precision_moderate@k | 0.933 | [0.800, 1.000] | 3 |
+| pilot | B1 | all | quote_validity | 1.000 | [1.000, 1.000] | 3 |
+| pilot | B1 | cardiac_surgery | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | cardiac_surgery | kendall_tau_b | 0.623 | [0.623, 0.623] | 1 |
+| pilot | B1 | cardiac_surgery | ndcg@5 | 0.814 | [0.814, 0.814] | 1 |
+| pilot | B1 | cardiac_surgery | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | cardiac_surgery | quote_validity | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | dialysis | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | dialysis | kendall_tau_b | 0.599 | [0.599, 0.599] | 1 |
+| pilot | B1 | dialysis | ndcg@5 | 0.827 | [0.827, 0.827] | 1 |
+| pilot | B1 | dialysis | precision_moderate@k | 0.800 | [0.800, 0.800] | 1 |
+| pilot | B1 | dialysis | quote_validity | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | emergency_csection | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | emergency_csection | kendall_tau_b | 0.625 | [0.625, 0.625] | 1 |
+| pilot | B1 | emergency_csection | ndcg@5 | 0.872 | [0.872, 0.872] | 1 |
+| pilot | B1 | emergency_csection | no_possible | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | emergency_csection | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B1 | emergency_csection | quote_validity | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | all | judged_coverage | 1.000 | [1.000, 1.000] | 3 |
+| pilot | B2 | all | kendall_tau_b | 0.438 | [0.128, 0.776] | 3 |
+| pilot | B2 | all | ndcg@5 | 0.725 | [0.370, 1.000] | 3 |
+| pilot | B2 | all | no_possible | 0.000 | [0.000, 0.000] | 1 |
+| pilot | B2 | all | precision_moderate@k | 1.000 | [1.000, 1.000] | 3 |
+| pilot | B2 | all | precision_possible@k | 0.333 | [0.000, 0.500] | 3 |
+| pilot | B2 | all | quote_validity | 0.467 | [0.200, 0.600] | 3 |
+| pilot | B2 | cardiac_surgery | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | cardiac_surgery | kendall_tau_b | 0.776 | [0.776, 0.776] | 1 |
+| pilot | B2 | cardiac_surgery | ndcg@5 | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | cardiac_surgery | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | cardiac_surgery | precision_possible@k | 0.500 | [0.500, 0.500] | 1 |
+| pilot | B2 | cardiac_surgery | quote_validity | 0.600 | [0.600, 0.600] | 1 |
+| pilot | B2 | dialysis | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | dialysis | kendall_tau_b | 0.409 | [0.409, 0.409] | 1 |
+| pilot | B2 | dialysis | ndcg@5 | 0.804 | [0.804, 0.804] | 1 |
+| pilot | B2 | dialysis | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | dialysis | precision_possible@k | 0.000 | [0.000, 0.000] | 1 |
+| pilot | B2 | dialysis | quote_validity | 0.600 | [0.600, 0.600] | 1 |
+| pilot | B2 | emergency_csection | judged_coverage | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | emergency_csection | kendall_tau_b | 0.128 | [0.128, 0.128] | 1 |
+| pilot | B2 | emergency_csection | ndcg@5 | 0.370 | [0.370, 0.370] | 1 |
+| pilot | B2 | emergency_csection | no_possible | 0.000 | [0.000, 0.000] | 1 |
+| pilot | B2 | emergency_csection | precision_moderate@k | 1.000 | [1.000, 1.000] | 1 |
+| pilot | B2 | emergency_csection | precision_possible@k | 0.500 | [0.500, 0.500] | 1 |
+| pilot | B2 | emergency_csection | quote_validity | 0.200 | [0.200, 0.200] | 1 |
+
+Failure examples: 10. Missing method responses: 0.
