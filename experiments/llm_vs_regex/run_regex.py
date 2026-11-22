@@ -58,8 +58,8 @@ def features_sql_chain():
     ctes = []
     for name in order:
         q = re.sub(r"--[^\n]*", "", stmts[name])
-        q = q.replace("workspace.hackathon.bronze_facilities", "BRONZE").replace("workspace.hackathon.", "")
-        q = q.replace("BRONZE", f"(SELECT * FROM workspace.hackathon.bronze_facilities WHERE unique_id IN ({id_list}))")
+        q = q.replace("workspace.hackathon.silver_facilities", "SRC").replace("workspace.hackathon.", "")
+        q = q.replace("SRC", f"(SELECT * FROM workspace.hackathon.silver_facilities WHERE unique_id IN ({id_list}))")
         ctes.append(f"{name} AS (\n{q}\n)")
     return "WITH " + ",\n".join(ctes) + "\n"
 
@@ -69,18 +69,18 @@ SERVICES = {
         direct=r"dialys|\bcrrt\b",
         equip=r"dialysis (machines?|units?|stations?|chairs?|beds?)|ha?emodialysis machines?|ro (water )?plant",
         corrob_equip=r"dialysis (machines?|units?|stations?|chairs?|beds?)|ha?emodialysis machines?|ro (water )?plant|nephrologist",
-        excl=None, codes={"nephrology", "pediatricNephrology"}, name_type="nephrology_dialysis",
+        excl=None, codes={"nephrology"}, name_type="nephrology_dialysis",
         implied=[], checked=["nephro_code_or_nephrologist"]),
     "emergency_csection": dict(
         direct=r"caesarean|cesarean|c-section|\blscs\b", equip=None,
         corrob_equip=r"operation theat|operating theat|\bmodular ot|labou?r room|delivery room|anaesthe|anesthe|\bnicu\b",
-        excl=None, codes={"gynecologyAndObstetrics", "obstetricsAndMaternityCare", "maternalFetalMedicineOrPerinatology"},
+        excl=None, codes={"obstetrics", "maternalFetalMedicine"},
         name_type="maternity", implied=["ot", "anaesthesia"], checked=["blood_bank"]),
     "cardiac_surgery": dict(
         direct=r"\bcabg\b|coronary (artery )?bypass|open[- ]heart|valve (replacement|repair)|cardiac surg|cardiothoracic surg",
         equip=None, corrob_equip=r"cath\s*lab|catheteri[sz]ation lab|\bcticu\b|\bcicu\b|heart[- ]lung",
         excl=r"gastric|bariatric|obesity|weight loss|roux",
-        codes={"cardiacSurgery", "cardiothoracicSurgery"}, name_type="cardiac",
+        codes={"cardiothoracicSurgery"}, name_type="cardiac",
         implied=["ot", "anaesthesia", "icu_or_ccu"], checked=["blood_bank"]),
 }
 FIELD_W = {"procedure": 1.0, "equipment": 1.0, "capability": 0.9, "description": 0.6}

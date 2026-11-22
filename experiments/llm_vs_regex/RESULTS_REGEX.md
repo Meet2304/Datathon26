@@ -2,6 +2,8 @@
 
 **Status (2026-11-21):** regex and LLM arms compared. **Human grades not done yet**, so NDCG@5 and τ vs human and the README decision rule can't be applied.
 
+> **Note:** this pilot ran on the **bronze** table with the v3 rules. `run_regex.py` and `regex_extract.py` now read `silver_facilities` (docs v4: M8 flags, silver specialty codes), so re-running them reproduces the method, not these exact numbers.
+
 ## Method
 - **Same input:** `facilities_15.json` (identical to the file on Meet's branch).
 - **Same scorer:** both arms scored with Meet's `score_features.py` (from `origin/experiment/llm-vs-regex`). Re-scoring LLM run 1 here reproduces Meet's committed `ranking_llm_run1.csv` exactly.

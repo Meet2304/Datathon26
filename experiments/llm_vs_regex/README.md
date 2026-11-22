@@ -10,6 +10,10 @@
 |---|---|
 | `facilities_15.json` | **The only input for both methods.** Full record text for the 15 facilities (description, specialties, procedure, equipment, capability, size fields, contact) plus distance to each query |
 | `facilities_15.csv` | Quick-look table: ids, names, coordinates, distances, doctors, beds |
+| `regex_extract.py`, `run_regex.py` | Regex arm. See [RESULTS_REGEX.md](RESULTS_REGEX.md) for the file list and how to reproduce |
+| `features_regex.csv`, `evidence_regex.csv`, `ranking_regex.csv` | Regex arm scored with the shared `score_features.py` (own-scorer versions in `regex_own_scorer/`) |
+
+> **Human rankers: don't open any `ranking_*` / `evidence_*` / `features_*` file until your rankings are saved.**
 
 ## The 3 queries
 

@@ -1,6 +1,6 @@
 # Evidence, Completeness & Ranking — Design
 
-> Status: **draft v3** (2026-11-21). Assumes clean input: **every value is either valid or missing (NULL / empty). No wrong data.** v3 adds extraction and ranking ideas from Meet's plan v4 that fit this assumption (clause negation, exclusions, context words, service vs equipment terms, dedup, truncation, Strong rules, radius schedule, evaluation design). 2026-11-21: prerequisites split into **implied** (met by a direct claim) and **checked** (must be in text), for all services. The Raipur pilot showed only 1 of 15 facilities passing the old C-section gate, because records saying "performs caesareans" rarely also mention an OT. Thresholds and weights marked *(tune)* are provisional.
+> Status: **draft v4** (2026-11-21). Reads the team's silver tables; specialty codes follow silver's standardised vocabulary. Assumes clean input: **every value is either valid or missing (NULL / empty). No wrong data.** v3 adds extraction and ranking ideas from Meet's plan v4 that fit this assumption (clause negation, exclusions, context words, service vs equipment terms, dedup, truncation, Strong rules, radius schedule, evaluation design). 2026-11-21: prerequisites split into **implied** (met by a direct claim) and **checked** (must be in text), for all services. The Raipur pilot showed only 1 of 15 facilities passing the old C-section gate, because records saying "performs caesareans" rarely also mention an OT. Thresholds and weights marked *(tune)* are provisional.
 > Related: [FEATURES.md](FEATURES.md) (Depth `D`, feature computation, SQL) · [DATA_DICTIONARY.md](DATA_DICTIONARY.md)
 
 ## 1. What this answers
@@ -20,7 +20,7 @@ Design principles:
 3. **Missing is not negative.** A missing field (or a list cut off at 50 items) is shown as "not reported" and lowers **confidence**. It never lowers the **rank**.
 4. **Simple over clever.** Additive rules a judge can check by hand beat an opaque model.
 
-> **Note on specialty tags:** a specialty tag on its own is weak evidence. Tags aren't wrong, but a tag says a department exists, not that a specific service is offered. Facilities average ~28 tags; 3,003 are tagged `cardiology`, but only 489 mention a cath lab.
+> **Note on specialty tags:** a specialty tag on its own is weak evidence. Tags aren't wrong, but a tag says a department exists, not that a specific service is offered. Facilities average ~28 tags; 3,024 are tagged `cardiology` in the silver table, but only ~490 mention a cath lab.
 
 **Services (9):** dialysis · emergency C-section · NICU · cardiac surgery · MRI · trauma · burn care (beta) · oncology · ENT. **Time-critical:** emergency C-section, NICU, trauma.
 
@@ -32,13 +32,13 @@ Design principles:
 
 | Component | Points | Rule |
 |---|---|---|
-| **Location precision** | 25 | exact lat/lon 25 · PIN centroid only 15 · city/state only 5 · none 0 |
-| **Contact** | 10 | `officialPhone` or `phone_numbers` present (needed for "call to confirm") |
-| **Doctors** | 10 | `numberDoctors` present |
-| **Beds** | 10 | `capacity` present, or a bed count stated in text |
-| **Clinical text** | 30 | 10 each for non-empty `procedure`, `equipment`, `capability` |
-| **Year established** | 5 | present |
-| **Freshness** | 10 | `recency_of_page_update` within 2 years 10 · older 5 · missing 0 |
+| **Location precision** | 25 | exact lat/lon 25 · PIN centroid only 15 (including coordinates the silver table flags as > 50 km from their PIN, FEATURES M8) · city/state only 5 · none 0 |
+| **Contact** | 10 | `clean_officialPhone` or `clean_phone_numbers` present (needed for "call to confirm") |
+| **Doctors** | 10 | `clean_number_doctors` present (and not flagged implausible, FEATURES M8) |
+| **Beds** | 10 | `clean_capacity` or `clean_capacity_from_text` present, or a bed count parsed from text |
+| **Clinical text** | 30 | 10 each for non-empty `clean_procedures`, `clean_equipment`, `clean_capabilities` |
+| **Year established** | 5 | `yearEstablished` present |
+| **Freshness** | 10 | `clean_recency_of_page_update` within 2 years 10 · older 5 · missing 0 |
 | **Total** | **100** | |
 
 ### 2.1 Bands
@@ -76,15 +76,15 @@ Each service has four term lists. **Direct** terms name the service. **Equipment
 
 | Service | Direct terms | Service-specific equipment | Specialty codes (exact) | Exclusion (same clause) | Strong also needs |
 |---|---|---|---|---|---|
-| **Dialysis** | `dialys`, `crrt` (after equipment phrases are removed, §3.2 step 4) | dialysis machines/units/stations/chairs/beds, haemodialysis machine, RO (water) plant, nephrologist | `nephrology`, `pediatricNephrology` | — | equipment **or** name type nephrology_dialysis |
-| **Emergency C-section** | `caesarean`, `cesarean`, `c-section`, `\blscs\b` | operating theatre, labour room, anaesthesia, NICU | `gynecologyAndObstetrics`, `obstetricsAndMaternityCare`, `maternalFetalMedicineOrPerinatology` | — | **emergency readiness in the same item** (`24x7`, `24/7`, `emergency`, `round the clock`). Otherwise label "C-section (emergency readiness not confirmed)", at most Moderate |
-| **NICU** | `\bnicu\b`, `neonatal intensive` (SNCU / Level II count as **supporting**, not direct) | ventilator, CPAP, warmer, incubator, phototherapy, **only with a neonatal context word in the same item** | `neonatologyPerinatalMedicine`, `pediatricCriticalCareMedicine` | — | neonatal equipment |
-| **Cardiac surgery** | `cabg`, `coronary (artery )?bypass`, `open[- ]heart`, `valve (replacement\|repair)`, `cardiac surg`, `cardiothoracic surg` | cath lab, CTICU/CICU, heart-lung machine | `cardiacSurgery`, `cardiothoracicSurgery` | `gastric`, `bariatric`, `obesity`, `weight loss`, `roux` (73 of 327 "bypass" facilities) | equipment, and beds not known to be < 30 |
-| **MRI** | `\bmri\b`, `magnetic resonance` | (none: MRI is the equipment) | `radiology`, `diagnosticRadiology` (supporting) | — | MRI term in `equipment`, or in the same item as `tesla` / `scanner` |
+| **Dialysis** | `dialys`, `crrt` (after equipment phrases are removed, §3.2 step 4) | dialysis machines/units/stations/chairs/beds, haemodialysis machine, RO (water) plant, nephrologist | `nephrology` | — | equipment **or** name type nephrology_dialysis |
+| **Emergency C-section** | `caesarean`, `cesarean`, `c-section`, `\blscs\b` | operating theatre, labour room, anaesthesia, NICU | `obstetrics`, `maternalFetalMedicine` (`gynecology` alone doesn't count) | — | **emergency readiness in the same item** (`24x7`, `24/7`, `emergency`, `round the clock`). Otherwise label "C-section (emergency readiness not confirmed)", at most Moderate |
+| **NICU** | `\bnicu\b`, `neonatal intensive` (SNCU / Level II count as **supporting**, not direct) | ventilator, CPAP, warmer, incubator, phototherapy, **only with a neonatal context word in the same item** | `neonatology`, `pediatricCriticalCare` | — | neonatal equipment |
+| **Cardiac surgery** | `cabg`, `coronary (artery )?bypass`, `open[- ]heart`, `valve (replacement\|repair)`, `cardiac surg`, `cardiothoracic surg` | cath lab, CTICU/CICU, heart-lung machine | `cardiothoracicSurgery` | `gastric`, `bariatric`, `obesity`, `weight loss`, `roux` (73 of 327 "bypass" facilities) | equipment, and beds not known to be < 30 |
+| **MRI** | `\bmri\b`, `magnetic resonance` | (none: MRI is the equipment) | `radiology` (supporting) | — | MRI term in `equipment`, or in the same item as `tesla` / `scanner` |
 | **Trauma** | `trauma (care\|centre\|center\|unit\|ward\|surgery)`, `polytrauma`, `accident (and\|&) emergency` | CT scan, ambulance | `emergencyMedicine` (supporting; "24/7 emergency" alone is supporting only) | `eye`, `ocular`, `orbit`, `dental`, `tooth`, `teeth`, `maxillofacial`, `facial` (222 facilities) | CT or ambulance |
-| **Burn care** *(beta)* | `burns? (unit\|ward\|centre\|center\|icu\|care)`, `burn injur` | burn ICU, burns dressing room | `burnAndTraumaPlasticSurgery` | — | burn-specific equipment |
-| **Oncology** | `chemotherap`, `radiotherap`, `oncolog`, `cancer (surgery\|treatment\|care)` | LINAC, PET-CT, brachytherapy | `medicalOncology`, `surgicalOncology`, `radiationOncology` | — | LINAC/PET **or** name type oncology |
-| **ENT** | `\bent\b`, `otolaryngolog`, `tonsillectomy`, `cochlear implant`, `sinus surgery` | audiometry, BERA, ENT endoscope | `otolaryngology`, `headAndNeckSurgeryOtolaryngology` | — | audiometry/endoscope |
+| **Burn care** *(beta)* | `burns? (unit\|ward\|centre\|center\|icu\|care)`, `burn injur` | burn ICU, burns dressing room | `burnCare` | — | burn-specific equipment |
+| **Oncology** | `chemotherap`, `radiotherap`, `oncolog`, `cancer (surgery\|treatment\|care)` | LINAC, PET-CT, brachytherapy | `medicalOncology`, `surgicalOncology`, `radiationOncology`, `oncology` | — | LINAC/PET **or** name type oncology |
+| **ENT** | `\bent\b`, `otolaryngolog`, `tonsillectomy`, `cochlear implant`, `sinus surgery` | audiometry, BERA, ENT endoscope | `otolaryngology` | — | audiometry/endoscope |
 
 **Prerequisites** (feed the 0–20 prerequisite points in §3.3) come in two kinds:
 - **Implied:** the service physically can't be delivered without it, on site. A positive direct claim counts as meeting it, and it's never shown as missing. (A record that says "performs caesareans" has an operating theatre and anaesthesia, whether or not it says so.)
@@ -358,4 +358,4 @@ ORDER BY service, rand(7);
 - Can claims be linked to a specific `source_url`? If not, URLs stay as facility references (§5).
 - Does NFHS need data feed into ranking, or only the planner view? (Current plan: planner view only.)
 - The ×1.4 road factor may be too low for hilly and north-east states.
-- Burn care rests mostly on one specialty code (131 facilities). Keep it marked beta until E1/E3 cover it.
+- Burn care rests mostly on one specialty code (`burnCare`, 148 facilities). Keep it marked beta until E1/E3 cover it.

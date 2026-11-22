@@ -1,6 +1,6 @@
 # Facility Features — Design
 
-> Status: **draft v3** (2026-11-21). Assumes clean input: every value is valid or missing, never wrong (§2). v3 adds clause-level negation, truncation (M7), neonatal context, equipment-only dialysis terms, name-based specialist type, and trauma / burn-care weights. Weights and thresholds marked *(tune)* are starting points to be tuned on the test-query set.
+> Status: **draft v4** (2026-11-21). **Input is now the team's silver tables** (`silver_facilities`, `silver_pincode_directory`). Assumes clean input: every value is valid or missing, never wrong (§2). v3 adds clause-level negation, truncation (M7), neonatal context, equipment-only dialysis terms, name-based specialist type, and trauma / burn-care weights. Weights and thresholds marked *(tune)* are starting points to be tuned on the test-query set.
 > Related: [SCORING.md](SCORING.md) (Evidence `E`, Completeness `C`, ranking formula, confidence) · [DATA_DICTIONARY.md](DATA_DICTIONARY.md)
 
 ## 0. Where this fits
@@ -57,6 +57,7 @@ From `bronze_facilities` (10,088 rows), profiled 2026-11-21. Keyword counts are 
 | **M4. Missing lowers confidence** | Feature coverage (§6) counts only known features, so missing data reduces confidence automatically. |
 | **M5. Location fallback** | If latitude/longitude are missing, use the PIN centroid and mark the location `approximate`. If both are missing, the location is `unknown` and the facility can't be ranked by distance. |
 | **M6. Negation is data, not error** | "Dialysis not available", "MRI (outsourced)", "cath lab under construction" are valid statements that the service isn't offered **here, now**. Detected per clause (§4.2). Excluded from positive features; E uses them for the "Not offered" label (SCORING §3.4). |
+| **M8. Silver flags that mean "don't trust this value"** | Two `silver_facilities` flags are treated as **missing**: `flag_coordinates_far_from_pincode` (coordinates > 50 km from the facility's own PIN; 1,492 facilities) → use the PIN centroid, location `approximate`; `flag_numberDoctors_implausible` (96) → doctors unknown. All other `flag_*` columns are ignored. (Team decision, 2026-11-21.) |
 | **M7. Truncated lists** | If any of a facility's `procedure` / `equipment` / `capability` lists has 50 items, it was cut off. A text feature that isn't found is then `truncated` (NULL → 0.5 in D), not `not_mentioned` (0). |
 
 Values are trusted as given, so structured columns get **no** sanity bounds. Bounds remain only on numbers parsed out of free text (§4.3 `qty_min`/`qty_max`), because a regex can grab the wrong number from a correct sentence.
@@ -75,13 +76,13 @@ Every feature is normalised to **0–1**, or **NULL = unknown**.
 |---|---|---|---|
 | G1 | `facility_type` | structured | hospital 1.0 · nursing_home 0.7 · clinic 0.4 · doctor 0.2 · dentist/pharmacy → only eligible for dental services · other → NULL |
 | G2 | `doctors` | structured | `least(1, ln(1+n)/ln(101))` |
-| G3 | `beds` | structured + text | `coalesce(capacity, parsed total beds)`; `least(1, ln(1+b)/ln(1001))`. Parsed beds must fall in 5–5,000 |
+| G3 | `beds` | structured + text | `coalesce(clean_capacity, clean_capacity_from_text, parsed total beds)`; `least(1, ln(1+b)/ln(1001))`. Parsed beds must fall in 5–5,000 |
 | G4 | `icu` | presence + qty | ICU / intensive care; qty = ICU beds (1–200), ref 20 |
 | G5 | `emergency_24x7` | presence | 24x7 / round the clock / emergency dept / casualty, or tag `emergencyMedicine` |
 | G6 | `ambulance` | presence | ambulance |
 | G7 | `ot` | presence + qty | operation theatre / modular OT; qty = OT count (1–60), ref 10 |
 | G8 | `blood_bank` | presence | blood bank / blood storage / blood centre |
-| G9 | `anaesthesia` | presence | anaesthesia, or tags `anesthesia` / `anesthesiology` |
+| G9 | `anaesthesia` | presence | anaesthesia, or tag `anesthesiology` |
 | G10 | `accreditation` | presence | JCI 1.0 · NABH 0.8 (take the max) |
 | G11 | `lab_accreditation` | presence | NABL |
 | G12 | `teaching` | structured + text | `affiliationTypeIds` has `academic`, or the name or text matches medical college / institute of medical sciences / AIIMS |
@@ -156,68 +157,70 @@ Ranking weights (wE / wD / wA, d_half, radius) for all nine services are in SCOR
 
 Tables flow `bronze → silver → gold`. All live in `workspace.hackathon`.
 
-### 4.1 `silver_facility_clean`: normalise empties, parse types *(offline)*
+### 4.1 `silver_facility_clean`: a thin view over the team's silver table *(offline)*
 
-The input is clean (§2), so this step only turns empties into NULL (M1) and parses types. If your cleaned table already stores arrays and numbers, drop the `from_json` / `try_cast` calls.
+The team's `workspace.hackathon.silver_facilities` (10,077 rows, one per `unique_id`) already parses lists, removes placeholder items, de-duplicates and standardises values. This step only renames columns, turns empty arrays into NULL (M1), applies M8, and adds `has_text`, `truncated` and `name_type`.
 
 ```sql
 CREATE OR REPLACE TABLE workspace.hackathon.silver_facility_clean AS
-WITH b AS (
-  SELECT *,
-    -- M1: empty array / empty string → NULL
-    nullif(filter(from_json(procedure,  'array<string>'), x -> trim(x) <> ''), array()) AS procedure_arr,
-    nullif(filter(from_json(equipment,  'array<string>'), x -> trim(x) <> ''), array()) AS equipment_arr,
-    nullif(filter(from_json(capability, 'array<string>'), x -> trim(x) <> ''), array()) AS capability_arr,
-    nullif(filter(from_json(specialties,'array<string>'), x -> trim(x) <> ''), array()) AS specialties_arr,
-    nullif(trim(description), '')                                                       AS description_ok,
-    -- M7: was any list cut off at 50 items?
-    greatest(coalesce(size(from_json(procedure, 'array<string>')), 0),
-             coalesce(size(from_json(equipment, 'array<string>')), 0),
-             coalesce(size(from_json(capability,'array<string>')), 0)) >= 50              AS truncated
-  FROM workspace.hackathon.bronze_facilities)
 SELECT
-  unique_id, name,
-  nullif(trim(facilityTypeId), '')                         AS facility_type,
-  nullif(trim(operatorTypeId), '')                         AS operator_type,
-  from_json(affiliationTypeIds, 'array<string>')           AS affiliations,
-  try_cast(numberDoctors   AS INT)                         AS n_doctors,
-  try_cast(capacity        AS INT)                         AS capacity,
+  unique_id,
+  clean_name                                               AS name,
+  nullif(clean_facility_type, '')                          AS facility_type,
+  nullif(clean_operator_type, '')                          AS operator_type,
+  clean_affiliations                                       AS affiliations,
+  -- M8: a flagged doctor count is unknown
+  CASE WHEN NOT coalesce(flag_numberDoctors_implausible, false) THEN clean_number_doctors END AS n_doctors,
+  clean_capacity                                           AS capacity,
+  clean_capacity_from_text                                 AS capacity_text,
   try_cast(yearEstablished AS INT)                         AS year_established,
-  specialties_arr, procedure_arr, equipment_arr, capability_arr, description_ok,
+  -- M1: empty array → NULL
+  CASE WHEN size(clean_specialties)  > 0 THEN clean_specialties  END AS specialties_arr,
+  CASE WHEN size(clean_procedures)   > 0 THEN clean_procedures   END AS procedure_arr,
+  CASE WHEN size(clean_equipment)    > 0 THEN clean_equipment    END AS equipment_arr,
+  CASE WHEN size(clean_capabilities) > 0 THEN clean_capabilities END AS capability_arr,
+  nullif(trim(clean_description), '')                      AS description_ok,
   -- M3: does the facility have any text at all?
-  coalesce(procedure_arr, equipment_arr, capability_arr) IS NOT NULL
-    OR description_ok IS NOT NULL                          AS has_text,
-  truncated,
+  coalesce(size(clean_procedures), 0) > 0 OR coalesce(size(clean_equipment), 0) > 0
+    OR coalesce(size(clean_capabilities), 0) > 0 OR nullif(trim(clean_description), '') IS NOT NULL AS has_text,
+  -- M7: was any list cut off at 50 items?
+  coalesce(flag_procedure_truncated_50, false) OR coalesce(flag_equipment_truncated_50, false)
+    OR coalesce(flag_capability_truncated_50, false)       AS truncated,
   -- G15: specialist type from name (positive use only)
-  CASE WHEN lower(name) rlike 'kidney|dialysis|nephro|renal'                    THEN 'nephrology_dialysis'
-       WHEN lower(name) rlike 'maternity|prasuti|mother|women.?s hospital|birthing' THEN 'maternity'
-       WHEN lower(name) rlike 'cancer|onco'                                      THEN 'oncology'
-       WHEN lower(name) rlike 'heart|cardiac|cardio'                             THEN 'cardiac'
-       WHEN lower(name) rlike 'trauma|accident'                                  THEN 'trauma'
-       WHEN lower(name) rlike 'eye|netra|nethra|nayan|ophthal|vision'            THEN 'eye'
-       WHEN lower(name) rlike 'dental|dentist|teeth|smile|orthodont'             THEN 'dental'
-       WHEN lower(name) rlike 'diagnostic|imaging|scan|patholog|\\blab'         THEN 'diagnostic'
+  CASE WHEN lower(clean_name) rlike 'kidney|dialysis|nephro|renal'                    THEN 'nephrology_dialysis'
+       WHEN lower(clean_name) rlike 'maternity|prasuti|mother|women.?s hospital|birthing' THEN 'maternity'
+       WHEN lower(clean_name) rlike 'cancer|onco'                                      THEN 'oncology'
+       WHEN lower(clean_name) rlike 'heart|cardiac|cardio'                             THEN 'cardiac'
+       WHEN lower(clean_name) rlike 'trauma|accident'                                  THEN 'trauma'
+       WHEN lower(clean_name) rlike 'eye|netra|nethra|nayan|ophthal|vision'            THEN 'eye'
+       WHEN lower(clean_name) rlike 'dental|dentist|teeth|smile|orthodont'             THEN 'dental'
+       WHEN lower(clean_name) rlike 'diagnostic|imaging|scan|patholog|\\blab'         THEN 'diagnostic'
   END                                                      AS name_type,
-  try_cast(regexp_extract(address_zipOrPostcode, '(\\d{6})', 1) AS BIGINT) AS pincode,
-  latitude  AS lat_raw,
-  longitude AS lon_raw,
-  phone_numbers, officialPhone AS official_phone,
-  from_json(source_urls, 'array<string>')                  AS source_urls
-FROM b;
+  try_cast(clean_pincode AS BIGINT)                        AS pincode,
+  -- M8: coordinates > 50 km from the facility's own PIN are treated as missing
+  CASE WHEN NOT coalesce(flag_coordinates_far_from_pincode, false) THEN clean_latitude  END AS lat_raw,
+  CASE WHEN NOT coalesce(flag_coordinates_far_from_pincode, false) THEN clean_longitude END AS lon_raw,
+  clean_phone_numbers                                      AS phone_numbers,
+  clean_officialPhone                                      AS official_phone,
+  clean_recency_of_page_update                             AS last_updated,
+  clean_district                                           AS district,
+  clean_state                                              AS state
+FROM workspace.hackathon.silver_facilities;
 ```
 
-Then resolve the facility location once (M5). This assumes `silver_pincode_geo(pincode, lat, lon, district, state)` (PIN directory aggregated to one row per PIN, median lat/lon):
+Then resolve the facility location once (M5, M8), using the team's `silver_pincode_directory` (one row per PIN where `is_primary_state`):
 
 ```sql
 CREATE OR REPLACE TABLE workspace.hackathon.silver_facility_location AS
 SELECT f.unique_id,
-  coalesce(f.lat_raw, p.lat)                                                         AS lat,
-  CASE WHEN f.lat_raw IS NOT NULL THEN f.lon_raw ELSE p.lon END                      AS lon,
+  coalesce(f.lat_raw, p.latitude)                                                    AS lat,
+  CASE WHEN f.lat_raw IS NOT NULL THEN f.lon_raw ELSE p.longitude END                AS lon,
   CASE WHEN f.lat_raw IS NOT NULL AND f.lon_raw IS NOT NULL THEN 'exact'
-       WHEN p.lat IS NOT NULL THEN 'approximate'      -- PIN centroid
+       WHEN p.latitude IS NOT NULL THEN 'approximate'      -- PIN centroid
        ELSE 'unknown' END                                                            AS location_quality
 FROM workspace.hackathon.silver_facility_clean f
-LEFT JOIN workspace.hackathon.silver_pincode_geo p ON f.pincode = p.pincode;
+LEFT JOIN workspace.hackathon.silver_pincode_directory p
+  ON p.pincode = f.pincode AND p.is_primary_state;
 ```
 
 ### 4.2 `silver_claims`: one row per clause *(offline)*
@@ -300,12 +303,12 @@ SELECT * FROM VALUES
  ('neonatal_support', 'neonat|newborn|infant|nicu|sncu|baby|paediatric|pediatric')
 AS t(feature, ctx_rx);
 
--- Specialty tags that also count as weak (0.3) presence
+-- Specialty tags that also count as weak (0.3) presence (silver's standardised codes)
 CREATE OR REPLACE TABLE workspace.hackathon.ref_feature_specialty AS
 SELECT * FROM VALUES
- ('emergency_24x7','emergencyMedicine'), ('anaesthesia','anesthesia'), ('anaesthesia','anesthesiology'),
- ('icu','criticalCareMedicine'), ('nicu','neonatologyPerinatalMedicine'), ('radiotherapy','radiationOncology'),
- ('chemotherapy','medicalOncology'), ('pet','nuclearMedicineAndMolecularImaging')
+ ('emergency_24x7','emergencyMedicine'), ('anaesthesia','anesthesiology'),
+ ('icu','criticalCareMedicine'), ('nicu','neonatology'), ('radiotherapy','radiationOncology'),
+ ('chemotherapy','medicalOncology'), ('pet','nuclearMedicine'), ('audiometry','audiology')
 AS t(feature, specialty);
 ```
 
@@ -403,10 +406,10 @@ structured AS (
       'qty', CAST(w.n_doctors AS DOUBLE)),
     -- G3
     named_struct('feature','beds',
-      'value', CASE WHEN coalesce(w.capacity, b.beds_parsed) IS NOT NULL
-                    THEN least(1, ln(1 + coalesce(w.capacity, b.beds_parsed)) / ln(1001)) END,
-      'status', CASE WHEN coalesce(w.capacity, b.beds_parsed) IS NOT NULL THEN 'found' ELSE 'unknown' END,
-      'qty', CAST(coalesce(w.capacity, b.beds_parsed) AS DOUBLE)),
+      'value', CASE WHEN coalesce(w.capacity, w.capacity_text, b.beds_parsed) IS NOT NULL
+                    THEN least(1, ln(1 + coalesce(w.capacity, w.capacity_text, b.beds_parsed)) / ln(1001)) END,
+      'status', CASE WHEN coalesce(w.capacity, w.capacity_text, b.beds_parsed) IS NOT NULL THEN 'found' ELSE 'unknown' END,
+      'qty', CAST(coalesce(w.capacity, w.capacity_text, b.beds_parsed) AS DOUBLE)),
     -- G10
     named_struct('feature','accreditation',
       'value', CASE WHEN w.has_jci = 1 THEN 1.0 WHEN w.has_nabh = 1 THEN 0.8
@@ -532,7 +535,8 @@ RETURNS TABLE (unique_id STRING, rank INT, rank_score DOUBLE, distance_km DOUBLE
                E DOUBLE, D DOUBLE, A DOUBLE, confidence STRING, passes_gate BOOLEAN,
                location_quality STRING, top_contributors STRING, missing_fields STRING)
 RETURN
-WITH q AS (SELECT lat, lon FROM workspace.hackathon.silver_pincode_geo WHERE pincode = p_pincode),
+WITH q AS (SELECT latitude AS lat, longitude AS lon FROM workspace.hackathon.silver_pincode_directory
+           WHERE pincode = p_pincode AND is_primary_state),
      p AS (SELECT * FROM workspace.hackathon.ref_service_profile WHERE service = p_service),
      c AS (
   SELECT s.*, p.wE, p.wD, p.wA,
@@ -567,8 +571,8 @@ Gate-passing facilities rank first. Facilities that fail the gate follow as "par
 
 | Step | When | Re-run when… | Output |
 |---|---|---|---|
-| Normalise empties + parse types (4.1) | **Offline, once** | input data changes | `silver_facility_clean`, `silver_facility_location` |
-| PIN geo table | **Offline, once** | never (static directory) | `silver_pincode_geo` |
+| Thin view over the team's silver table (4.1) | **Offline, once** | silver data changes | `silver_facility_clean`, `silver_facility_location` |
+| PIN geo table (team-built) | **Offline, once** | never (static directory) | `silver_pincode_directory` |
 | Explode claims, flag negation (4.2) | **Offline, once** | data changes | `silver_claims` |
 | Keyword / specialty dictionaries (4.3) | **Offline config** | P2 edits terms | `ref_feature_terms`, `ref_feature_specialty` |
 | Feature hits + feature values (4.4–4.5) | **Offline, once** | data or dictionary changes | `silver_feature_hits`, `gold_facility_features` |
@@ -639,12 +643,21 @@ Coverage fell from v2 (0.70–0.99) because 21% of facilities have a truncated l
 - Spark's `least(1, NULL)` returns `1` (it skips NULLs), so missing doctors/beds/years scored as maximum. Fixed with `CASE WHEN x IS NOT NULL` guards in §4.5.
 - `LATERAL VIEW … JOIN` is not valid Spark SQL. The specialty-tag hits use a subquery instead.
 
+### 7.1 v4 run on the silver tables (2026-11-21)
+
+§4.1–4.6 run end-to-end on `silver_facilities` (10,077 facilities, read-only test).
+
+- **Location (M5, M8):** exact 8,460 · approximate (PIN centroid) 1,527 · unknown 90.
+- **Doctors:** found 3,516 (96 flagged values now unknown, M8). **Beds:** found 2,690 (adds `clean_capacity_from_text`).
+- **NICU** found 1,514 (was 712): silver's standardised `neonatology` tag (1,303 facilities) now maps to the weak (0.3) tag hit. Text-only NICU evidence is unchanged.
+- **Audiometry** found 304 (adds the `audiology` tag).
+- Depth D medians: burn 7.5 · cardiac 5.0 · dialysis 30.0 · C-section 17.0 · ENT 22.5 · MRI 16.0 · NICU 19.5 · oncology 5.0 · trauma 18.5. Coverage 0.61–0.85, as in v3.
+
 ## 8. Open questions
 
 - Is the 50-item cap the only truncation, or are text fields also cut? (M7 assumes lists only.)
 - Name-based specialist type (G15) is a regex on names; spot-check ~30 before relying on it for Strong.
 
-- Does the cleaned input store arrays/numbers natively, or still as JSON strings? (§4.1 assumes strings.)
 - `beds` parsing takes the max "N beds" sentence. Check on ~20 records that this picks the hospital total and not one ward.
 - Word-number quantities ("Twenty-bed NICU") are missed. Is it worth a small word→number map?
 - The `\bct\b` and `\bot\b` patterns overmatch. Review a sample of hits before freezing the dictionary.
