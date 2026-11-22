@@ -1,0 +1,23 @@
+# Install once with `make setup` (or `uv run pre-commit install`).
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: ["--maxkb=10000"]
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: uv run ruff check --force-exclude
+        language: system
+        types_or: [python, jupyter]
+      - id: notebook-clean
+        name: notebook has no outputs and still parses
+        entry: uv run pytest -q tests/test_notebook.py
+        language: system
+        files: ^notebooks/
+        pass_filenames: false

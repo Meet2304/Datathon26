@@ -1,3 +1,32 @@
+# OS / editors
 .DS_Store
+.idea/
+.vscode/
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Local Spark runs (scripts/run_local_pipeline.py)
+.local_spark/
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Secrets: never commit tokens. Copy .env.example to .env instead.
+.env
+*.token
+token*.txt
+
+# Node (app/frontend, video)
+node_modules/
+
+# Rendered video output (large; attach to a GitHub release instead)
+video/out/
+*.mp4

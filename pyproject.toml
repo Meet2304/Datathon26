@@ -1,0 +1,77 @@
+[project]
+name = "find-the-right-care"
+version = "5.0.0"
+description = "Find the Right Care: evidence-cited facility recommendations for India (CMU Datathon Fall 2026, Databricks)"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+# Runtime needs of the notebook's query layer and the shared helpers. Spark, the app and dev tools are dependency groups.
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.0",
+    "pyarrow>=14",
+]
+
+[dependency-groups]
+# Local Spark run of the pipeline notebook (scripts/run_local_pipeline.py). Also needs Java 17 on the machine.
+spark = [
+    "pyspark>=3.5,<5",
+]
+# The Databricks App (app/). app/requirements.txt mirrors this for the Databricks Apps runtime.
+app = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "databricks-sdk>=0.30",
+    "databricks-sql-connector>=3.4,<5",
+]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "pre-commit>=3.7",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ftrc"]
+
+# --------------------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 140
+target-version = "py311"
+extend-exclude = ["app/frontend", "app/static", "video", "**/node_modules"]
+
+[tool.ruff.lint]
+# Correctness-focused: pyflakes + pycodestyle errors. The research code is written densely on purpose, so the
+# style rules that fight it (one-line compound statements, lambdas, long SQL strings) are switched off.
+select = ["E", "F", "W", "I001"]
+ignore = [
+    "E401",  # several imports on one line
+    "E501",  # long lines (SQL and regex literals)
+    "E701",  # one-line `if x: y`
+    "E702",  # semicolons
+    "E731",  # lambda assignments
+    "E741",  # short names such as `l`
+    "I001",  # import order (kept as written)
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Databricks notebooks: `spark`, `dbutils`, `display` are injected by the runtime; cells run in order.
+"notebooks/*.ipynb" = ["F821", "E402", "F401", "F811", "E703"]
+"evaluation/eval_run.py" = ["F821", "E402"]
+"eval_bench/databricks_runner.py" = ["F821"]
+# Scripts set up sys.path / env before importing.
+"scripts/*.py" = ["E402"]
+"evaluation/deploy_eval.py" = ["E402"]
+
+# --------------------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "spark: runs the pipeline notebook on local Spark (needs Java 17 and `uv sync --group spark`; slow)",
+]
