@@ -1,0 +1,526 @@
+unique_id,feature,value,status,quote,field
+e43a21d0-8c78-436d-9656-39418b1fbf16,G1_facility_type,1.0,found,,facilityTypeId
+e43a21d0-8c78-436d-9656-39418b1fbf16,G2_doctors,,unknown,,numberDoctors
+e43a21d0-8c78-436d-9656-39418b1fbf16,G3_beds,0.3471,found,,capacity
+e43a21d0-8c78-436d-9656-39418b1fbf16,G4_icu,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,G5_emergency_24x7,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,G6_ambulance,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,G7_ot,0.6,found,Performs minimally invasive surgeries in operation theatres,procedure
+e43a21d0-8c78-436d-9656-39418b1fbf16,G8_blood_bank,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,G9_anaesthesia,0.3,found,anesthesiology,specialties
+e43a21d0-8c78-436d-9656-39418b1fbf16,G11_lab_accreditation,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,G10_accreditation,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,G12_teaching,1.0,found,,affiliationTypeIds
+e43a21d0-8c78-436d-9656-39418b1fbf16,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+e43a21d0-8c78-436d-9656-39418b1fbf16,G14_years_operating,0.5868,found,,yearEstablished
+e43a21d0-8c78-436d-9656-39418b1fbf16,S1_dialysis_unit,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S2_labour_room,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S3_nicu,0.18,found,neonatologyPerinatalMedicine,specialties
+e43a21d0-8c78-436d-9656-39418b1fbf16,S4_neonatal_support,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S5_cath_lab,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S6_ccu,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S7_mri,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S8_ct,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S9_pet,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,S10_radiotherapy,0.9,found,Has a Department of Radiation Oncology at All India Institute of Medical Sciences Raipur,capability
+e43a21d0-8c78-436d-9656-39418b1fbf16,S11_chemotherapy,0.3,found,medicalOncology,specialties
+e43a21d0-8c78-436d-9656-39418b1fbf16,S12_audiometry,,truncated,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_dialysis_direct_claim,0,not_mentioned,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_dialysis_negated,0,not_mentioned,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_dialysis_label,0.3,Possible,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_emergency_csection_direct_claim,0,not_mentioned,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_emergency_csection_negated,0,not_mentioned,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_emergency_csection_label,0.267,Possible,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_cardiac_surgery_negated,0,not_mentioned,,
+e43a21d0-8c78-436d-9656-39418b1fbf16,EV_cardiac_surgery_label,0.15,Possible,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G1_facility_type,1.0,found,,facilityTypeId
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G2_doctors,0.238,found,,numberDoctors
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G3_beds,0.5691,found,,capacity
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G4_icu,0.54,found,ICU available,capability
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G5_emergency_24x7,0.9,found,Offers 24/7 emergency care,capability
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G6_ambulance,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G7_ot,0.54,found,OT available,capability
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G8_blood_bank,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G9_anaesthesia,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G11_lab_accreditation,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G10_accreditation,0.8,found,NABH accredited,capability
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G12_teaching,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G13_diagnostic_breadth,0.1667,found,usg,derived
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,G14_years_operating,,unknown,,yearEstablished
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S1_dialysis_unit,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S2_labour_room,1.0,found,Delivery rooms designed to international safety standards,equipment
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S3_nicu,0.18,found,neonatologyPerinatalMedicine,specialties
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S4_neonatal_support,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S5_cath_lab,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S6_ccu,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S7_mri,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S8_ct,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S9_pet,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S10_radiotherapy,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S11_chemotherapy,0.3,found,medicalOncology,specialties
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,S12_audiometry,0.0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_dialysis_direct_claim,0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_dialysis_negated,0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_dialysis_label,0.3,Possible,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_emergency_csection_direct_claim,1,found,Performs Caesarean Section,procedure
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_emergency_csection_negated,0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_emergency_csection_label,0.733,Moderate,Performs Caesarean Section,procedure
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_cardiac_surgery_negated,0,not_mentioned,,
+6c08e1f3-1d59-42c0-bb0c-4617f95a8986,EV_cardiac_surgery_label,0.1,Possible,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G1_facility_type,1.0,found,,facilityTypeId
+8f5bea35-e441-441f-ae15-cca315bbee5b,G2_doctors,0.238,found,,numberDoctors
+8f5bea35-e441-441f-ae15-cca315bbee5b,G3_beds,0.4101,found,,capacity
+8f5bea35-e441-441f-ae15-cca315bbee5b,G4_icu,0.18,found,criticalCareMedicine,specialties
+8f5bea35-e441-441f-ae15-cca315bbee5b,G5_emergency_24x7,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G6_ambulance,1.0,found,24-hour ambulance service,equipment
+8f5bea35-e441-441f-ae15-cca315bbee5b,G7_ot,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G8_blood_bank,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G9_anaesthesia,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G11_lab_accreditation,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G10_accreditation,0.8,found,NABH accredited,capability
+8f5bea35-e441-441f-ae15-cca315bbee5b,G12_teaching,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+8f5bea35-e441-441f-ae15-cca315bbee5b,G14_years_operating,0.7576,found,,yearEstablished
+8f5bea35-e441-441f-ae15-cca315bbee5b,S1_dialysis_unit,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S2_labour_room,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S3_nicu,0.18,found,neonatologyPerinatalMedicine,specialties
+8f5bea35-e441-441f-ae15-cca315bbee5b,S4_neonatal_support,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S5_cath_lab,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S6_ccu,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S7_mri,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S8_ct,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S9_pet,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S10_radiotherapy,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S11_chemotherapy,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,S12_audiometry,0.0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_dialysis_direct_claim,0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_dialysis_negated,0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_dialysis_label,0.0,None,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_emergency_csection_direct_claim,0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_emergency_csection_negated,0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_emergency_csection_label,0.0,None,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_cardiac_surgery_negated,0,not_mentioned,,
+8f5bea35-e441-441f-ae15-cca315bbee5b,EV_cardiac_surgery_label,0.05,Possible,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G1_facility_type,1.0,found,,facilityTypeId
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G2_doctors,,unknown,,numberDoctors
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G3_beds,0.778,found,,capacity
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G4_icu,1.0,found,Total bed capacity of 400+ beds including 125 ICU beds and 200 recovery beds.,equipment
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G5_emergency_24x7,0.3,found,emergencyMedicine,specialties
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G6_ambulance,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G7_ot,0.6,found,Integrated operating theatre designed by Carl Storz (Germany),equipment
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G8_blood_bank,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G9_anaesthesia,0.3,found,anesthesia,specialties
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G11_lab_accreditation,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G10_accreditation,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G12_teaching,0.0,not_mentioned,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G13_diagnostic_breadth,0.6667,found,"xray, usg, ct, mri",derived
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,G14_years_operating,0.737,found,,yearEstablished
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S1_dialysis_unit,1.0,found,Dialysis treatment is provided using 25 dialysis machines.,procedure
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S2_labour_room,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S3_nicu,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S4_neonatal_support,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S5_cath_lab,1.0,found,Cath Lab (Catheterization Laboratory),equipment
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S6_ccu,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S7_mri,0.8,found,MRI scanning is available,procedure
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S8_ct,1.0,found,Multi-Slice CT scanning,procedure
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S9_pet,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S10_radiotherapy,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S11_chemotherapy,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,S12_audiometry,,truncated,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_dialysis_direct_claim,1,found,Dialysis treatment is provided using 25 dialysis machines.,procedure
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_dialysis_negated,0,not_mentioned,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_dialysis_label,0.9,Strong,Dialysis treatment is provided using 25 dialysis machines.,procedure
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_emergency_csection_direct_claim,0,not_mentioned,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_emergency_csection_negated,0,not_mentioned,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_emergency_csection_label,0.367,Possible,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_cardiac_surgery_direct_claim,1,found,Performs cardiothoracic surgery,procedure
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_cardiac_surgery_negated,0,not_mentioned,,
+723a6e17-fdf9-4af8-ae80-b16ea3b98244,EV_cardiac_surgery_label,0.875,Strong,Performs cardiothoracic surgery,procedure
+509c6668-953b-4d13-b198-5659718b54e6,G1_facility_type,1.0,found,,facilityTypeId
+509c6668-953b-4d13-b198-5659718b54e6,G2_doctors,,unknown,,numberDoctors
+509c6668-953b-4d13-b198-5659718b54e6,G3_beds,0.5542,found,,capacity
+509c6668-953b-4d13-b198-5659718b54e6,G4_icu,0.54,found,ICU with 24x7 Intensivist,capability
+509c6668-953b-4d13-b198-5659718b54e6,G5_emergency_24x7,1.0,found,24x7 Pharmacy,equipment
+509c6668-953b-4d13-b198-5659718b54e6,G6_ambulance,1.0,found,Ambulance with Advanced Life Support (ALS),equipment
+509c6668-953b-4d13-b198-5659718b54e6,G7_ot,0.6,found,Modular Operation Theatre Complex,equipment
+509c6668-953b-4d13-b198-5659718b54e6,G8_blood_bank,1.0,found,Blood Storage Center,equipment
+509c6668-953b-4d13-b198-5659718b54e6,G9_anaesthesia,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,G11_lab_accreditation,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,G10_accreditation,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,G12_teaching,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+509c6668-953b-4d13-b198-5659718b54e6,G14_years_operating,0.5868,found,,yearEstablished
+509c6668-953b-4d13-b198-5659718b54e6,S1_dialysis_unit,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S2_labour_room,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S3_nicu,0.9,found,Has 90-bed NICU,capability
+509c6668-953b-4d13-b198-5659718b54e6,S4_neonatal_support,1.0,found,Neonatal incubators visible in the image,equipment
+509c6668-953b-4d13-b198-5659718b54e6,S5_cath_lab,1.0,found,Philips Azurion 5 M12 Cathlab,equipment
+509c6668-953b-4d13-b198-5659718b54e6,S6_ccu,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S7_mri,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S8_ct,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S9_pet,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S10_radiotherapy,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S11_chemotherapy,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,S12_audiometry,0.0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_dialysis_direct_claim,1,found,Dialysis facilities,equipment
+509c6668-953b-4d13-b198-5659718b54e6,EV_dialysis_negated,0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_dialysis_label,0.4,Weak,Dialysis facilities,equipment
+509c6668-953b-4d13-b198-5659718b54e6,EV_emergency_csection_direct_claim,0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_emergency_csection_negated,0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_emergency_csection_label,0.233,Possible,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_cardiac_surgery_negated,0,not_mentioned,,
+509c6668-953b-4d13-b198-5659718b54e6,EV_cardiac_surgery_label,0.25,Possible,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G1_facility_type,1.0,found,,facilityTypeId
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G2_doctors,0.238,found,,numberDoctors
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G3_beds,,unknown,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G4_icu,0.54,found,Maintains an intensive care unit,capability
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G5_emergency_24x7,0.9,found,Provides emergency services,capability
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G6_ambulance,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G7_ot,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G8_blood_bank,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G9_anaesthesia,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G11_lab_accreditation,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G10_accreditation,0.8,found,Non-NABH accreditation,capability
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G12_teaching,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G13_diagnostic_breadth,0.1667,found,xray,derived
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,G14_years_operating,0.7641,found,,yearEstablished
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S1_dialysis_unit,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S2_labour_room,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S3_nicu,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S4_neonatal_support,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S5_cath_lab,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S6_ccu,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S7_mri,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S8_ct,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S9_pet,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S10_radiotherapy,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S11_chemotherapy,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,S12_audiometry,0.0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_dialysis_direct_claim,0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_dialysis_negated,0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_dialysis_label,0.0,None,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_emergency_csection_direct_claim,1,found,Caesarean Delivery,procedure
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_emergency_csection_negated,0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_emergency_csection_label,0.733,Moderate,Caesarean Delivery,procedure
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_cardiac_surgery_negated,0,not_mentioned,,
+3933c2cf-fae4-439e-a72d-39d2c28ddf4e,EV_cardiac_surgery_label,0.05,Possible,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G1_facility_type,1.0,found,,facilityTypeId
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G2_doctors,1,found,,numberDoctors
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G3_beds,0.8251,found,,capacity
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G4_icu,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G5_emergency_24x7,0.3,found,emergencyMedicine,specialties
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G6_ambulance,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G7_ot,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G8_blood_bank,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G9_anaesthesia,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G11_lab_accreditation,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G10_accreditation,0.8,found,NABH accredited,capability
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G12_teaching,0.0,not_mentioned,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G13_diagnostic_breadth,0.5,found,"ct, mri, pet",derived
+c35dabaa-544a-4d93-9405-b5444ed0bab3,G14_years_operating,,unknown,,yearEstablished
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S1_dialysis_unit,0.54,found,Has the largest dialysis centre in Central India,capability
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S2_labour_room,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S3_nicu,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S4_neonatal_support,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S5_cath_lab,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S6_ccu,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S7_mri,0.6,found,MRI scanner,equipment
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S8_ct,0.6,found,Positron Emission Tomography – Computed Tomography (PET-CT) scanner,equipment
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S9_pet,1.0,found,Positron Emission Tomography – Computed Tomography (PET-CT) scanner,equipment
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S10_radiotherapy,1.0,found,"Utilizes SRS, SRT, SBRT, IMRT, IGRT, and brachytherapy",procedure
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S11_chemotherapy,0.3,found,medicalOncology,specialties
+c35dabaa-544a-4d93-9405-b5444ed0bab3,S12_audiometry,,truncated,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_dialysis_direct_claim,1,found,Has the largest dialysis centre in Central India,capability
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_dialysis_negated,0,not_mentioned,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_dialysis_label,0.76,Moderate,Has the largest dialysis centre in Central India,capability
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_emergency_csection_direct_claim,0,not_mentioned,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_emergency_csection_negated,0,not_mentioned,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_emergency_csection_label,0.2,Possible,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_cardiac_surgery_direct_claim,1,found,Heart valve replacement is performed,procedure
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_cardiac_surgery_negated,0,not_mentioned,,
+c35dabaa-544a-4d93-9405-b5444ed0bab3,EV_cardiac_surgery_label,0.775,Moderate,Heart valve replacement is performed,procedure
+f71b47e9-1504-40f9-9256-706f6173280b,G1_facility_type,1.0,found,,facilityTypeId
+f71b47e9-1504-40f9-9256-706f6173280b,G2_doctors,,unknown,,numberDoctors
+f71b47e9-1504-40f9-9256-706f6173280b,G3_beds,0.668,found,,capacity
+f71b47e9-1504-40f9-9256-706f6173280b,G4_icu,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G5_emergency_24x7,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G6_ambulance,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G7_ot,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G8_blood_bank,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G9_anaesthesia,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G11_lab_accreditation,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G10_accreditation,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G12_teaching,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+f71b47e9-1504-40f9-9256-706f6173280b,G14_years_operating,,unknown,,yearEstablished
+f71b47e9-1504-40f9-9256-706f6173280b,S1_dialysis_unit,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S2_labour_room,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S3_nicu,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S4_neonatal_support,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S5_cath_lab,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S6_ccu,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S7_mri,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S8_ct,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S9_pet,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S10_radiotherapy,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,S11_chemotherapy,0.3,found,medicalOncology,specialties
+f71b47e9-1504-40f9-9256-706f6173280b,S12_audiometry,0.0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_dialysis_direct_claim,0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_dialysis_negated,0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_dialysis_label,0.3,Possible,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_emergency_csection_direct_claim,0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_emergency_csection_negated,0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_emergency_csection_label,0.1,Possible,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_cardiac_surgery_negated,0,not_mentioned,,
+f71b47e9-1504-40f9-9256-706f6173280b,EV_cardiac_surgery_label,0.1,Possible,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G1_facility_type,1.0,found,,facilityTypeId
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G2_doctors,,unknown,,numberDoctors
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G3_beds,0.6942,found,,capacity
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G4_icu,0.18,found,criticalCareMedicine,specialties
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G5_emergency_24x7,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G6_ambulance,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G7_ot,0.6,found,Laparoscopic cancer surgeries are performed in modular operating theatres,procedure
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G8_blood_bank,0.9,found,Haematology and haemato-oncology department with blood bank facility,capability
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G9_anaesthesia,0.3,found,anesthesia,specialties
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G11_lab_accreditation,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G10_accreditation,0.8,found,NABH accreditation,capability
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G12_teaching,0.0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G13_diagnostic_breadth,0.3333,found,"ct, pet",derived
+269e3a30-c0d8-447c-8d74-fe6a2977a315,G14_years_operating,0.6597,found,,yearEstablished
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S1_dialysis_unit,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S2_labour_room,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S3_nicu,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S4_neonatal_support,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S5_cath_lab,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S6_ccu,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S7_mri,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S8_ct,0.6,found,Uses PET-CT imaging for cancer diagnosis and staging,procedure
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S9_pet,1.0,found,PET scan,procedure
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S10_radiotherapy,1.0,found,Provides radiotherapy,procedure
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S11_chemotherapy,1.0,found,Provides chemotherapy,procedure
+269e3a30-c0d8-447c-8d74-fe6a2977a315,S12_audiometry,,truncated,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_dialysis_direct_claim,0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_dialysis_negated,0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_dialysis_label,0.3,Possible,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_emergency_csection_direct_claim,0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_emergency_csection_negated,0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_emergency_csection_label,0.4,Possible,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_cardiac_surgery_negated,0,not_mentioned,,
+269e3a30-c0d8-447c-8d74-fe6a2977a315,EV_cardiac_surgery_label,0.3,Possible,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G1_facility_type,1.0,found,,facilityTypeId
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G2_doctors,,unknown,,numberDoctors
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G3_beds,,unknown,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G4_icu,0.54,found,Intensive Care Unit on-site,capability
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G5_emergency_24x7,0.9,found,Has emergency department,capability
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G6_ambulance,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G7_ot,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G8_blood_bank,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G9_anaesthesia,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G11_lab_accreditation,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G10_accreditation,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G12_teaching,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+8e0dbec3-fd46-42e1-b213-9204bf799f69,G14_years_operating,0.5718,found,,yearEstablished
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S1_dialysis_unit,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S2_labour_room,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S3_nicu,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S4_neonatal_support,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S5_cath_lab,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S6_ccu,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S7_mri,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S8_ct,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S9_pet,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S10_radiotherapy,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S11_chemotherapy,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,S12_audiometry,0.0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_dialysis_direct_claim,1,found,Dialysis,procedure
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_dialysis_negated,0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_dialysis_label,0.8,Moderate,Dialysis,procedure
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_emergency_csection_direct_claim,0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_emergency_csection_negated,0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_emergency_csection_label,0.1,Possible,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_cardiac_surgery_negated,0,not_mentioned,,
+8e0dbec3-fd46-42e1-b213-9204bf799f69,EV_cardiac_surgery_label,0.05,Possible,,
+0b02d119-a409-4554-9979-39817ed38e3e,G1_facility_type,1.0,found,,facilityTypeId
+0b02d119-a409-4554-9979-39817ed38e3e,G2_doctors,0.238,found,,numberDoctors
+0b02d119-a409-4554-9979-39817ed38e3e,G3_beds,0.7262,found,,capacity
+0b02d119-a409-4554-9979-39817ed38e3e,G4_icu,0.8942,found,Has 19 ICU beds,capability
+0b02d119-a409-4554-9979-39817ed38e3e,G5_emergency_24x7,0.3,found,emergencyMedicine,specialties
+0b02d119-a409-4554-9979-39817ed38e3e,G6_ambulance,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,G7_ot,0.6,found,Modern operation theatres,equipment
+0b02d119-a409-4554-9979-39817ed38e3e,G8_blood_bank,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,G9_anaesthesia,0.3,found,anesthesia,specialties
+0b02d119-a409-4554-9979-39817ed38e3e,G11_lab_accreditation,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,G10_accreditation,0.8,found,NABH accreditation,capability
+0b02d119-a409-4554-9979-39817ed38e3e,G12_teaching,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,G13_diagnostic_breadth,0.3333,found,"xray, ct",derived
+0b02d119-a409-4554-9979-39817ed38e3e,G14_years_operating,0.4761,found,,yearEstablished
+0b02d119-a409-4554-9979-39817ed38e3e,S1_dialysis_unit,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S2_labour_room,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S3_nicu,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S4_neonatal_support,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S5_cath_lab,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S6_ccu,0.9,found,Operates a Heart Institute for cardiac care,capability
+0b02d119-a409-4554-9979-39817ed38e3e,S7_mri,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S8_ct,0.6,found,CT Angiogram,procedure
+0b02d119-a409-4554-9979-39817ed38e3e,S9_pet,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S10_radiotherapy,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S11_chemotherapy,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,S12_audiometry,0.0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,EV_dialysis_direct_claim,0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,EV_dialysis_negated,0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,EV_dialysis_label,0.3,Possible,,
+0b02d119-a409-4554-9979-39817ed38e3e,EV_emergency_csection_direct_claim,1,found,Performs cesarean delivery,procedure
+0b02d119-a409-4554-9979-39817ed38e3e,EV_emergency_csection_negated,0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,EV_emergency_csection_label,0.733,Moderate,Performs cesarean delivery,procedure
+0b02d119-a409-4554-9979-39817ed38e3e,EV_cardiac_surgery_direct_claim,1,found,Cardiothoracic Surgery,procedure
+0b02d119-a409-4554-9979-39817ed38e3e,EV_cardiac_surgery_negated,0,not_mentioned,,
+0b02d119-a409-4554-9979-39817ed38e3e,EV_cardiac_surgery_label,0.75,Moderate,Cardiothoracic Surgery,procedure
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G1_facility_type,1.0,found,,facilityTypeId
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G2_doctors,,unknown,,numberDoctors
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G3_beds,0.7998,found,,capacity
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G4_icu,1.0,found,60-bed intensive care unit (ICU),equipment
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G5_emergency_24x7,0.9,found,24/7 emergency and trauma services with ambulance,capability
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G6_ambulance,0.9,found,24/7 emergency and trauma services with ambulance,capability
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G7_ot,0.9469,found,Operates 7 ultra-modern operation theatres,equipment
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G8_blood_bank,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G9_anaesthesia,0.3,found,anesthesia,specialties
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G11_lab_accreditation,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G10_accreditation,0.8,found,NABH accreditation,capability
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G12_teaching,0.0,not_mentioned,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G13_diagnostic_breadth,0.6667,found,"xray, usg, ct, mri",derived
+3d4c1b68-7402-427c-922c-adbf52bd7dab,G14_years_operating,,unknown,,yearEstablished
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S1_dialysis_unit,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S2_labour_room,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S3_nicu,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S4_neonatal_support,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S5_cath_lab,1.0,found,Cardiac catheterization with Cathlab and bypass surgery,procedure
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S6_ccu,1.0,found,Intensive Critical Care Unit (ICCU),equipment
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S7_mri,0.6,found,"Radiology imaging procedures including CT, MRI, ultrasound, and X-ray imaging",procedure
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S8_ct,0.6,found,"Radiology imaging procedures including CT, MRI, ultrasound, and X-ray imaging",procedure
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S9_pet,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S10_radiotherapy,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S11_chemotherapy,0.9,found,Oncology and chemotherapy program,capability
+3d4c1b68-7402-427c-922c-adbf52bd7dab,S12_audiometry,,truncated,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_dialysis_direct_claim,1,found,Dialysis,procedure
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_dialysis_negated,0,not_mentioned,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_dialysis_label,0.8,Moderate,Dialysis,procedure
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_emergency_csection_direct_claim,0,not_mentioned,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_emergency_csection_negated,0,not_mentioned,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_emergency_csection_label,0.367,Possible,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_cardiac_surgery_negated,0,not_mentioned,,
+3d4c1b68-7402-427c-922c-adbf52bd7dab,EV_cardiac_surgery_label,0.375,Possible,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G1_facility_type,0.4,found,,facilityTypeId
+f73efb65-a436-45a4-b6b3-8409e412525d,G2_doctors,0.3004,found,,numberDoctors
+f73efb65-a436-45a4-b6b3-8409e412525d,G3_beds,,unknown,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G4_icu,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G5_emergency_24x7,0.9,found,24x7 nursing,capability
+f73efb65-a436-45a4-b6b3-8409e412525d,G6_ambulance,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G7_ot,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G8_blood_bank,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G9_anaesthesia,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G11_lab_accreditation,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G10_accreditation,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G12_teaching,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,G13_diagnostic_breadth,0.1667,found,usg,derived
+f73efb65-a436-45a4-b6b3-8409e412525d,G14_years_operating,0.8477,found,,yearEstablished
+f73efb65-a436-45a4-b6b3-8409e412525d,S1_dialysis_unit,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S2_labour_room,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S3_nicu,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S4_neonatal_support,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S5_cath_lab,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S6_ccu,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S7_mri,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S8_ct,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S9_pet,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S10_radiotherapy,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S11_chemotherapy,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,S12_audiometry,0.0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_dialysis_direct_claim,0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_dialysis_negated,0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_dialysis_label,0.0,None,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_emergency_csection_direct_claim,1,found,Caesarean Section (C Section),procedure
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_emergency_csection_negated,0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_emergency_csection_label,0.633,Moderate,Caesarean Section (C Section),procedure
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_cardiac_surgery_negated,0,not_mentioned,,
+f73efb65-a436-45a4-b6b3-8409e412525d,EV_cardiac_surgery_label,0.0,None,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G1_facility_type,1.0,found,,facilityTypeId
+702a22a9-0c4c-49b4-afbe-e54b42750283,G2_doctors,0.3882,found,,numberDoctors
+702a22a9-0c4c-49b4-afbe-e54b42750283,G3_beds,0.5691,found,,capacity
+702a22a9-0c4c-49b4-afbe-e54b42750283,G4_icu,0.18,found,criticalCareMedicine,specialties
+702a22a9-0c4c-49b4-afbe-e54b42750283,G5_emergency_24x7,0.3,found,emergencyMedicine,specialties
+702a22a9-0c4c-49b4-afbe-e54b42750283,G6_ambulance,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G7_ot,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G8_blood_bank,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G9_anaesthesia,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G11_lab_accreditation,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G10_accreditation,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G12_teaching,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+702a22a9-0c4c-49b4-afbe-e54b42750283,G14_years_operating,,unknown,,yearEstablished
+702a22a9-0c4c-49b4-afbe-e54b42750283,S1_dialysis_unit,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S2_labour_room,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S3_nicu,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S4_neonatal_support,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S5_cath_lab,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S6_ccu,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S7_mri,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S8_ct,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S9_pet,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S10_radiotherapy,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S11_chemotherapy,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,S12_audiometry,0.0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_dialysis_direct_claim,0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_dialysis_negated,0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_dialysis_label,0.3,Possible,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_emergency_csection_direct_claim,0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_emergency_csection_negated,0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_emergency_csection_label,0.1,Possible,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_cardiac_surgery_negated,0,not_mentioned,,
+702a22a9-0c4c-49b4-afbe-e54b42750283,EV_cardiac_surgery_label,0.05,Possible,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G1_facility_type,1.0,found,,facilityTypeId
+78bed667-b16e-43c1-8d82-c82891f23aa8,G2_doctors,0.1502,found,,numberDoctors
+78bed667-b16e-43c1-8d82-c82891f23aa8,G3_beds,0.5691,found,,capacity
+78bed667-b16e-43c1-8d82-c82891f23aa8,G4_icu,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G5_emergency_24x7,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G6_ambulance,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G7_ot,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G8_blood_bank,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G9_anaesthesia,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G11_lab_accreditation,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G10_accreditation,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G12_teaching,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,G13_diagnostic_breadth,0.0,not_mentioned,,derived
+78bed667-b16e-43c1-8d82-c82891f23aa8,G14_years_operating,0.7938,found,,yearEstablished
+78bed667-b16e-43c1-8d82-c82891f23aa8,S1_dialysis_unit,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S2_labour_room,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S3_nicu,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S4_neonatal_support,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S5_cath_lab,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S6_ccu,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S7_mri,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S8_ct,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S9_pet,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S10_radiotherapy,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S11_chemotherapy,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,S12_audiometry,0.0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_dialysis_direct_claim,1,found,"Established in 1988, it specializes in nephrology and offers 24-hour dialysis services with 10 units and intensive renal care facilities.",description
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_dialysis_negated,0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_dialysis_label,0.688,Moderate,"Established in 1988, it specializes in nephrology and offers 24-hour dialysis services with 10 units and intensive renal care facilities.",description
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_emergency_csection_direct_claim,0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_emergency_csection_negated,0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_emergency_csection_label,0.0,None,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_cardiac_surgery_direct_claim,0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_cardiac_surgery_negated,0,not_mentioned,,
+78bed667-b16e-43c1-8d82-c82891f23aa8,EV_cardiac_surgery_label,0.0,None,,
