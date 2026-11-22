@@ -1,6 +1,6 @@
 # Find the Right Care: Deterministic Methodology
 
-> Status: **2026-11-21**. Summarises the current method. Full detail, SQL and weights: [FEATURES.md](FEATURES.md) (features, Depth, SQL) · [SCORING.md](SCORING.md) (evidence, completeness, ranking, evaluation) · [DATA_DICTIONARY.md](DATA_DICTIONARY.md) (tables).
+> Status: **2026-11-21, v5.** Summarises the current method. **[PLAN_V5.md](PLAN_V5.md) overrides FEATURES/SCORING where they differ** (pilot fixes X1–X7, scoring fixes R1–R6, output contract, regression fixtures). Full detail, SQL and weights: [FEATURES.md](FEATURES.md) (features, Depth, SQL) · [SCORING.md](SCORING.md) (evidence, completeness, ranking, evaluation) · [DATA_DICTIONARY.md](DATA_DICTIONARY.md) (tables).
 
 ## 1. The problem
 
@@ -14,7 +14,7 @@ The system returns the best nearby facilities. For each one it answers **why thi
 
 | Choice | Why |
 |---|---|
-| **Deterministic (regex + rules), not LLM extraction** | A 15-facility pilot found the two agree on 98.5% of values. The regex's few errors have cheap fixes. Regex is reproducible, cites text verbatim by construction, and runs in seconds instead of ~60–70 hours (§8) |
+| **Deterministic (regex + rules), not LLM extraction** | In a 15-facility pilot the two agreed on 516/525 values, but only 92–94% of the values that needed reading text. Three independent reviews found the LLM slightly better, with no clear regex win, and every LLM win has a cheap regex fix (applied in v5, PLAN_V5 §1). An optional LLM second reader handles borderline cells (PLAN_V5 §3). Regex is reproducible, cites text verbatim by construction, and runs in seconds instead of ~60–70 hours (§8) |
 | **Input is clean: every value is valid or missing** | Team decision. The pipeline handles **missing** data, not wrong data. Two silver flags are treated as missing (M8) |
 | **Missing ≠ negative** | A missing field lowers **confidence**, never **rank**, so small, thinly documented rural facilities aren't pushed down |
 | **Every claim is a quote** | Nothing is shown as fact unless it's verbatim text from the facility's own record |
@@ -221,13 +221,13 @@ Confidence is shown as a word, never a percentage. URLs are listed as references
 
 | | Result |
 |---|---|
-| Feature and evidence values that agree | **517 / 525 (98.5%)** |
+| Feature and evidence values that agree | **516 / 525** (92–94% on values that needed reading the text) |
 | Evidence labels that agree | 44 / 45 |
 | Made-up quotes | 0 (regex) · 0 (LLM) |
 | Same top 3 | dialysis 2/3 · C-section 3/3 · cardiac 2/3 |
-| Disagreements | LLM right 6 · debatable 2 · regex right 0 |
+| Disagreements | LLM right 5–6 · debatable 2–3 · regex clearly right 0 (3 independent reviews) |
 
-The regex's misses and false hits (e.g. "cardiac bypass surgery", "Non-NABH", "24x7 nursing") have specific fixes, which are pending (§10). Human-graded NDCG is still to come.
+The regex's misses and false hits (e.g. "cardiac bypass surgery", "Non-NABH", "24x7 nursing") are fixed in v5 (PLAN_V5 §1), with regression fixtures (PLAN_V5 §6). The reviews also found spec problems that hurt both methods: no facility could be Strong for C-section, description-only claims could never be Strong, truncation inflated Depth, and C-section ranking was decided by distance alone. These are fixed by PLAN_V5 §2 (R1–R6). Human-graded NDCG is still to come.
 
 **Silver re-run:** the deterministic flow was re-run on the same 15 facilities from `silver_facilities` (`experiments/llm_vs_regex/silver_rerun/`). Every evidence label and E score matches the bronze run; only small ranking shifts appear, from silver's PIN-centre query points.
 
@@ -250,5 +250,7 @@ The regex's misses and false hits (e.g. "cardiac bypass surgery", "Non-NABH", "2
 | Evidence E, labels, completeness C, ranking | 🟨 working in Python on silver (`experiments/llm_vs_regex/run_regex.py`), tested on the 15-facility pilot |
 | `gold_facility_completeness`, `gold_service_evidence` (SQL) | ⬜ to build |
 | `gold_service_scores` + `find_care` query function | ⬜ specified; depends on the two tables above |
-| Five regex fixes from the pilot | ⬜ to apply |
+| Pilot fixes X1–X7 and scoring fixes R1–R6 (PLAN_V5) | ⬜ specified; to build in the Databricks notebook |
+| `find_care` output contract + `gold_query_log` (PLAN_V5 §5) | ⬜ specified |
+| Synthetic evaluation bench (PLAN_V5 §7) | ⬜ to build |
 | Human grading + 20-query evaluation | ⬜ to run |

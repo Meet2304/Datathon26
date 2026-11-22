@@ -1,5 +1,7 @@
 # Facility Features — Design
 
+> **v5:** [PLAN_V5.md](PLAN_V5.md) overrides this document where they differ.
+
 > Status: **draft v4** (2026-11-21). **Input is now the team's silver tables** (`silver_facilities`, `silver_pincode_directory`). Assumes clean input: every value is valid or missing, never wrong (§2). v3 adds clause-level negation, truncation (M7), neonatal context, equipment-only dialysis terms, name-based specialist type, and trauma / burn-care weights. Weights and thresholds marked *(tune)* are starting points to be tuned on the test-query set.
 > Related: [SCORING.md](SCORING.md) (Evidence `E`, Completeness `C`, ranking formula, confidence) · [DATA_DICTIONARY.md](DATA_DICTIONARY.md)
 

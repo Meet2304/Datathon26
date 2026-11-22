@@ -1,5 +1,7 @@
 # Evidence, Completeness & Ranking — Design
 
+> **v5:** [PLAN_V5.md](PLAN_V5.md) overrides this document where they differ.
+
 > Status: **draft v4** (2026-11-21). Reads the team's silver tables; specialty codes follow silver's standardised vocabulary. Assumes clean input: **every value is either valid or missing (NULL / empty). No wrong data.** v3 adds extraction and ranking ideas from Meet's plan v4 that fit this assumption (clause negation, exclusions, context words, service vs equipment terms, dedup, truncation, Strong rules, radius schedule, evaluation design). 2026-11-21: prerequisites split into **implied** (met by a direct claim) and **checked** (must be in text), for all services. The Raipur pilot showed only 1 of 15 facilities passing the old C-section gate, because records saying "performs caesareans" rarely also mention an OT. Thresholds and weights marked *(tune)* are provisional.
 > Related: [FEATURES.md](FEATURES.md) (Depth `D`, feature computation, SQL) · [DATA_DICTIONARY.md](DATA_DICTIONARY.md)
 
